@@ -1,0 +1,25 @@
+Intellij Idea
+JDK8
+Slack (https://ppm64.slack.com)
+Trello (https://trello.com/ppm64)
+
+Sprint Planning
+Meetups on Monday and Thursday
+
+== Object Model Design ==
+app
+view
+order
+report
+user.management
+process
+	stock
+	product
+	formula
+stock
+product/catalog
+inventory
+	
+product 1..1 formula 1..n stock
+production >> product
+
