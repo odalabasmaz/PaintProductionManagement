@@ -1,5 +1,6 @@
 Intellij Idea
 JDK8
+GitHub (https://github.com/odalabasmaz/PaintProductionManagement)
 Slack (https://ppm64.slack.com)
 Trello (https://trello.com/ppm64)
 
@@ -9,17 +10,18 @@ Meetups on Monday and Thursday
 == Object Model Design ==
 app
 view
-order
+
 report
-user.management
 process
-	stock
-	product
-	formula
-stock
-product/catalog
-inventory
-	
-product 1..1 formula 1..n stock
-production >> product
+
+user.management
+material/product (id, code, name, description) - 
+	formula (material/product list, quantity, unit, description) - 
+	product (id, code, name, color code, color name, density)
+stock: material (quantity) / product (product id, container, quantity, order, time) / container
+
+container (size, )
+container-size (1L/5KG)
+order
+
 
