@@ -22,6 +22,8 @@ public class MainApplication
 
 	@Autowired
 	private HelloWorldService service;
+//	@Autowired
+//	private MainView mainView;
 
 	/**
 	 * $ java -jar -Dtarget.env=dev ppm.desktop-1.0-SNAPSHOT.jar
