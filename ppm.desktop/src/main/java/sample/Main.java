@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * @author Orhun Dalabasmaz
+ * @author utku
  */
 public class Main extends Application {
 
