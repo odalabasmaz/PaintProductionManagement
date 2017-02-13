@@ -6,5 +6,6 @@ package tr.com.ppm.desktop.model.material;
 public class Product extends Material {
 	private String colorCode;
 	private String colorName;
+	private String colorType;   //
 	private double density;
 }
