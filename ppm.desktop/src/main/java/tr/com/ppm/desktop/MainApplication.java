@@ -13,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tr.com.ppm.desktop.service.HelloWorldService;
 
+import java.io.IOException;
+
 /**
  * @author Orhun Dalabasmaz
  */
@@ -40,7 +42,7 @@ public class MainApplication extends Application implements CommandLineRunner {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
 		primaryStage.setTitle("Boya Üretim Yönetimi");
 		primaryStage.setScene(new Scene(root));
