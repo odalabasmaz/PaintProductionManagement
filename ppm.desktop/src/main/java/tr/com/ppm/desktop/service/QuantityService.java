@@ -25,6 +25,10 @@ public class QuantityService {
 		return jpaDao.findByCriteriaQuery(criteriaQuery);
 	}
 
+	public List<Quantity> listQuantity() {
+		return jpaDao.getEntityList(Quantity.class);
+	}
+
 	public void removeQuantity(Quantity quantity) {
 		jpaDao.removeEntity(quantity);
 	}

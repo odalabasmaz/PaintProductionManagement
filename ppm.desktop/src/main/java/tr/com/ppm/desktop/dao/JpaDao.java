@@ -20,4 +20,6 @@ public interface JpaDao {
 	CriteriaBuilder getCriteriaBuilder();
 
 	<T> List<T> findByCriteriaQuery(CriteriaQuery<T> var1);
+
+	<T> List<T> getEntityList(Class<T> var1);
 }

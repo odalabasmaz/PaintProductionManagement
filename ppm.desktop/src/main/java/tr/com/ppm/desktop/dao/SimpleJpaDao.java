@@ -6,12 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author ykarabalkan
  */
 @Repository
+@Transactional
 public class SimpleJpaDao implements JpaDao {
 
 	@PersistenceContext
@@ -44,5 +47,14 @@ public class SimpleJpaDao implements JpaDao {
 
 	public <T> List<T> findByCriteriaQuery(CriteriaQuery<T> criteriaQuery) {
 		return entityManager.createQuery(criteriaQuery).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> List<T> getEntityList(Class<T> entityClass) {
+		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+		CriteriaQuery<T> query = (CriteriaQuery<T>) criteriaBuilder.createQuery();
+		Root<T> from = query.from(entityClass);
+		query.select(from);
+		return entityManager.createQuery(query).getResultList();
 	}
 }
