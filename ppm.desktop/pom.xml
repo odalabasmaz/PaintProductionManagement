@@ -26,6 +26,7 @@
 		<!--<main.basedir>${basedir}/../..</main.basedir>-->
 		<maven.compiler.level>1.8</maven.compiler.level>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<main.class>tr.com.ppm.desktop.App</main.class>
 	</properties>
 
 	<dependencies>
@@ -49,6 +50,11 @@
 			<artifactId>spring-tx</artifactId>
 			<version>4.3.5.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>de.roskenet</groupId>
+			<artifactId>springboot-javafx-support</artifactId>
+			<version>1.2.0</version>
+		</dependency>
 
 		<!--<dependency>
 			<groupId>org.hibernate</groupId>
@@ -65,6 +71,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.193</version>
+			<scope>runtime</scope>
 		</dependency>
 		<!--<dependency>
 			<groupId>org.postgresql</groupId>
@@ -123,7 +130,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>8.7.0</version>
 				<configuration>
-					<mainClass>tr.com.ppm.desktop.MainApplication</mainClass>
+					<mainClass>${main.class}</mainClass>
 				</configuration>
 			</plugin>
 
@@ -155,7 +162,7 @@
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
-							<mainClass>tr.com.ppm.desktop.MainApplication</mainClass>
+							<mainClass>${main.class}</mainClass>
 						</manifest>
 						<manifestEntries>
 							<App-Version>${project.version}</App-Version>

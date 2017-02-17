@@ -13,6 +13,13 @@ public class Quantity extends AuditableEntity {
 	@Column
 	private double amount;
 
+	public Quantity() {
+	}
+
+	public Quantity(double amount) {
+		this.amount = amount;
+	}
+
 	/*@Column
 	private Unit unit;*/
 

@@ -1,5 +1,7 @@
 package tr.com.ppm.desktop.view;
 
+import de.felixroske.jfxsupport.AbstractFxmlView;
+import de.felixroske.jfxsupport.FXMLView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -13,12 +15,17 @@ import org.springframework.stereotype.Component;
  * @author Orhun Dalabasmaz
  */
 //@Component
-public class MainView {
+@FXMLView("/view/main.fxml")
+public class MainView extends AbstractFxmlView {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 
-//	@Autowired
+	public MainView() {
+		setTitle("Ana sayfa");
+	}
+
+	//	@Autowired
 //	private FormulaView formulaView;
-	private Stage stage;
+	/*private Stage stage;
 
 	public MainView(Stage stage) {
 		this.stage = stage;
@@ -41,5 +48,5 @@ public class MainView {
 		stage.setTitle("Hello World!");
 		stage.setScene(scene);
 		stage.show();
-	}
+	}*/
 }
