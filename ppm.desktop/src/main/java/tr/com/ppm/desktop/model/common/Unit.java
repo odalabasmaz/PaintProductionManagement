@@ -2,14 +2,24 @@ package tr.com.ppm.desktop.model.common;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.*;
+
 /**
  * @author Orhun Dalabasmaz
  */
+@Entity
+@Table(name = "UNIT")
 public class Unit extends AuditableEntity {
 	public enum TYPE {UNIT, DENSITY, TEMPERATURE, AREA, VOLUME, FORCE, ENERGY, MASS, WEIGHT}
 
+	@Column
+	@Enumerated(EnumType.STRING)
 	private TYPE type;
+
+	@Column
 	private String definition;
+
+	@Column
 	private String description;
 
 	public Unit(TYPE type, String definition, String description) {
