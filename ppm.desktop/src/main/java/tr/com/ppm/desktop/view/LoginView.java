@@ -1,8 +1,5 @@
 package tr.com.ppm.desktop.view;
 
-import de.felixroske.jfxsupport.AbstractFxmlView;
-import de.felixroske.jfxsupport.FXMLView;
-
 /**
  * @author Orhun Dalabasmaz
  */
@@ -10,7 +7,7 @@ import de.felixroske.jfxsupport.FXMLView;
 public class LoginView extends AbstractFxmlView {
 
 	public LoginView() {
-		setTitle("Giriş");
+		setTitle("Giriş Ekranı");
 	}
 
 }

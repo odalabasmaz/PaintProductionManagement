@@ -50,11 +50,11 @@
 			<artifactId>spring-tx</artifactId>
 			<version>4.3.5.RELEASE</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>de.roskenet</groupId>
 			<artifactId>springboot-javafx-support</artifactId>
 			<version>1.2.0</version>
-		</dependency>
+		</dependency>-->
 
 		<!--<dependency>
 			<groupId>org.hibernate</groupId>
