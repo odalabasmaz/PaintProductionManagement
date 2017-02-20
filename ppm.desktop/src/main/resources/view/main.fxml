@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="tr.com.ppm.desktop.controller.MainController">
-    <opaqueInsets>
-        <Insets/>
-    </opaqueInsets>
-</BorderPane>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <BorderPane prefHeight="200.0" prefWidth="600.0">
+            <top>
+                <MenuBar prefHeight="25.0" prefWidth="263.0" BorderPane.alignment="CENTER">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Tanımlamalar">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Hammadde" />
+                                <MenuItem mnemonicParsing="false" text="Ürün" />
+                                <MenuItem mnemonicParsing="false" text="Boya Türü" />
+                                <MenuItem mnemonicParsing="false" text="Boya Alt Türü" />
+                                <MenuItem mnemonicParsing="false" text="Kova Türü" />
+                                <MenuItem mnemonicParsing="false" text="Kullanıcı" />
+                                <MenuItem mnemonicParsing="false" text="Rol" />
+                                <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
+                                <MenuItem mnemonicParsing="false" text="Müşteri" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Üretim">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Stok">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Sipariş">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Rapor">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </top>
+        </BorderPane>
+    </children>
+</AnchorPane>
