@@ -18,5 +18,6 @@ public class Container extends AuditableEntity {
 	private TYPE type;
 
 /*	@Column
+
 	private Quantity quantity;*/
 }
