@@ -17,6 +17,6 @@ public class Container extends AuditableEntity {
 	@Enumerated(EnumType.STRING)
 	private TYPE type;
 
-	@Column
-	private Quantity quantity;
+/*	@Column
+	private Quantity quantity;*/
 }
