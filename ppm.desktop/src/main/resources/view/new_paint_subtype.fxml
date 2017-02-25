@@ -30,7 +30,7 @@
               </Label>
               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="KAYDET" GridPane.rowIndex="2" />
               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="VAZGEÇ" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-              <ComboBox prefWidth="150.0" promptText="Boya Türü Seçiniz..." GridPane.columnIndex="1" />
+              <ComboBox prefWidth="150.0" promptText="Boya Türü Seçiniz.." GridPane.columnIndex="1" />
               <Label text="BOYA ALT TÜRÜ :" GridPane.rowIndex="1">
                   <font>
                       <Font name="System Bold" size="14.0" />
