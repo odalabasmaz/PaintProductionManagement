@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,9 +17,17 @@ import java.net.URL;
 public abstract class AbstractFxmlView {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractFxmlView.class);
 	private StringProperty title = new SimpleStringProperty();
+	private ApplicationContext applicationContext;
 
-	public Parent getView() throws IOException {
-		return FXMLLoader.load(getResource());
+	public Parent getView(ApplicationContext applicationContext) throws IOException {
+		this.applicationContext = applicationContext;
+		FXMLLoader fxmlLoader = new FXMLLoader(getResource());
+		fxmlLoader.setControllerFactory(this::createControllerForType);
+		return fxmlLoader.load();
+	}
+
+	private Object createControllerForType(Class<?> type) {
+		return this.applicationContext.getBean(type);
 	}
 
 	private URL getResource() {

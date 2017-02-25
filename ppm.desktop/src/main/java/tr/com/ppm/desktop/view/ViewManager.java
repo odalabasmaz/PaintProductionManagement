@@ -35,7 +35,7 @@ public class ViewManager {
 		stage.titleProperty().bind(view.titleProperty());
 		Parent parentView = null;
 		try {
-			parentView = view.getView();
+			parentView = view.getView(applicationContext);
 		} catch (IOException e) {
 			//todo: ex handling for unfound page
 			LOGGER.error("Page cannot be loaded.", e);

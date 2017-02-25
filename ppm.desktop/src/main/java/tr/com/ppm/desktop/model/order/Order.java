@@ -13,4 +13,5 @@ public class Order extends AuditableEntity {
 	private Customer customer;
 	private Date dueDate;
 	private List<ProductOrder> productOrders;
+//	private State state;
 }
