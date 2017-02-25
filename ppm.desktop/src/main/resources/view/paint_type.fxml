@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.PaintTypeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.PaintTypeController">
     <children>
         <BorderPane prefHeight="504.0" prefWidth="689.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -43,15 +42,9 @@
                                                         <Font name="System Bold" size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField prefHeight="25.0" prefWidth="139.0" GridPane.columnIndex="1" />
-                                                <Button defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="SORGULA" GridPane.rowIndex="2">
-                                       <effect>
-                                          <InnerShadow />
-                                       </effect></Button>
-                                                <Button defaultButton="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="TEMIZLE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <effect>
-                                          <InnerShadow />
-                                       </effect></Button>
+                                                <TextField fx:id="txtPaintType" prefHeight="25.0" prefWidth="139.0" GridPane.columnIndex="1" />
+                                                <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" prefHeight="25.0" prefWidth="109.0" text="SORGULA" GridPane.rowIndex="2" />
+                                                <Button fx:id="btnClean" mnemonicParsing="false" onAction="#clean" prefHeight="25.0" prefWidth="110.0" text="TEMIZLE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                             </children>
                                         </GridPane>
                                     </children>

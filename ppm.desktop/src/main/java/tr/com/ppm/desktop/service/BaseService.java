@@ -2,10 +2,13 @@ package tr.com.ppm.desktop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tr.com.ppm.desktop.dao.JpaDao;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Orhun Dalabasmaz
@@ -21,6 +24,10 @@ public abstract class BaseService<T> {
 		return jpaDao.findByCriteriaQuery(criteriaQuery);
 	}
 
+	public List<T> executeQuery(String queryString, Map<String, Object> params) {
+		return jpaDao.executeQuery(queryString, params);
+	}
+
 	public List<T> list() {
 		return jpaDao.getEntityList(getEntityClass());
 	}
@@ -29,8 +36,10 @@ public abstract class BaseService<T> {
 		jpaDao.persistEntity(entity);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void remove(T entity) {
-		jpaDao.removeEntity(entity);
+		T mergeEntity = jpaDao.mergeEntity(entity);
+		jpaDao.removeEntity(mergeEntity);
 	}
 
 	public void update(T entity) {
