@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.PaintTypeController">
     <children>
         <BorderPane prefHeight="504.0" prefWidth="689.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -51,9 +51,9 @@
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="321.0" prefWidth="687.0">
                                     <children>
-                                        <TableView layoutX="14.0" layoutY="7.0" prefHeight="200.0" prefWidth="326.0">
+                                        <TableView fx:id="tblViewPaintType" layoutX="14.0" layoutY="7.0" prefHeight="200.0" prefWidth="326.0">
                                             <columns>
-                                                <TableColumn prefWidth="325.0" text="BOYA TÜRÜ" />
+                                                <TableColumn fx:id="tblColumnPaintType" prefWidth="325.0" text="BOYA TÜRÜ" />
                                             </columns>
                                         </TableView>
                                         <Button fx:id="btnAdd" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="80.0" text="YENİ KAYIT" />
