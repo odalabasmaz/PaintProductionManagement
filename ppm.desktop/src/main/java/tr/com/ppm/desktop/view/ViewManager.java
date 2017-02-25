@@ -42,7 +42,7 @@ public class ViewManager {
 		}
 
 		if (scene == null) {
-			scene = new Scene(parentView);
+			scene = new Scene(parentView, 1000, 600);
 		} else {
 			scene.setRoot(parentView);
 		}
