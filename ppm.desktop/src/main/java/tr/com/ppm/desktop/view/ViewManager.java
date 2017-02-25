@@ -55,8 +55,9 @@ public class ViewManager {
 		stage.show();
 	}
 
-	public static void openPopup(Class<? extends AbstractFxmlView> newView) {
+	public static void openPopup(Class<? extends AbstractFxmlView> newView, Callback callback) {
 		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
 		AbstractFxmlView view = applicationContext.getBean(newView);
 		stage.titleProperty().bind(view.titleProperty());
 		Parent parentView = null;
@@ -70,6 +71,7 @@ public class ViewManager {
 		stage.setScene(new Scene(parentView, 300, 300));
 		stage.setResizable(false);
 		stage.centerOnScreen();
+		stage.setOnHiding(event -> callback.terminate());
 		stage.show();
 	}
 

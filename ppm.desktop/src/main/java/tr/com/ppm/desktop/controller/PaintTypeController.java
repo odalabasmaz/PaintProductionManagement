@@ -48,7 +48,7 @@ public class PaintTypeController implements Initializable {
 
 	@FXML
 	void add(ActionEvent event) {
-		ViewManager.openPopup(PaintTypeEditView.class);
+		ViewManager.openPopup(PaintTypeEditView.class, () -> listAll());
 	}
 
 	@FXML
