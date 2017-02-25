@@ -39,8 +39,8 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" />
                         <Label text="Username" GridPane.rowIndex="1" />
                         <Label text="Password" GridPane.rowIndex="2" />
-                        <TextField fx:id="txtUserName" prefHeight="31.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <PasswordField fx:id="txtPassword" prefHeight="31.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtUserName" text="admin" prefHeight="31.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="txtPassword" text="admin" prefHeight="31.0" prefWidth="115.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#login" onKeyPressed="#loginWithKeyEvent" prefHeight="31.0" prefWidth="217.0" text="Login" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                     </children>
                     <padding>
