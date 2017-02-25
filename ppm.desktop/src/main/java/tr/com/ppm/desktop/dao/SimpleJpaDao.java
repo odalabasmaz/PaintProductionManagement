@@ -1,5 +1,7 @@
 package tr.com.ppm.desktop.dao;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author ykarabalkan
@@ -56,5 +59,15 @@ public class SimpleJpaDao implements JpaDao {
 		Root<T> from = query.from(entityClass);
 		query.select(from);
 		return entityManager.createQuery(query).getResultList();
+	}
+
+	@Override
+	public List executeQuery(String queryString, Map<String, Object> params) {
+		Session session = entityManager.unwrap(Session.class);
+		Query query = session.createQuery(queryString);
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		return query.list();
 	}
 }

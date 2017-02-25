@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.material.PaintType;
@@ -16,6 +17,7 @@ import tr.com.ppm.desktop.view.PaintTypeEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -32,15 +34,17 @@ public class PaintTypeController implements Initializable {
 	private Button btnEdit;
 	@FXML
 	private Button btnQuery;
+	@FXML
+	private Button btnClean;
+	@FXML
+	private TextField txtPaintType;
+	@FXML
+	private TableView<PaintType> tblViewPaintType;
+	@FXML
+	private TableColumn<PaintType, String> tblColumnPaintType;
 
 	@Autowired
 	private PaintTypeService service;
-
-	@FXML
-	private TableView<PaintType> tblViewPaintType;
-
-	@FXML
-	private TableColumn<PaintType, String> tblColumnPaintType;
 
 	@FXML
 	void add(ActionEvent event) {
@@ -48,18 +52,40 @@ public class PaintTypeController implements Initializable {
 	}
 
 	@FXML
-	void delete(ActionEvent event) {
-		System.out.println("Delete");
+	public void delete(ActionEvent event) {
+		PaintType paintType = tblViewPaintType.getSelectionModel().getSelectedItem();
+		service.remove(paintType);
+		listAll();
 	}
 
 	@FXML
-	void edit(ActionEvent event) {
+	public void edit(ActionEvent event) {
 //		ViewManager.openPage(PaintTypeEditView.class);
+	}
+
+	@FXML
+	public void query(ActionEvent event) {
+		query();
+	}
+
+	private void query() {
+		String paintType = txtPaintType.getText();
+		List<PaintType> paintTypes = service.listByPaintType(paintType);
+		tblViewPaintType.setItems(FXCollections.observableArrayList(paintTypes));
+	}
+
+	@FXML
+	public void clean(ActionEvent event) {
+		txtPaintType.clear();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tblColumnPaintType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		listAll();
+	}
+
+	private void listAll() {
 		tblViewPaintType.setItems(FXCollections.observableArrayList(service.list()));
 	}
 }
