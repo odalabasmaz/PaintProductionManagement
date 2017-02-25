@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Service
 public class PaintTypeService extends BaseService<PaintType> {
-	private final static String QUERY_STRING = "from PaintType where lower(name) like :name";
+	private static final String QUERY_STRING = "from PaintType where lower(name) like :name";
 
 	@Override
 	protected Class getEntityClass() {

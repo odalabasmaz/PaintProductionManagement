@@ -19,7 +19,7 @@
                     <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
                     <MenuItem mnemonicParsing="false" text="Müşteri" />
                     <SeparatorMenuItem/>
-                    <MenuItem text="Exit"/>
+                    <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#exit" text="Exit"/>
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Üretim">

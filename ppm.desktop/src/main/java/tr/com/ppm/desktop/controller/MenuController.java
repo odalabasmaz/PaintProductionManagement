@@ -1,5 +1,6 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,5 +40,9 @@ public class MenuController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+	}
+
+	public void exit(ActionEvent actionEvent) {
+		Platform.exit();
 	}
 }

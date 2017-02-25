@@ -3,6 +3,7 @@ package tr.com.ppm.desktop.view;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +24,7 @@ public class ViewManager {
 
 	public static void init(Stage stage, ApplicationContext applicationContext) {
 		ViewManager.stage = stage;
+		ViewManager.stage.initStyle(StageStyle.UNDECORATED);
 		ViewManager.applicationContext = applicationContext;
 	}
 
@@ -65,7 +67,7 @@ public class ViewManager {
 			LOGGER.error("Page cannot be loaded.", e);
 		}
 
-		stage.setScene(new Scene(parentView, 300,300));
+		stage.setScene(new Scene(parentView, 300, 300));
 		stage.setResizable(false);
 		stage.centerOnScreen();
 		stage.show();
