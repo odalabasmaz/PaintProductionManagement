@@ -1,11 +1,16 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.service.PaintTypeService;
 
 import java.net.URL;
@@ -30,6 +35,12 @@ public class PaintTypeController implements Initializable {
 	private PaintTypeService service;
 
 	@FXML
+	private TableView<PaintType> tblViewPaintType;
+
+	@FXML
+	private TableColumn<PaintType, String> tblColumnPaintType;
+
+	@FXML
 	void add(ActionEvent event) {
 	}
 
@@ -45,6 +56,7 @@ public class PaintTypeController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		tblColumnPaintType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		tblViewPaintType.setItems(FXCollections.observableArrayList(service.list()));
 	}
 }

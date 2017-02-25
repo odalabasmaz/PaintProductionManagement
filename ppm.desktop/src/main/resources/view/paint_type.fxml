@@ -51,9 +51,9 @@
                                 </AnchorPane>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="321.0" prefWidth="687.0">
                                     <children>
-                                        <TableView layoutX="14.0" layoutY="7.0" prefHeight="200.0" prefWidth="326.0">
+                                        <TableView fx:id="tblViewPaintType" layoutX="14.0" layoutY="7.0" prefHeight="200.0" prefWidth="326.0">
                                             <columns>
-                                                <TableColumn prefWidth="325.0" text="BOYA TÜRÜ" />
+                                                <TableColumn fx:id="tblColumnPaintType" prefWidth="325.0" text="BOYA TÜRÜ" />
                                             </columns>
                                         </TableView>
                                         <Button fx:id="btnAdd" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="80.0" text="YENİ KAYIT" />
