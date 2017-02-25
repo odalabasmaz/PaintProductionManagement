@@ -20,45 +20,9 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="504.0" prefWidth="689.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <MenuBar prefHeight="22.0" prefWidth="607.0" BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="Tanımlamalar">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Hammadde" />
-                        <MenuItem mnemonicParsing="false" text="Ürün" />
-                        <MenuItem mnemonicParsing="false" text="Boya Türü" />
-                        <MenuItem mnemonicParsing="false" text="Boya Alt Türü" />
-                        <MenuItem mnemonicParsing="false" text="Kova Türü" />
-                        <MenuItem mnemonicParsing="false" text="Kullanıcı" />
-                        <MenuItem mnemonicParsing="false" text="Rol" />
-                        <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
-                        <MenuItem mnemonicParsing="false" text="Müşteri" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Üretim">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Stok">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="Sipariş">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Rapor">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                     </items>
-                  </Menu>
-              </menus>
-            </MenuBar>
-         </top>
+          <top>
+              <fx:include source="menu.fxml"/>
+          </top>
          <center>
             <TitledPane animated="false" prefHeight="487.0" prefWidth="680.0" text="Boya Alt Türü Tanımlama" BorderPane.alignment="CENTER">
               <content>
