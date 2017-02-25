@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.service.PaintTypeService;
+import tr.com.ppm.desktop.view.PaintTypeEditView;
+import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +44,7 @@ public class PaintTypeController implements Initializable {
 
 	@FXML
 	void add(ActionEvent event) {
+		ViewManager.openPopup(PaintTypeEditView.class);
 	}
 
 	@FXML

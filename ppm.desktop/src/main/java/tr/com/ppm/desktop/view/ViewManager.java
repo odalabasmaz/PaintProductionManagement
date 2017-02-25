@@ -53,4 +53,22 @@ public class ViewManager {
 		stage.show();
 	}
 
+	public static void openPopup(Class<? extends AbstractFxmlView> newView) {
+		Stage stage = new Stage();
+		AbstractFxmlView view = applicationContext.getBean(newView);
+		stage.titleProperty().bind(view.titleProperty());
+		Parent parentView = null;
+		try {
+			parentView = view.getView(applicationContext);
+		} catch (IOException e) {
+			//todo: ex handling for unfound page
+			LOGGER.error("Page cannot be loaded.", e);
+		}
+
+		stage.setScene(new Scene(parentView, 300,300));
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+
 }
