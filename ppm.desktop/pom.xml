@@ -92,11 +92,11 @@
 		</dependency>
 
 		<!--report-->
-		<dependency>
+		<!--<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 			<version>6.4.0</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- logging -->
 		<dependency>
@@ -127,7 +127,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${artifactId}</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
