@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import org.springframework.stereotype.Component;
+import tr.com.ppm.desktop.view.PaintSubtypeView;
 import tr.com.ppm.desktop.view.PaintTypeView;
 import tr.com.ppm.desktop.view.RawMaterialView;
 import tr.com.ppm.desktop.view.ViewManager;
@@ -35,14 +36,15 @@ public class MenuController implements Initializable {
 
 	@FXML
 	void openPaintSubType(ActionEvent event) {
+		ViewManager.openPage(PaintSubtypeView.class);
+	}
+
+	public void exit(ActionEvent actionEvent) {
+		Platform.exit();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-	}
-
-	public void exit(ActionEvent actionEvent) {
-		Platform.exit();
 	}
 }

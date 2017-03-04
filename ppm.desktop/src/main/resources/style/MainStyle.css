@@ -1,0 +1,51 @@
+/**************
+ * TextField *                                                                 *
+ **************/
+.text-field {
+    -fx-border-width: 1px;
+    -fx-border-color: #D7D7D7;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-padding: 5px 35px 5px 15px;
+    -fx-background-color: white;
+}
+.text-field:focused {
+    -fx-border-color: #EA5444;
+}
+
+/**********
+ * Button *                                                                 *
+ **********/
+.button {
+    -fx-border-width: 1px;
+    -fx-border-color: #ACACAC;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-background-color: white;
+    -fx-font-size: 12px;
+    -fx-padding: 8px 25px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+.button:hover {
+    -fx-background-color: #EA5444;
+    -fx-text-fill: white;
+}
+
+/****************
+ * ComboBox *
+ ****************/
+
+.combo-box {
+    -fx-border-width: 1px;
+    -fx-border-color: #ACACAC;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-background-color: white;
+    -fx-font-size: 12px;
+    -fx-padding: 0px;
+    -fx-font-weight: 700;
+    -fx-font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}

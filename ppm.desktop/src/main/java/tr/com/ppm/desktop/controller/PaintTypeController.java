@@ -37,7 +37,7 @@ public class PaintTypeController implements Initializable {
 	@FXML
 	private Button btnClean;
 	@FXML
-	private TextField txtPaintType;
+	private TextField tfPaintType;
 	@FXML
 	private TableView<PaintType> tblViewPaintType;
 	@FXML
@@ -48,7 +48,7 @@ public class PaintTypeController implements Initializable {
 
 	@FXML
 	void add(ActionEvent event) {
-		ViewManager.openPopup(PaintTypeEditView.class, () -> listAll());
+		ViewManager.openPopup(PaintTypeEditView.class, this::query);
 	}
 
 	@FXML
@@ -69,14 +69,14 @@ public class PaintTypeController implements Initializable {
 	}
 
 	private void query() {
-		String paintType = txtPaintType.getText();
+		String paintType = tfPaintType.getText();
 		List<PaintType> paintTypes = service.listByPaintType(paintType);
 		tblViewPaintType.setItems(FXCollections.observableArrayList(paintTypes));
 	}
 
 	@FXML
 	public void clean(ActionEvent event) {
-		txtPaintType.clear();
+		tfPaintType.clear();
 	}
 
 	@Override

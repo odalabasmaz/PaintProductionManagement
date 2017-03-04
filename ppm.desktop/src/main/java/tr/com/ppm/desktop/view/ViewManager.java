@@ -2,6 +2,7 @@ package tr.com.ppm.desktop.view;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.slf4j.Logger;
@@ -58,6 +59,7 @@ public class ViewManager {
 	public static void openPopup(Class<? extends AbstractFxmlView> newView, Callback callback) {
 		Stage stage = new Stage();
 		stage.initStyle(StageStyle.UNDECORATED);
+		stage.initModality(Modality.APPLICATION_MODAL);
 		AbstractFxmlView view = applicationContext.getBean(newView);
 		stage.titleProperty().bind(view.titleProperty());
 		Parent parentView = null;
@@ -68,7 +70,7 @@ public class ViewManager {
 			LOGGER.error("Page cannot be loaded.", e);
 		}
 
-		stage.setScene(new Scene(parentView, 300, 300));
+		stage.setScene(new Scene(parentView));
 		stage.setResizable(false);
 		stage.centerOnScreen();
 		stage.setOnHiding(event -> callback.terminate());
