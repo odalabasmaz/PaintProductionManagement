@@ -14,10 +14,12 @@ import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.material.PaintSubType;
 import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.service.PaintSubTypeService;
+import tr.com.ppm.desktop.service.PaintTypeService;
 import tr.com.ppm.desktop.view.PaintSubtypeEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -27,7 +29,10 @@ import java.util.ResourceBundle;
 public class PaintSubtypeController implements Initializable {
 
 	@Autowired
-	private PaintSubTypeService service;
+	private PaintSubTypeService paintSubTypeService;
+
+	@Autowired
+	private PaintTypeService paintTypeService;
 
 	@FXML
 	private Button btnClean;
@@ -67,7 +72,7 @@ public class PaintSubtypeController implements Initializable {
 	@FXML
 	public void delete(ActionEvent event) {
 		PaintSubType paintSubType = tvPaintSubtype.getSelectionModel().getSelectedItem();
-		service.remove(paintSubType);
+		paintSubTypeService.remove(paintSubType);
 		listAll();
 	}
 
@@ -82,6 +87,9 @@ public class PaintSubtypeController implements Initializable {
 	}
 
 	private void query() {
+		//todo query with conditions
+		List<PaintSubType> paintSubTypes = paintSubTypeService.list();
+		tvPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypes));
 	}
 
 	@FXML
@@ -90,12 +98,14 @@ public class PaintSubtypeController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
+		cbPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
 		tcPaintType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaintType().getName()));
 		tcPaintSubtype.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		listAll();
 	}
 
 	private void listAll() {
-		tvPaintSubtype.setItems(FXCollections.observableArrayList(service.list()));
+		tvPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
 	}
 }

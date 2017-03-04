@@ -12,7 +12,7 @@ public class PaintSubType extends AuditableEntity {
 	@Column(name = "NAME")
 	private String name;
 
-	@OneToOne(targetEntity = PaintType.class, cascade = {CascadeType.ALL})
+	@OneToOne(targetEntity = PaintType.class)
 	@JoinColumn(name = "PAINT_TYPE_ID", referencedColumnName = "ID")
 	private PaintType paintType;
 
@@ -39,5 +39,10 @@ public class PaintSubType extends AuditableEntity {
 
 	public void setPaintType(PaintType paintType) {
 		this.paintType = paintType;
+	}
+
+	@Override
+	public String toString() {
+		return getName();
 	}
 }

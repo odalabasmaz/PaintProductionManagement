@@ -1,5 +1,6 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import tr.com.ppm.desktop.model.material.PaintSubType;
 import tr.com.ppm.desktop.model.material.PaintType;
+import tr.com.ppm.desktop.service.PaintSubTypeService;
 import tr.com.ppm.desktop.service.PaintTypeService;
 
 import java.net.URL;
@@ -23,7 +26,10 @@ import java.util.ResourceBundle;
 public class PaintSubtypeEditController implements Initializable {
 
 	@Autowired
-	private PaintTypeService service;
+	private PaintTypeService paintTypeService;
+
+	@Autowired
+	private PaintSubTypeService paintSubTypeService;
 
 	@FXML
 	private Button btnClose;
@@ -42,7 +48,7 @@ public class PaintSubtypeEditController implements Initializable {
 
 	@FXML
 	void add(ActionEvent event) {
-		service.save(new PaintType(tfPaintSubType.getText()));
+		paintSubTypeService.save(new PaintSubType(tfPaintSubType.getText(), cbPaintType.getValue()));
 		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
 
@@ -53,6 +59,6 @@ public class PaintSubtypeEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
 	}
 }
