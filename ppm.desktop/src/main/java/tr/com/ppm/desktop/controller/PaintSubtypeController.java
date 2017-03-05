@@ -94,6 +94,8 @@ public class PaintSubtypeController implements Initializable {
 
 	@FXML
 	public void clean(ActionEvent event) {
+		cbPaintSubtype.getSelectionModel().clearSelection();
+		cbPaintType.getSelectionModel().clearSelection();
 	}
 
 	@Override
