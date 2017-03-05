@@ -7,10 +7,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -24,16 +26,6 @@ public class DatabaseConfig {
 	@Autowired
 	private Environment env;
 
-	@Autowired
-	private DataSource dataSource;
-
-	@Autowired
-	private LocalContainerEntityManagerFactoryBean entityManagerFactory;
-
-	/**
-	 * DataSource definition for database connection. Settings are read from
-	 * the application.properties file (using the env object).
-	 */
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -44,39 +36,34 @@ public class DatabaseConfig {
 		return dataSource;
 	}
 
-	/**
-	 * JPA entity manager factory.
-	 */
+	private Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+
+		return properties;
+	}
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory =
 				new LocalContainerEntityManagerFactoryBean();
 
-		entityManagerFactory.setDataSource(dataSource);
+		entityManagerFactory.setDataSource(dataSource());
 		entityManagerFactory.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
 
-		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
-
-		Properties additionalProperties = new Properties();
-		additionalProperties.put(
-				"hibernate.dialect",
-				env.getProperty("hibernate.dialect"));
-		additionalProperties.put(
-				"hibernate.show_sql",
-				env.getProperty("hibernate.show_sql"));
-		additionalProperties.put(
-				"hibernate.hbm2ddl.auto",
-				env.getProperty("hibernate.hbm2ddl.auto"));
-		entityManagerFactory.setJpaProperties(additionalProperties);
+		entityManagerFactory.setJpaProperties(additionalProperties());
 
 		return entityManagerFactory;
 	}
 
 	@Bean
-	public JpaTransactionManager transactionManager() {
+	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+		transactionManager.setEntityManagerFactory(emf);
 		return transactionManager;
 	}
 
