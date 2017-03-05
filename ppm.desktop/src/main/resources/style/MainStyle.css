@@ -4,8 +4,8 @@
 .text-field {
     -fx-border-width: 1px;
     -fx-border-color: #D7D7D7;
-    -fx-border-radius: 50px;
-    -fx-background-radius: 50px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
     -fx-text-fill: black;
     -fx-font-size: 15px;
     -fx-padding: 5px 35px 5px 15px;
@@ -21,8 +21,8 @@
 .button {
     -fx-border-width: 1px;
     -fx-border-color: #ACACAC;
-    -fx-border-radius: 50px;
-    -fx-background-radius: 50px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
     -fx-background-color: white;
     -fx-font-size: 12px;
     -fx-padding: 8px 25px;
@@ -41,11 +41,27 @@
 .combo-box {
     -fx-border-width: 1px;
     -fx-border-color: #ACACAC;
-    -fx-border-radius: 50px;
-    -fx-background-radius: 50px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
     -fx-background-color: white;
     -fx-font-size: 12px;
     -fx-padding: 0px;
     -fx-font-weight: 700;
     -fx-font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/****************
+ * TextArea *
+ ****************/
+.text-area{
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #D7D7D7;
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-background-color: white;
+}
+.text-area:focused{
+    -fx-border-color: #EA5444;
 }

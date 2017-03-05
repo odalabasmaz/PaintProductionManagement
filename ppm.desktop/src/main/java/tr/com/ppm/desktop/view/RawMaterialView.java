@@ -3,7 +3,7 @@ package tr.com.ppm.desktop.view;
 /**
  * @author Orhun Dalabasmaz
  */
-@FXMLView("/view/raw_materials.fxml")
+@FXMLView("/view/rawMaterial.fxml")
 public class RawMaterialView extends AbstractFxmlView {
 
 	public RawMaterialView() {
