@@ -9,11 +9,12 @@ import javax.persistence.*;
  */
 @Entity(name = "PAINT_SUB_TYPE")
 public class PaintSubType extends AuditableEntity {
+
 	@Column(name = "NAME")
 	private String name;
 
-	@OneToOne(targetEntity = PaintType.class)
-	@JoinColumn(name = "PAINT_TYPE_ID", referencedColumnName = "ID")
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "PAINT_TYPE_ID")
 	private PaintType paintType;
 
 	/* for hibernate */
