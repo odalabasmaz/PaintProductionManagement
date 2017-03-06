@@ -42,7 +42,7 @@
         </GridPane>
         <stylesheets>
             <URL value="@../style/MainStyle.css"/>
-            <URL value="@../style/PopUp.css"/>
+            <URL value="@../style/popUp.css"/>
         </stylesheets>
     </AnchorPane>
 </Group>
