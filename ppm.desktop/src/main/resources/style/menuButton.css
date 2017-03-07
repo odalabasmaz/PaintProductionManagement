@@ -12,3 +12,8 @@
 .button:focused{
     -fx-background-color: none;
 }
+MenuBar{
+    -fx-background-color: lightblue;
+    -fx-background-size: 100%;
+    -fx-background-radius: 7 7 0 0;
+}
