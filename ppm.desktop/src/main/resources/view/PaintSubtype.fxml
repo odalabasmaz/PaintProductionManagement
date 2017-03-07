@@ -8,7 +8,7 @@
     <BorderPane layoutX="9.0" layoutY="9.0" prefHeight="513.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
-            <fx:include source="menu.fxml"/>
+            <fx:include source="menu.fxml" />
         </top>
         <center>
             <SplitPane dividerPositions="0.49361702127659574" orientation="VERTICAL" prefHeight="455.0"
@@ -19,8 +19,8 @@
                         <ComboBox fx:id="cbPaintType" prefHeight="31.0" prefWidth="402.0"
                                   promptText="Boya Türü Seçiniz.." GridPane.columnSpan="3" GridPane.rowIndex="1"/>
                         <Label text="Boya Alt Türü :" GridPane.rowIndex="3"/>
-                        <ComboBox fx:id="cbPaintSubtype" prefHeight="31.0" prefWidth="402.0"
-                                  promptText="Boya Türü Seçiniz.." GridPane.columnSpan="3" GridPane.rowIndex="4"/>
+                        <TextField fx:id="txtPaintSubtype" prefHeight="31.0" prefWidth="402.0"
+                                  GridPane.columnSpan="3" GridPane.rowIndex="4"/>
                         <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" prefHeight="25.0"
                                 prefWidth="109.0" text="Sorgula" GridPane.columnIndex="0" GridPane.halignment="LEFT"
                                 GridPane.rowIndex="6"/>

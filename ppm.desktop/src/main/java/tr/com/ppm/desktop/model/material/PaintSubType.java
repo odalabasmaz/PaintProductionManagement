@@ -7,7 +7,8 @@ import javax.persistence.*;
 /**
  * @author Orhun Dalabasmaz
  */
-@Entity(name = "PAINT_SUB_TYPE")
+@Entity
+@Table(name = "PAINT_SUB_TYPE")
 public class PaintSubType extends AuditableEntity {
 
 	@Column(name = "NAME")

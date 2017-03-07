@@ -25,7 +25,7 @@ public class ViewManager {
 
 	public static void init(Stage stage, ApplicationContext applicationContext) {
 		ViewManager.stage = stage;
-		ViewManager.stage.initStyle(StageStyle.UNDECORATED);
+//		ViewManager.stage.initStyle(StageStyle.UNDECORATED);
 		ViewManager.applicationContext = applicationContext;
 	}
 

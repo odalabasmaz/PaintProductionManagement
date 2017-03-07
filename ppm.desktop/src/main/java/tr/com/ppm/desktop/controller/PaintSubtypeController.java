@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.material.PaintSubType;
@@ -50,7 +47,7 @@ public class PaintSubtypeController implements Initializable {
 	private ComboBox<PaintType> cbPaintType;
 
 	@FXML
-	private ComboBox<PaintSubType> cbPaintSubtype;
+	private TextField txtPaintSubtype;
 
 	@FXML
 	private TableView<PaintSubType> tvPaintSubtype;
@@ -87,21 +84,26 @@ public class PaintSubtypeController implements Initializable {
 	}
 
 	private void query() {
-		//todo query with conditions
-		List<PaintSubType> paintSubTypes = paintSubTypeService.list();
+		String paintSubType = txtPaintSubtype.getText();
+		PaintType paintType = cbPaintType.getSelectionModel().getSelectedItem();
+		List<PaintSubType> paintSubTypes;
+		if (paintType == null) {
+			paintSubTypes = paintSubTypeService.list(paintSubType);
+		} else {
+			paintSubTypes = paintSubTypeService.list(paintSubType, paintType);
+		}
 		tvPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypes));
 	}
 
 	@FXML
 	public void clean(ActionEvent event) {
-		cbPaintSubtype.getSelectionModel().clearSelection();
+		txtPaintSubtype.clear();
 		cbPaintType.getSelectionModel().clearSelection();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
-		cbPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
 		tcPaintType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaintType().getName()));
 		tcPaintSubtype.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		listAll();
