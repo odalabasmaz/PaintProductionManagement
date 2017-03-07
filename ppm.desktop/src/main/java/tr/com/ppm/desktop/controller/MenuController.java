@@ -4,6 +4,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Window;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.view.PaintSubtypeView;
 import tr.com.ppm.desktop.view.PaintTypeView;
@@ -18,6 +21,9 @@ import java.util.ResourceBundle;
  */
 @Component
 public class MenuController implements Initializable {
+
+	private double xOffset = 0;
+	private double yOffset = 0;
 
 	@FXML
 	void openRawMaterial(ActionEvent event) {
@@ -41,6 +47,19 @@ public class MenuController implements Initializable {
 
 	public void exit(ActionEvent actionEvent) {
 		Platform.exit();
+	}
+
+	@FXML
+	void onMouseDragged(MouseEvent event) {
+		Window window = ((Node) (event.getSource())).getScene().getWindow();
+		window.setX(event.getScreenX() - xOffset);
+		window.setY(event.getScreenY() - yOffset);
+	}
+
+	@FXML
+	void onMousePressed(MouseEvent event) {
+		xOffset = event.getSceneX();
+		yOffset = event.getSceneY();
 	}
 
 	@Override
