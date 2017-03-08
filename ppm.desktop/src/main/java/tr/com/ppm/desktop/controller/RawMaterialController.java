@@ -1,18 +1,25 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.common.State;
 import tr.com.ppm.desktop.model.material.RawMaterial;
+import tr.com.ppm.desktop.service.RawMaterialService;
 import tr.com.ppm.desktop.view.RawMaterialEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -20,6 +27,10 @@ import java.util.ResourceBundle;
  */
 @Component
 public class RawMaterialController implements Initializable {
+
+	@Autowired
+	RawMaterialService service;
+
 	@FXML
 	private TextField tfCode;
 
@@ -54,23 +65,29 @@ public class RawMaterialController implements Initializable {
 	private TableColumn<RawMaterial, String> tcCode;
 
 	@FXML
-	private TableColumn<RawMaterial, String> tcState;
+	private TableColumn<RawMaterial, State> tcState;
 
 	@FXML
 	private TableColumn<RawMaterial, String> tcDescription;
 
 	@FXML
 	void query(ActionEvent event) {
-
+		query();
 	}
 
 	private void query() {
-
+		String code = tfCode.getText();
+		String name = tfName.getText();
+		State state = cbState.getSelectionModel().getSelectedItem();
+		List<RawMaterial> rawMaterials = service.queryWithParameter(code, name, state);
+		tvRawMaterial.setItems(FXCollections.observableArrayList(rawMaterials));
 	}
 
 	@FXML
 	void clean(ActionEvent event) {
-
+		cbState.getSelectionModel().select(null);
+		tfCode.setText(null);
+		tfName.setText(null);
 	}
 
 	@FXML
@@ -79,13 +96,18 @@ public class RawMaterialController implements Initializable {
 	}
 
 	@FXML
-	void edit(ActionEvent event) {
-
+	public void delete(ActionEvent event) {
+		RawMaterial rawMaterial = tvRawMaterial.getSelectionModel().getSelectedItem();
+		service.remove(rawMaterial);
+		query();
 	}
 
 	@FXML
-	void delete(ActionEvent event) {
-
+	public void edit(ActionEvent event) {
+		RawMaterial selectedItem = tvRawMaterial.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			ViewManager.openPopup(RawMaterialEditView.class, this::query, selectedItem);
+		}
 	}
 
 	@Override
@@ -93,7 +115,7 @@ public class RawMaterialController implements Initializable {
 		cbState.setItems(FXCollections.observableArrayList(State.values()));
 		tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		tcCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCode()));
-		tcState.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getState()));
+		tcState.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getState()));
 		tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 	}
 }
