@@ -1,14 +1,14 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.common.State;
+import tr.com.ppm.desktop.model.material.RawMaterial;
 import tr.com.ppm.desktop.view.RawMaterialEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
@@ -45,6 +45,21 @@ public class RawMaterialController implements Initializable {
 	private Button btnQuery;
 
 	@FXML
+	private TableView<RawMaterial> tvRawMaterial;
+
+	@FXML
+	private TableColumn<RawMaterial, String> tcName;
+
+	@FXML
+	private TableColumn<RawMaterial, String> tcCode;
+
+	@FXML
+	private TableColumn<RawMaterial, String> tcState;
+
+	@FXML
+	private TableColumn<RawMaterial, String> tcDescription;
+
+	@FXML
 	void query(ActionEvent event) {
 
 	}
@@ -76,5 +91,9 @@ public class RawMaterialController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cbState.setItems(FXCollections.observableArrayList(State.values()));
+		tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		tcCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCode()));
+		tcState.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getState()));
+		tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 	}
 }
