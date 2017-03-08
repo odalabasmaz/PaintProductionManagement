@@ -47,7 +47,7 @@ public class PaintSubtypeController implements Initializable {
 	private ComboBox<PaintType> cbPaintType;
 
 	@FXML
-	private TextField txtPaintSubtype;
+	private TextField tfPaintSubtype;
 
 	@FXML
 	private TableView<PaintSubType> tvPaintSubtype;
@@ -75,7 +75,8 @@ public class PaintSubtypeController implements Initializable {
 
 	@FXML
 	public void edit(ActionEvent event) {
-//		ViewManager.openPage(PaintSubtypeEditView.class);
+
+		ViewManager.openPage(PaintSubtypeEditView.class);
 	}
 
 	@FXML
@@ -84,7 +85,7 @@ public class PaintSubtypeController implements Initializable {
 	}
 
 	private void query() {
-		String paintSubType = txtPaintSubtype.getText();
+		String paintSubType = tfPaintSubtype.getText();
 		PaintType paintType = cbPaintType.getSelectionModel().getSelectedItem();
 		List<PaintSubType> paintSubTypes;
 		if (paintType == null) {
@@ -97,7 +98,7 @@ public class PaintSubtypeController implements Initializable {
 
 	@FXML
 	public void clean(ActionEvent event) {
-		txtPaintSubtype.clear();
+		tfPaintSubtype.clear();
 		cbPaintType.getSelectionModel().clearSelection();
 	}
 
