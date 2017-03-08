@@ -21,12 +21,13 @@
                                 <Insets/>
                             </opaqueInsets>
                         </TextField>
-                        <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" prefHeight="25.0"
-                                prefWidth="109.0" text="Sorgula" GridPane.columnIndex="0" GridPane.halignment="LEFT"
-                                GridPane.rowIndex="3"/>
-                        <Button fx:id="btnClean" mnemonicParsing="false" onAction="#clean" prefHeight="25.0"
-                                prefWidth="110.0" text="Temizle" GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                                GridPane.rowIndex="3"/>
+                        <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0"
+                                   GridPane.rowIndex="3" GridPane.columnSpan="4">
+                            <buttons>
+                                <Button fx:id="btnClean" mnemonicParsing="false" onAction="#delete" text="Temizle"/>
+                                <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#edit" text="Sorgula"/>
+                            </buttons>
+                        </ButtonBar>
                         <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -43,18 +44,22 @@
                     </GridPane>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                    <TableView fx:id="tblViewPaintType" layoutX="14.0" layoutY="7.0" prefHeight="200.0"
-                               prefWidth="326.0">
-                        <columns>
-                            <TableColumn fx:id="tblColumnPaintType" prefWidth="325.0" text="BOYA TÜRÜ"/>
-                        </columns>
-                    </TableView>
-                    <Button fx:id="btnAdd" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onAction="#add"
-                            prefHeight="25.0" prefWidth="80.0" text="Yeni Kayıt"/>
-                    <Button fx:id="btnEdit" layoutX="137.0" layoutY="235.0" mnemonicParsing="false" onAction="#edit"
-                            prefHeight="25.0" prefWidth="80.0" text="Düzenle"/>
-                    <Button fx:id="btnDelete" layoutX="260.0" layoutY="235.0" mnemonicParsing="false" onAction="#delete"
-                            prefHeight="25.0" prefWidth="80.0" text="Sil"/>
+                    <VBox layoutX="14.0" layoutY="7.0" prefHeight="257.0" prefWidth="597.0"
+                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                          AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tblViewPaintType" prefHeight="200.0" prefWidth="326.0">
+                            <columns>
+                                <TableColumn fx:id="tblColumnPaintType" prefWidth="325.0" text="BOYA TÜRÜ"/>
+                            </columns>
+                        </TableView>
+                        <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
+                            <buttons>
+                                <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#edit" text="Düzenle"/>
+                                <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#delete" text="Sil"/>
+                                <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle"/>
+                            </buttons>
+                        </ButtonBar>
+                    </VBox>
                 </AnchorPane>
             </SplitPane>
         </center>

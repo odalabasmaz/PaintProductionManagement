@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.102"
@@ -8,7 +7,7 @@
     <BorderPane layoutX="9.0" layoutY="9.0" prefHeight="513.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
-            <fx:include source="menu.fxml" />
+            <fx:include source="menu.fxml"/>
         </top>
         <center>
             <SplitPane dividerPositions="0.49361702127659574" orientation="VERTICAL" prefHeight="455.0"
@@ -19,14 +18,15 @@
                         <ComboBox fx:id="cbPaintType" prefHeight="31.0" prefWidth="402.0"
                                   promptText="Boya Türü Seçiniz.." GridPane.columnSpan="3" GridPane.rowIndex="1"/>
                         <Label text="Boya Alt Türü :" GridPane.rowIndex="3"/>
-                        <TextField fx:id="tfPaintSubtype" prefHeight="31.0" prefWidth="402.0"
-                                   GridPane.columnSpan="3" GridPane.rowIndex="4"/>
-                        <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" prefHeight="25.0"
-                                prefWidth="109.0" text="Sorgula" GridPane.columnIndex="0" GridPane.halignment="LEFT"
-                                GridPane.rowIndex="6"/>
-                        <Button fx:id="btnClean" mnemonicParsing="false" onAction="#clean" prefHeight="25.0"
-                                prefWidth="110.0" text="Temizle" GridPane.columnIndex="1" GridPane.halignment="LEFT"
-                                GridPane.rowIndex="6"/>
+                        <TextField fx:id="tfPaintSubtype" prefHeight="31.0" prefWidth="402.0" GridPane.columnSpan="3"
+                                   GridPane.rowIndex="4"/>
+                        <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0"
+                                   GridPane.rowIndex="6" GridPane.columnSpan="3">
+                            <buttons>
+                                <Button fx:id="btnClean" mnemonicParsing="false" onAction="#delete" text="Temizle"/>
+                                <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#edit" text="Sorgula"/>
+                            </buttons>
+                        </ButtonBar>
                         <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -45,18 +45,21 @@
                     </GridPane>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="321.0" prefWidth="687.0">
-                    <TableView fx:id="tvPaintSubtype" layoutX="14.0" layoutY="7.0" prefHeight="200.0" prefWidth="511.0">
-                        <columns>
-                            <TableColumn fx:id="tcPaintType" prefWidth="255.0" text="BOYA TÜRÜ"/>
-                            <TableColumn fx:id="tcPaintSubtype" prefWidth="254.0" text="BOYA ALT TÜRÜ"/>
-                        </columns>
-                    </TableView>
-                    <Button fx:id="btnAdd" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onAction="#add"
-                            prefHeight="25.0" prefWidth="80.0" text="Yeni Kayıt"/>
-                    <Button fx:id="btnEdit" layoutX="137.0" layoutY="235.0" mnemonicParsing="false" onAction="#edit"
-                            prefHeight="25.0" prefWidth="80.0" text="Düzenle"/>
-                    <Button fx:id="btnDelete" layoutX="260.0" layoutY="235.0" mnemonicParsing="false" onAction="#delete"
-                            prefHeight="25.0" prefWidth="80.0" text="Sil"/>
+                    <VBox layoutX="14.0" layoutY="7.0">
+                        <TableView fx:id="tvPaintSubtype" prefHeight="200.0" prefWidth="511.0">
+                            <columns>
+                                <TableColumn fx:id="tcPaintType" prefWidth="255.0" text="BOYA TÜRÜ"/>
+                                <TableColumn fx:id="tcPaintSubtype" prefWidth="254.0" text="BOYA ALT TÜRÜ"/>
+                            </columns>
+                        </TableView>
+                        <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
+                            <buttons>
+                                <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#edit" text="Düzenle"/>
+                                <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#delete" text="Sil"/>
+                                <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle"/>
+                            </buttons>
+                        </ButtonBar>
+                    </VBox>
                 </AnchorPane>
             </SplitPane>
         </center>
