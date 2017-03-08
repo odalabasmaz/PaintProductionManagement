@@ -1,5 +1,6 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -74,6 +75,6 @@ public class RawMaterialController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		cbState.setItems(FXCollections.observableArrayList(State.values()));
 	}
 }
