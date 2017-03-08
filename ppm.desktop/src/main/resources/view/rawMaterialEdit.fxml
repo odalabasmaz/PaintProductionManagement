@@ -20,7 +20,7 @@
             <Label text="Kodu :" GridPane.rowIndex="4"/>
             <TextField fx:id="tfCode" GridPane.columnSpan="4" GridPane.rowIndex="5"/>
             <Label text="Türü :" GridPane.rowIndex="7"/>
-            <ComboBox fx:id="cbType" promptText="Tür seçiniz.." GridPane.columnSpan="3" GridPane.rowIndex="8"/>
+            <ComboBox fx:id="cbState" promptText="Tür seçiniz.." GridPane.columnSpan="3" GridPane.rowIndex="8"/>
             <Label text="Açıklama :" GridPane.rowIndex="10"/>
             <TextArea fx:id="taDiscription" GridPane.columnSpan="4" GridPane.rowIndex="11" GridPane.rowSpan="2"/>
             <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle" GridPane.columnIndex="1"

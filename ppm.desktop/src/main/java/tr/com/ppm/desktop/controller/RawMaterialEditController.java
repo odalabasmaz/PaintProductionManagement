@@ -1,11 +1,13 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import org.springframework.stereotype.Component;
+import tr.com.ppm.desktop.model.common.State;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +24,7 @@ public class RawMaterialEditController implements Initializable {
 	private Button btnClose;
 
 	@FXML
-	private ComboBox<?> cbType;
+	private ComboBox<State> cbState;
 
 	@FXML
 	private Button btnAdd;
@@ -47,6 +49,6 @@ public class RawMaterialEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		cbState.setItems(FXCollections.observableArrayList(State.values()));
 	}
 }
