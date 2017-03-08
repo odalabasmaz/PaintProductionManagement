@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import tr.com.ppm.desktop.controller.EditViewController;
+import tr.com.ppm.desktop.model.common.AuditableEntity;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +26,16 @@ public abstract class AbstractFxmlView {
 		FXMLLoader fxmlLoader = new FXMLLoader(getResource());
 		fxmlLoader.setControllerFactory(this::createControllerForType);
 		return fxmlLoader.load();
+	}
+
+	public Parent getView(ApplicationContext applicationContext, AuditableEntity entity) throws IOException {
+		this.applicationContext = applicationContext;
+		FXMLLoader fxmlLoader = new FXMLLoader(getResource());
+		fxmlLoader.setControllerFactory(this::createControllerForType);
+		Parent load = fxmlLoader.load();
+		EditViewController controller = fxmlLoader.getController();
+		controller.updateEditView(entity);
+		return load;
 	}
 
 	private Object createControllerForType(Class<?> type) {

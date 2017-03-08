@@ -60,7 +60,10 @@ public class PaintTypeController implements Initializable {
 
 	@FXML
 	public void edit(ActionEvent event) {
-//		ViewManager.openPage(PaintTypeEditView.class);
+		PaintType selectedItem = tblViewPaintType.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			ViewManager.openPopup(PaintTypeEditView.class, this::query, selectedItem);
+		}
 	}
 
 	@FXML

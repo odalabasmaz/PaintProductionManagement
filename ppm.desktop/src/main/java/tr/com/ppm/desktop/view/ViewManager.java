@@ -8,6 +8,7 @@ import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import tr.com.ppm.desktop.model.common.AuditableEntity;
 
 import java.io.IOException;
 
@@ -65,6 +66,27 @@ public class ViewManager {
 		Parent parentView = null;
 		try {
 			parentView = view.getView(applicationContext);
+		} catch (IOException e) {
+			//todo: ex handling for unfound page
+			LOGGER.error("Page cannot be loaded.", e);
+		}
+
+		stage.setScene(new Scene(parentView));
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.setOnHiding(event -> callback.terminate());
+		stage.show();
+	}
+
+	public static void openPopup(Class<? extends AbstractFxmlView> newView, Callback callback, AuditableEntity entity) {
+		Stage stage = new Stage();
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		AbstractFxmlView view = applicationContext.getBean(newView);
+		stage.titleProperty().bind(view.titleProperty());
+		Parent parentView = null;
+		try {
+			parentView = view.getView(applicationContext,entity);
 		} catch (IOException e) {
 			//todo: ex handling for unfound page
 			LOGGER.error("Page cannot be loaded.", e);

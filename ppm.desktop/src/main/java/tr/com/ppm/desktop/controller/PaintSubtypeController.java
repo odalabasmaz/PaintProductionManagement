@@ -75,8 +75,10 @@ public class PaintSubtypeController implements Initializable {
 
 	@FXML
 	public void edit(ActionEvent event) {
-
-		ViewManager.openPage(PaintSubtypeEditView.class);
+		PaintSubType selectedItem = tvPaintSubtype.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			ViewManager.openPopup(PaintSubtypeEditView.class, this::query, selectedItem);
+		}
 	}
 
 	@FXML

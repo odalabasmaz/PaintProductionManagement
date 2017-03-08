@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
  * @author ykarabalkan.
  */
 @Component
-public class PaintSubtypeEditController implements Initializable {
+public class PaintSubtypeEditController implements Initializable, EditViewController<PaintSubType> {
 
 	@Autowired
 	private PaintTypeService paintTypeService;
@@ -46,9 +46,19 @@ public class PaintSubtypeEditController implements Initializable {
 	@FXML
 	private Label lblHeader;
 
+	private PaintSubType paintSubType;
+
+	private ViewMode viewMode;
+
 	@FXML
 	void add(ActionEvent event) {
-		paintSubTypeService.save(new PaintSubType(tfPaintSubType.getText(), cbPaintType.getValue()));
+		if (this.viewMode == ViewMode.NEW) {
+			paintSubTypeService.save(new PaintSubType(tfPaintSubType.getText(), cbPaintType.getValue()));
+		} else if (this.viewMode == ViewMode.EDIT) {
+			this.paintSubType.setName(tfPaintSubType.getText());
+			this.paintSubType.setPaintType(cbPaintType.getValue());
+			paintSubTypeService.update(this.paintSubType);
+		}
 		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
 
@@ -59,6 +69,17 @@ public class PaintSubtypeEditController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.viewMode = ViewMode.NEW;
 		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
+	}
+
+	@Override
+	public void updateEditView(PaintSubType paintSubType) {
+		if (paintSubType != null) {
+			this.paintSubType = paintSubType;
+			this.viewMode = ViewMode.EDIT;
+			cbPaintType.getSelectionModel().select(paintSubType.getPaintType());
+			tfPaintSubType.setText(paintSubType.getName());
+		}
 	}
 }
