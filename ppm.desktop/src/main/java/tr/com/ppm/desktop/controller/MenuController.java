@@ -30,7 +30,7 @@ public class MenuController implements Initializable {
 
 	@FXML
 	void openProduct(ActionEvent event) {
-		ViewManager.openPage(RawMaterialView.class);
+		ViewManager.openPage(ProductView.class);
 	}
 
 	@FXML
