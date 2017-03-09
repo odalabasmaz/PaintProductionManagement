@@ -43,6 +43,9 @@ public class RawMaterialEditController implements Initializable, EditViewControl
 	private TextField tfName;
 
 	@FXML
+	private TextField tfStock;
+
+	@FXML
 	private Label lblHeader;
 
 	private RawMaterial rawMaterial;
@@ -51,11 +54,12 @@ public class RawMaterialEditController implements Initializable, EditViewControl
 	@FXML
 	void add(ActionEvent event) {
 		if (viewMode == ViewMode.NEW) {
-			RawMaterial rawMaterial = new RawMaterial(tfCode.getText(), tfName.getText(), taDiscription.getText(), cbState.getSelectionModel().getSelectedItem());
+			RawMaterial rawMaterial = new RawMaterial(tfCode.getText(), tfName.getText(), taDiscription.getText(), cbState.getSelectionModel().getSelectedItem(), tfStock.getText());
 			rawMaterialService.save(rawMaterial);
 		} else if (viewMode == ViewMode.EDIT) {
 			this.rawMaterial.setName(tfName.getText());
 			this.rawMaterial.setCode(tfCode.getText());
+			this.rawMaterial.setStock(Long.parseLong(tfStock.getText()));
 			this.rawMaterial.setDescription(taDiscription.getText());
 			this.rawMaterial.setState(cbState.getSelectionModel().getSelectedItem());
 			rawMaterialService.update(this.rawMaterial);

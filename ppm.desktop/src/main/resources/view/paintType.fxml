@@ -24,7 +24,7 @@
                         <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0"
                                    GridPane.rowIndex="3" GridPane.columnSpan="4">
                             <buttons>
-                                <Button fx:id="btnClean" mnemonicParsing="false" onAction="#delete" text="Temizle"/>
+                                <Button fx:id="btnClean" mnemonicParsing="false" onAction="#clean" text="Temizle"/>
                                 <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" text="Sorgula"/>
                             </buttons>
                         </ButtonBar>
