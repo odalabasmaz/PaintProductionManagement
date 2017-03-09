@@ -21,8 +21,8 @@ public class RawMaterial extends Material {
 	@Column(name = "STATE")
 	private State state;
 
-	public RawMaterial(String code, String name, String desc, State state) {
-		super(code, name, desc);
+	public RawMaterial(String code, String name, String desc, State state, String stock) {
+		super(code, name, desc, stock);
 		this.state = state;
 	}
 

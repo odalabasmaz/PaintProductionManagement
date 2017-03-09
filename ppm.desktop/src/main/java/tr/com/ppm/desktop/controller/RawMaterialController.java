@@ -1,5 +1,6 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -68,6 +69,9 @@ public class RawMaterialController implements Initializable {
 	private TableColumn<RawMaterial, State> tcState;
 
 	@FXML
+	private TableColumn<RawMaterial, Long> tcStock;
+
+	@FXML
 	private TableColumn<RawMaterial, String> tcDescription;
 
 	@FXML
@@ -112,10 +116,12 @@ public class RawMaterialController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		tvRawMaterial.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		cbState.setItems(FXCollections.observableArrayList(State.values()));
 		tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		tcCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCode()));
 		tcState.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getState()));
+		tcStock.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getStock()));
 		tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 	}
 }

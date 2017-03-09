@@ -22,10 +22,14 @@ public abstract class Material extends AuditableEntity {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	public Material(String code, String name, String description) {
+	@Column(name = "STOCK")
+	private Long stock;
+
+	public Material(String code, String name, String description,String stock) {
 		this.code = code;
 		this.name = name;
 		this.description = description;
+		this.stock= Long.parseLong(stock);
 	}
 
 	//for Hibernate
@@ -55,5 +59,13 @@ public abstract class Material extends AuditableEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Long getStock() {
+		return stock;
+	}
+
+	public void setStock(Long stock) {
+		this.stock = stock;
 	}
 }
