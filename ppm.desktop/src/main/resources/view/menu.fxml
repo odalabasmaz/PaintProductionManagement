@@ -4,15 +4,14 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<MenuBar id="menuBar" focusTraversable="true" stylesheets="@../style/menuButton.css" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed"
-         xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102"
-         fx:controller="tr.com.ppm.desktop.controller.MenuController">
+
+<MenuBar id="menuBar" focusTraversable="true" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" stylesheets="@../style/menuButton.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.MenuController">
     <Menu mnemonicParsing="false" text="Tanımlamalar">
         <MenuItem fx:id="menuItemRawMaterial" mnemonicParsing="false" onAction="#openRawMaterial" text="Hammadde" />
         <MenuItem fx:id="menuItemProduct" mnemonicParsing="false" onAction="#openProduct" text="Ürün" />
         <MenuItem fx:id="menuItemPaintType" mnemonicParsing="false" onAction="#openPaintType" text="Boya Türü" />
         <MenuItem fx:id="menuItemPaintSubtype" mnemonicParsing="false" onAction="#openPaintSubType" text="Boya Alt Türü" />
-        <MenuItem mnemonicParsing="false" text="Kova Türü" />
+        <MenuItem fx:id="menuItemBucketType" mnemonicParsing="false" onAction="#openBucketType" text="Kova Türü" />
         <MenuItem mnemonicParsing="false" text="Kullanıcı" />
         <MenuItem mnemonicParsing="false" text="Rol" />
         <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
