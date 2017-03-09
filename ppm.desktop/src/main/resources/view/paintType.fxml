@@ -25,7 +25,7 @@
                                    GridPane.rowIndex="3" GridPane.columnSpan="4">
                             <buttons>
                                 <Button fx:id="btnClean" mnemonicParsing="false" onAction="#delete" text="Temizle"/>
-                                <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#edit" text="Sorgula"/>
+                                <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" text="Sorgula"/>
                             </buttons>
                         </ButtonBar>
                         <columnConstraints>

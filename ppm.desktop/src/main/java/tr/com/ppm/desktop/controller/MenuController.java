@@ -8,10 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 import org.springframework.stereotype.Component;
-import tr.com.ppm.desktop.view.PaintSubtypeView;
-import tr.com.ppm.desktop.view.PaintTypeView;
-import tr.com.ppm.desktop.view.RawMaterialView;
-import tr.com.ppm.desktop.view.ViewManager;
+import tr.com.ppm.desktop.model.material.BucketType;
+import tr.com.ppm.desktop.view.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,6 +41,12 @@ public class MenuController implements Initializable {
 	@FXML
 	void openPaintSubType(ActionEvent event) {
 		ViewManager.openPage(PaintSubtypeView.class);
+	}
+
+
+	@FXML
+	void openBucketType(ActionEvent event) {
+		ViewManager.openPage(BucketTypeView.class);
 	}
 
 	public void exit(ActionEvent actionEvent) {
