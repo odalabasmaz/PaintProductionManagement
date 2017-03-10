@@ -1,5 +1,6 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,11 +8,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.material.PaintSubType;
 import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.model.material.Product;
-import tr.com.ppm.desktop.view.RawMaterialEditView;
+import tr.com.ppm.desktop.service.PaintSubTypeService;
+import tr.com.ppm.desktop.service.PaintTypeService;
+import tr.com.ppm.desktop.view.ProductEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
@@ -22,6 +26,12 @@ import java.util.ResourceBundle;
  */
 @Component
 public class ProductController implements Initializable {
+
+	@Autowired
+	private PaintTypeService paintTypeService;
+
+	@Autowired
+	private PaintSubTypeService paintSubTypeService;
 
 	@FXML
 	private TextField tfName;
@@ -85,7 +95,7 @@ public class ProductController implements Initializable {
 
 	@FXML
 	void add(ActionEvent event) {
-		ViewManager.openPopup(RawMaterialEditView.class, this::query);
+		ViewManager.openPopup(ProductEditView.class, this::query);
 	}
 
 	@FXML
@@ -100,6 +110,7 @@ public class ProductController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
+		cbPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
 	}
 }
