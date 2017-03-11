@@ -11,9 +11,6 @@
         <MenuItem fx:id="menuItemProduct" mnemonicParsing="false" onAction="#openProduct" text="Ürün" />
         <MenuItem fx:id="menuItemPaintType" mnemonicParsing="false" onAction="#openPaintType" text="Boya Türü" />
         <MenuItem fx:id="menuItemPaintSubtype" mnemonicParsing="false" onAction="#openPaintSubType" text="Boya Alt Türü" />
-        <MenuItem mnemonicParsing="false" text="Kullanıcı" />
-        <MenuItem mnemonicParsing="false" text="Rol" />
-        <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
         <MenuItem mnemonicParsing="false" text="Müşteri" />
         <SeparatorMenuItem />
         <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#exit" text="Exit" />
@@ -29,5 +26,10 @@
     </Menu>
     <Menu mnemonicParsing="false" text="Rapor">
         <MenuItem mnemonicParsing="false" text="About" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Yönetim">
+        <MenuItem mnemonicParsing="false" text="Kullanıcı" />
+        <MenuItem mnemonicParsing="false" text="Rol" />
+        <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
     </Menu>
 </MenuBar>

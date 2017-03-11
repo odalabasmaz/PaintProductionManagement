@@ -21,9 +21,6 @@ import java.util.ResourceBundle;
 @Component
 public class RawMaterialEditController implements Initializable, EditViewController<RawMaterial> {
 
-	@Autowired
-	RawMaterialService rawMaterialService;
-
 	@FXML
 	private TextField tfCode;
 
@@ -48,13 +45,15 @@ public class RawMaterialEditController implements Initializable, EditViewControl
 	@FXML
 	private Label lblHeader;
 
+	@Autowired
+	private RawMaterialService rawMaterialService;
 	private RawMaterial rawMaterial;
 	private ViewMode viewMode = ViewMode.NEW;
 
 	@FXML
 	void add(ActionEvent event) {
 		if (viewMode == ViewMode.NEW) {
-			RawMaterial rawMaterial = new RawMaterial(tfCode.getText(), tfName.getText(), taDiscription.getText(), cbState.getSelectionModel().getSelectedItem(), tfStock.getText());
+			rawMaterial = new RawMaterial(tfCode.getText(), tfName.getText(), taDiscription.getText(), cbState.getSelectionModel().getSelectedItem(), Double.parseDouble(tfStock.getText()));
 			rawMaterialService.save(rawMaterial);
 		} else if (viewMode == ViewMode.EDIT) {
 			this.rawMaterial.setName(tfName.getText());

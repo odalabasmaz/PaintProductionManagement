@@ -15,10 +15,12 @@ import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.model.material.Product;
 import tr.com.ppm.desktop.service.PaintSubTypeService;
 import tr.com.ppm.desktop.service.PaintTypeService;
+import tr.com.ppm.desktop.service.ProductService;
 import tr.com.ppm.desktop.view.ProductEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -26,6 +28,9 @@ import java.util.ResourceBundle;
  */
 @Component
 public class ProductController implements Initializable {
+
+	@Autowired
+	private ProductService productService;
 
 	@Autowired
 	private PaintTypeService paintTypeService;
@@ -49,10 +54,7 @@ public class ProductController implements Initializable {
 	private ComboBox<PaintType> cbPaintType;
 
 	@FXML
-	private ComboBox<PaintSubType> cbPaintSubtype;
-
-	@FXML
-	private TextField tfDensity;
+	private ComboBox<PaintSubType> cbPaintSubType;
 
 	@FXML
 	private TableView<Product> tvProduct;
@@ -87,6 +89,15 @@ public class ProductController implements Initializable {
 	}
 
 	private void query() {
+		String name = tfName.getText();
+		String code = tfCode.getText();
+		String colorName = tfColorName.getText();
+		String colorCode = tfColorCode.getText();
+		PaintType paintType = cbPaintType.getSelectionModel().getSelectedItem();
+		PaintSubType paintSubType = cbPaintSubType.getSelectionModel().getSelectedItem();
+
+		List<Product> products = productService.list(name, code, colorName, colorCode, paintType, paintSubType);
+		tvProduct.setItems(FXCollections.observableArrayList(products));
 	}
 
 	@FXML
@@ -111,6 +122,6 @@ public class ProductController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
-		cbPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
+		cbPaintSubType.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
 	}
 }

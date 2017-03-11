@@ -10,18 +10,20 @@ import javax.persistence.*;
 @Table(name = "QUANTITY")
 public class Quantity extends AuditableEntity {
 
-	@Column
+	@Column(name = "AMOUNT")
 	private double amount;
 
-	public Quantity() {
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "UNIT_ID")
+	private Unit unit;
+
+	/* for hibernate */
+	Quantity() {
 	}
 
 	public Quantity(double amount) {
 		this.amount = amount;
 	}
-
-	/*@Column
-	private Unit unit;*/
 
 	public double getAmount() {
 		return amount;
@@ -31,11 +33,11 @@ public class Quantity extends AuditableEntity {
 		this.amount = amount;
 	}
 
-/*	public Unit getUnit() {
+	public Unit getUnit() {
 		return unit;
 	}
 
 	public void setUnit(Unit unit) {
 		this.unit = unit;
-	}*/
+	}
 }

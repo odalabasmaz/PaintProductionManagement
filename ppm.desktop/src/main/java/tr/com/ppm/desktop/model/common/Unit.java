@@ -12,15 +12,19 @@ import javax.persistence.*;
 public class Unit extends AuditableEntity {
 	public enum TYPE {UNIT, DENSITY, TEMPERATURE, AREA, VOLUME, FORCE, ENERGY, MASS, WEIGHT}
 
-	@Column
+	@Column(name = "TYPE")
 	@Enumerated(EnumType.STRING)
 	private TYPE type;
 
-	@Column
+	@Column(name = "DEFINITION")
 	private String definition;
 
-	@Column
+	@Column(name = "DESCRIPTION")
 	private String description;
+
+	/* for hibernate */
+	Unit() {
+	}
 
 	public Unit(TYPE type, String definition, String description) {
 		this.type = type;

@@ -36,7 +36,7 @@ public class FormulaView {
 		btSave.setOnAction(event -> stage.close());
 
 		root.getChildren().add(cbUnit);
-//		root.getChildren().add(btSave);
+//		root.getChildren().equals(btSave);
 
 		Scene scene = new Scene(root, 300, 250);
 		stage.setTitle("Formül Tanım");

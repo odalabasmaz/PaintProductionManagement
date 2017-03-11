@@ -4,7 +4,6 @@ import tr.com.ppm.desktop.model.production.Ingredient;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,14 +18,20 @@ public class Product extends Material {
 	@JoinColumn(name = "PAINT_SUB_TYPE_ID")
 	private PaintSubType paintSubType;   //
 
+	@Column(name = "COLOR_CODE")
+	private String colorCode;
+
+	@Column(name = "COLOR_NAME")
+	private String colorName;
+
 	@Column(name = "DENSITY")
 	private double density;
 
-	@Column(name="INTERMEDIATE_PRODUCT")
+	@Column(name = "INTERMEDIATE_PRODUCT")
 	private boolean intermediateProduct;
 
 	@OneToMany(targetEntity = Ingredient.class)
-	@JoinColumn( name = "PRODUCT_ID")
+	@JoinColumn(name = "PRODUCT_ID")
 	private Set<Ingredient> ingredientSet = new HashSet<>();
 
 	/*for hibernate*/
@@ -39,6 +44,22 @@ public class Product extends Material {
 
 	public void setPaintSubType(PaintSubType paintSubType) {
 		this.paintSubType = paintSubType;
+	}
+
+	public String getColorCode() {
+		return colorCode;
+	}
+
+	public void setColorCode(String colorCode) {
+		this.colorCode = colorCode;
+	}
+
+	public String getColorName() {
+		return colorName;
+	}
+
+	public void setColorName(String colorName) {
+		this.colorName = colorName;
 	}
 
 	public double getDensity() {
