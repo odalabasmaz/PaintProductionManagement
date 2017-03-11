@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane fx:id="AnchorPane" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.102"
@@ -10,83 +11,78 @@
             <fx:include source="menu.fxml"/>
         </top>
         <center>
-            <VBox BorderPane.alignment="CENTER">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="729.0">
-                    <GridPane layoutX="14.0" layoutY="18.0" prefHeight="245.0" prefWidth="729.0"
-                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                              AnchorPane.topAnchor="0.0">
-                        <Label text="Adı :" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                        <TextField fx:id="tfName" GridPane.columnIndex="1" GridPane.columnSpan="2"
-                                   GridPane.rowIndex="0"/>
-                        <Label text="Kodu :" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
-                        <TextField fx:id="tfCode" GridPane.columnIndex="5" GridPane.columnSpan="2"
-                                   GridPane.rowIndex="0"/>
-                        <Label text="Renk Adı :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                        <TextField fx:id="tfColorName" GridPane.columnIndex="1" GridPane.columnSpan="2"
-                                   GridPane.rowIndex="1"/>
-                        <Label text="Renk Kodu :" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
-                        <TextField fx:id="tfColorCode" GridPane.columnIndex="5" GridPane.columnSpan="2"
-                                   GridPane.rowIndex="1"/>
-                        <Label text="Boya Türü :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                        <ComboBox fx:id="cbPaintType" promptText="Boya Türü seçiniz.." GridPane.columnIndex="1"
-                                  GridPane.columnSpan="2" GridPane.rowIndex="2"/>
-                        <Label text="Boya Alt Türü :" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
-                        <ComboBox fx:id="cbPaintSubType" promptText="Boya Alt Türü seçiniz.."
-                                  GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
-                        <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0"
-                                   GridPane.columnSpan="3" GridPane.rowIndex="5">
-                            <buttons>
-                                <Button fx:id="btnClean" mnemonicParsing="false" onAction="#clean" text="Temizle"/>
-                                <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" text="Sorgula"/>
-                            </buttons>
-                        </ButtonBar>
-                        <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="69.0"/>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="91.0"/>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0"
-                                               prefWidth="140.0"/>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="78.0"/>
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        </rowConstraints>
-                    </GridPane>
+            <VBox>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <Label text="Adı :" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <TextField fx:id="tfName" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
+                    <Label text="Kodu :" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                    <TextField fx:id="tfCode" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
+                    <Label text="Renk Adı :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <TextField fx:id="tfColorName" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                               GridPane.rowIndex="2"/>
+                    <Label text="Renk Kodu :" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+                    <TextField fx:id="tfColorCode" GridPane.columnIndex="5" GridPane.columnSpan="2"
+                               GridPane.rowIndex="2"/>
+                    <Label text="Boya Türü :" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                    <ComboBox fx:id="cbPaintType" promptText="Boya Türü seçiniz.." GridPane.columnIndex="1"
+                              GridPane.columnSpan="2" GridPane.rowIndex="4"/>
+                    <Label text="Boya Alt Türü :" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+                    <ComboBox fx:id="cbPaintSubType" promptText="Boya Alt Türü seçiniz.." GridPane.columnIndex="5"
+                              GridPane.columnSpan="2" GridPane.rowIndex="4"/>
+                    <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0"
+                               GridPane.columnSpan="3" GridPane.rowIndex="6">
+                        <buttons>
+                            <Button fx:id="btnClean" mnemonicParsing="false" onAction="#clean" text="Temizle"/>
+                            <Button fx:id="btnQuery" mnemonicParsing="false" onAction="#query" text="Sorgula"/>
+                        </buttons>
+                    </ButtonBar>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                </GridPane>
+                <AnchorPane>
+                    <TableView fx:id="tvProduct" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <columns>
+                            <TableColumn fx:id="tcName" text="Adı"/>
+                            <TableColumn fx:id="tcCode" text="Kodu"/>
+                            <TableColumn fx:id="tcColor" text="Renk"/>
+                            <TableColumn fx:id="tcColorCode" text="Renk Kodu"/>
+                            <TableColumn fx:id="tcDensity" text="Yoğunluk"/>
+                            <TableColumn fx:id="tcPaintType" text="Boya Türü"/>
+                            <TableColumn fx:id="tcPaintSubtype" text="Boya Alt Türü"/>
+                            <TableColumn fx:id="tcDescription" text="Açıklama"/>
+                        </columns>
+                    </TableView>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="268.0" prefWidth="729.0">
-                    <VBox prefHeight="247.0" prefWidth="727.0" AnchorPane.bottomAnchor="0.0"
-                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <TableView fx:id="tvProduct">
-                            <columns>
-                                <TableColumn fx:id="tcName" text="Adı"/>
-                                <TableColumn fx:id="tcCode" prefWidth="60.0" text="Kodu"/>
-                                <TableColumn fx:id="tcColor" prefWidth="77.0" text="Renk"/>
-                                <TableColumn fx:id="tcColorCode" prefWidth="76.0" text="Renk Kodu"/>
-                                <TableColumn fx:id="tcDensity" prefWidth="83.0" text="Yoğunluk"/>
-                                <TableColumn fx:id="tcPaintType" prefWidth="97.0" text="Boya Türü"/>
-                                <TableColumn fx:id="tcPaintSubtype" prefWidth="128.0" text="Boya Alt Türü"/>
-                                <TableColumn fx:id="tcDescription" prefWidth="107.0" text="Açıklama"/>
-                            </columns>
-                        </TableView>
-                        <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
-                            <buttons>
-                                <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#edit"
-                                        text="Düzenle"/>
-                                <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#delete"
-                                        text="Sil"/>
-                                <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle"/>
-                            </buttons>
-                        </ButtonBar>
-                    </VBox>
-                </AnchorPane>
+                <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
+                    <buttons>
+                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#edit" text="Düzenle"/>
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#delete" text="Sil"/>
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle"/>
+                    </buttons>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                </ButtonBar>
             </VBox>
         </center>
     </BorderPane>
