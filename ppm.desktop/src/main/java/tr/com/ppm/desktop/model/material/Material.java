@@ -36,6 +36,11 @@ public abstract class Material extends AuditableEntity {
 		this.stock = stock;
 	}
 
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
 	public String getCode() {
 		return code;
 	}

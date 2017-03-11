@@ -53,10 +53,10 @@
                 <Label text="Ürün Tipi :" GridPane.rowIndex="6"/>
             </GridPane>
             <HBox>
-                <TableView prefHeight="200.0" prefWidth="507.0">
+                <TableView fx:id="tvRawMaterial" prefHeight="200.0" prefWidth="507.0">
                     <columns>
-                        <TableColumn editable="false" prefWidth="253.0" text="HAM MADDE"/>
-                        <TableColumn editable="false" prefWidth="253.0" text="MİKTAR (KG)"/>
+                        <TableColumn fx:id="tcRawMaterial" editable="false" prefWidth="253.0" text="HAM MADDE"/>
+                        <TableColumn fx:id="tcRwAmount"   editable="false" prefWidth="253.0" text="MİKTAR (KG)"/>
                     </columns>
                     <effect>
                         <InnerShadow color="#110b3c" height="29.89" radius="15.93" width="35.83"/>
@@ -66,13 +66,14 @@
                     </columnResizePolicy>
                 </TableView>
                 <VBox>
-                    <Button fx:id="btnRawAdd" mnemonicParsing="false" onAction="addRow" text="Ekle"/>
+                    <Button fx:id="btnRawAdd" mnemonicParsing="false" onAction="#addRow" text="Ekle"/>
+                    <Button fx:id="btnRawSave" mnemonicParsing="false" onAction="#saveRow" text="Ekle"/>
                 </VBox>
             </HBox>
-            <TableView prefHeight="229.0" prefWidth="507.0">
+            <TableView fx:id="tvIntermediateProduct" prefHeight="229.0" prefWidth="507.0">
                 <columns>
-                    <TableColumn prefWidth="251.0" text="ARA ÜRÜN"/>
-                    <TableColumn minWidth="0.0" prefWidth="247.0" text="MİKTAR"/>
+                    <TableColumn fx:id="tcIntermediateProduct"  prefWidth="251.0" text="ARA ÜRÜN"/>
+                    <TableColumn fx:id="tcIProductAmount" minWidth="0.0" prefWidth="247.0" text="MİKTAR"/>
                 </columns>
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

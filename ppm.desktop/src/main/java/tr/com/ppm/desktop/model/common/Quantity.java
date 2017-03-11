@@ -33,6 +33,12 @@ public class Quantity extends AuditableEntity {
 		this.amount = amount;
 	}
 
+	@Override
+	public String toString() {
+		return String.valueOf(amount);
+	}
+
+
 	public Unit getUnit() {
 		return unit;
 	}

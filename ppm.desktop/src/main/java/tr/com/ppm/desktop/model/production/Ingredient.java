@@ -22,8 +22,10 @@ public class Ingredient extends AuditableEntity {
 	private Quantity quantity;
 
 	/*for hibernate*/
-	Ingredient() {
+	public Ingredient() {
 	}
+
+
 
 	public Material getMaterial() {
 		return material;

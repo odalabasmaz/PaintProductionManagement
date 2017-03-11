@@ -38,6 +38,8 @@ public class Product extends Material {
 	Product() {
 	}
 
+
+
 	public PaintSubType getPaintSubType() {
 		return paintSubType;
 	}
