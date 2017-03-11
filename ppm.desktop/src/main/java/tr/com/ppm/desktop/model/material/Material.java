@@ -1,13 +1,13 @@
 package tr.com.ppm.desktop.model.material;
 
 import tr.com.ppm.desktop.model.common.AuditableEntity;
-import tr.com.ppm.desktop.model.common.State;
 
 import javax.persistence.*;
 
 /**
  * @author Orhun Dalabasmaz
  */
+
 @Entity
 @Table(name = "MATERIAL")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,19 +22,18 @@ public abstract class Material extends AuditableEntity {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@Column(name = "STOCK")
-	private Long stock;
+	@Column(name = "STOCK", precision = 10, scale = 4)
+	private double stock;
 
-	public Material(String code, String name, String description,String stock) {
+	//for Hibernate
+	Material() {
+	}
+
+	public Material(String code, String name, String description, double stock) {
 		this.code = code;
 		this.name = name;
 		this.description = description;
-		this.stock= Long.parseLong(stock);
-	}
-
-	//for Hibernate
-	public Material() {
-
+		this.stock = stock;
 	}
 
 	public String getCode() {
@@ -61,11 +60,11 @@ public abstract class Material extends AuditableEntity {
 		this.description = description;
 	}
 
-	public Long getStock() {
+	public double getStock() {
 		return stock;
 	}
 
-	public void setStock(Long stock) {
+	public void setStock(double stock) {
 		this.stock = stock;
 	}
 }

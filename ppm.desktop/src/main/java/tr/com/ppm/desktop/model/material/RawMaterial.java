@@ -13,15 +13,15 @@ import javax.persistence.Table;
 @Table(name = "RAW_MATERIAL")
 public class RawMaterial extends Material {
 
-	//for hibernate
-	public RawMaterial() {
-		super();
-	}
-
 	@Column(name = "STATE")
 	private State state;
 
-	public RawMaterial(String code, String name, String desc, State state, String stock) {
+	//for hibernate
+	RawMaterial() {
+		super();
+	}
+
+	public RawMaterial(String code, String name, String desc, State state, double stock) {
 		super(code, name, desc, stock);
 		this.state = state;
 	}

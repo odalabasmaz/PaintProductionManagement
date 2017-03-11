@@ -36,8 +36,6 @@
                        <ComboBox fx:id="cbPaintType" promptText="Boya Türü seçiniz.." GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                        <Label text="Boya Alt Türü :" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                        <ComboBox fx:id="cbPaintSubtype" promptText="Boya Alt Türü seçiniz.." GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                       <Label text="Yoğunluk :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                       <TextField fx:id="tfDensity" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                        <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
                            <buttons>
                                <Button fx:id="btnClean" mnemonicParsing="false" onAction="#clean" text="Temizle" />
