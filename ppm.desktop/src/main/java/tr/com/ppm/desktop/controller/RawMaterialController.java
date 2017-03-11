@@ -116,7 +116,6 @@ public class RawMaterialController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		tvRawMaterial.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		cbState.setItems(FXCollections.observableArrayList(State.values()));
 		tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		tcCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCode()));
