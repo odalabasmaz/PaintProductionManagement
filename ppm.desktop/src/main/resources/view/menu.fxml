@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-
-<MenuBar id="menuBar" focusTraversable="true" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" stylesheets="@../style/menuButton.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.MenuController">
+<?import javafx.scene.control.*?>
+<MenuBar xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102"
+         onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed"
+         fx:controller="tr.com.ppm.desktop.controller.MenuController">
     <Menu mnemonicParsing="false" text="Tanımlamalar">
-        <MenuItem fx:id="menuItemRawMaterial" mnemonicParsing="false" onAction="#openRawMaterial" text="Hammadde" />
-        <MenuItem fx:id="menuItemProduct" mnemonicParsing="false" onAction="#openProduct" text="Ürün" />
-        <MenuItem fx:id="menuItemPaintType" mnemonicParsing="false" onAction="#openPaintType" text="Boya Türü" />
-        <MenuItem fx:id="menuItemPaintSubtype" mnemonicParsing="false" onAction="#openPaintSubType" text="Boya Alt Türü" />
-        <MenuItem mnemonicParsing="false" text="Müşteri" />
-        <SeparatorMenuItem />
-        <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#exit" text="Exit" />
+        <MenuItem fx:id="menuItemRawMaterial" mnemonicParsing="false" onAction="#openRawMaterial" text="Hammadde"/>
+        <MenuItem fx:id="menuItemProduct" mnemonicParsing="false" onAction="#openProduct" text="Ürün"/>
+        <MenuItem fx:id="menuItemPaintType" mnemonicParsing="false" onAction="#openPaintType" text="Boya Türü"/>
+        <MenuItem fx:id="menuItemPaintSubtype" mnemonicParsing="false" onAction="#openPaintSubType"
+                  text="Boya Alt Türü"/>
+        <MenuItem mnemonicParsing="false" text="Müşteri"/>
+        <SeparatorMenuItem/>
+        <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#exit" text="Exit"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Üretim">
-        <MenuItem mnemonicParsing="false" text="Delete" />
+        <MenuItem mnemonicParsing="false" text="Delete"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Stok">
-        <MenuItem mnemonicParsing="false" text="About" />
+        <MenuItem mnemonicParsing="false" text="About"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Sipariş">
-        <MenuItem mnemonicParsing="false" text="About" />
+        <MenuItem mnemonicParsing="false" text="About"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Rapor">
-        <MenuItem mnemonicParsing="false" text="About" />
+        <MenuItem mnemonicParsing="false" text="About"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Yönetim">
-        <MenuItem mnemonicParsing="false" text="Kullanıcı" />
-        <MenuItem mnemonicParsing="false" text="Rol" />
-        <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
+        <MenuItem mnemonicParsing="false" text="Kullanıcı"/>
+        <MenuItem mnemonicParsing="false" text="Rol"/>
+        <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama"/>
     </Menu>
 </MenuBar>
