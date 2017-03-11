@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane fx:id="AnchorPane" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.102"
             xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane fx:id="BorderPane" prefHeight="32.0" prefWidth="459.0" AnchorPane.bottomAnchor="0.0"
+    <BorderPane fx:id="BorderPane" prefHeight="600" prefWidth="1000" AnchorPane.bottomAnchor="0.0"
                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
             <fx:include source="menu.fxml"/>
