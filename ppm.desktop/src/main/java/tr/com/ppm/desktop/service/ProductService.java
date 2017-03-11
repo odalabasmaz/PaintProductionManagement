@@ -20,9 +20,9 @@ public class ProductService extends BaseService<Product> {
 	                          PaintType paintType, PaintSubType paintSubType) {
 		Map<String, Object> params = new HashMap<>();
 		String queryString = QueryHelper.getInstance("Product", params)
-				.likeIgnoreCase("name", name)
+				.equals("name", name)
 				.equals("code", code)
-				.equals("colorName", colorName)
+				.likeIgnoreCase("colorName", colorName)
 				.equals("colorCode", colorCode)
 				.build();
 
