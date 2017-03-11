@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Window;
 import org.springframework.stereotype.Component;
-import tr.com.ppm.desktop.model.material.BucketType;
 import tr.com.ppm.desktop.view.*;
 
 import java.net.URL;
@@ -41,12 +40,6 @@ public class MenuController implements Initializable {
 	@FXML
 	void openPaintSubType(ActionEvent event) {
 		ViewManager.openPage(PaintSubtypeView.class);
-	}
-
-
-	@FXML
-	void openBucketType(ActionEvent event) {
-		ViewManager.openPage(BucketTypeView.class);
 	}
 
 	public void exit(ActionEvent actionEvent) {

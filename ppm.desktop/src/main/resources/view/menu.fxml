@@ -11,7 +11,6 @@
         <MenuItem fx:id="menuItemProduct" mnemonicParsing="false" onAction="#openProduct" text="Ürün" />
         <MenuItem fx:id="menuItemPaintType" mnemonicParsing="false" onAction="#openPaintType" text="Boya Türü" />
         <MenuItem fx:id="menuItemPaintSubtype" mnemonicParsing="false" onAction="#openPaintSubType" text="Boya Alt Türü" />
-        <MenuItem fx:id="menuItemBucketType" mnemonicParsing="false" onAction="#openBucketType" text="Kova Türü" />
         <MenuItem mnemonicParsing="false" text="Kullanıcı" />
         <MenuItem mnemonicParsing="false" text="Rol" />
         <MenuItem mnemonicParsing="false" text="Rol - Yetki Atama" />
