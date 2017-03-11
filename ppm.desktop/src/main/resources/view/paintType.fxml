@@ -14,15 +14,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
- <BorderPane prefHeight="561.0" prefWidth="603.0" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.PaintTypeController">
+<BorderPane prefHeight="561.0" prefWidth="603.0" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.PaintTypeController">
      <top>
          <fx:include source="menu.fxml" />
      </top>
      <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="247.0" prefWidth="599.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="599.0">
                     <GridPane layoutX="14.0" layoutY="23.0" prefHeight="150.0" prefWidth="413.0">
                         <Label text="Boya Türü :" GridPane.rowIndex="0" />
                         <TextField fx:id="tfPaintType" prefHeight="33.0" prefWidth="352.0" GridPane.columnSpan="4" GridPane.rowIndex="1">
@@ -48,11 +47,11 @@
                         </rowConstraints>
                     </GridPane>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="599.0">
-                    <VBox layoutX="14.0" layoutY="7.0" prefHeight="257.0" prefWidth="597.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <TableView fx:id="tblViewPaintType" prefHeight="200.0" prefWidth="326.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="257.0" prefWidth="599.0">
+                    <VBox layoutX="10.0" layoutY="4.0" prefHeight="243.0" prefWidth="571.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="-6.0">
+                        <TableView fx:id="tblViewPaintType" prefHeight="202.0" prefWidth="511.0">
                             <columns>
-                                <TableColumn fx:id="tblColumnPaintType" prefWidth="325.0" text="BOYA TÜRÜ" />
+                                <TableColumn fx:id="tblColumnPaintType" prefWidth="386.0" text="BOYA TÜRÜ" />
                             </columns>
                         </TableView>
                         <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">

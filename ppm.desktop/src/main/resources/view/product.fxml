@@ -67,16 +67,16 @@
                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="268.0" prefWidth="729.0">
                    <VBox prefHeight="247.0" prefWidth="727.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                        <children>
-                           <TableView fx:id="tvProduct" prefHeight="200.0" prefWidth="542.0">
+                           <TableView fx:id="tvProduct">
                                <columns>
                                    <TableColumn fx:id="tcName" text="Adı" />
-                                   <TableColumn fx:id="tcCode" text="Kodu" />
-                                   <TableColumn fx:id="tcColor" text="Renk" />
-                                   <TableColumn fx:id="tcColorCode" text="Renk Kodu" />
-                                   <TableColumn fx:id="tcDensity" text="Yoğunluk" />
-                                   <TableColumn fx:id="tcPaintType" text="Boya Türü" />
-                                   <TableColumn fx:id="tcPaintSubtype" text="Boya Alt Türü" />
-                                   <TableColumn fx:id="tcDescription" text="Açıklama" />
+                                   <TableColumn fx:id="tcCode" prefWidth="60.0" text="Kodu" />
+                                   <TableColumn fx:id="tcColor" prefWidth="77.0" text="Renk" />
+                                   <TableColumn fx:id="tcColorCode" prefWidth="76.0" text="Renk Kodu" />
+                                   <TableColumn fx:id="tcDensity" prefWidth="83.0" text="Yoğunluk" />
+                                   <TableColumn fx:id="tcPaintType" prefWidth="97.0" text="Boya Türü" />
+                                   <TableColumn fx:id="tcPaintSubtype" prefWidth="128.0" text="Boya Alt Türü" />
+                                   <TableColumn fx:id="tcDescription" prefWidth="107.0" text="Açıklama" />
                                </columns>
                            </TableView>
                            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">

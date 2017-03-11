@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.MainController">
-   <children>
-      <BorderPane layoutX="9.0" layoutY="9.0" prefHeight="409.0" prefWidth="609.0" stylesheets="@../style/MainStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-          <top>
-              <fx:include source="menu.fxml" />
-          </top>
-          <left>
-              <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-          </left>
-          <right>
-              <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-          </right>
-          <bottom>
-              <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-          </bottom>
-      </BorderPane>
-   </children>
-</AnchorPane>
+
+<BorderPane prefHeight="409.0" prefWidth="609.0" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.MainController">
+    <top>
+        <fx:include source="menu.fxml" />
+    </top>
+    <left>
+        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <Pane prefHeight="200.0" prefWidth="200.0" stylesheets="@../style/MainStyle.css" BorderPane.alignment="CENTER" />
+    </right>
+    <bottom>
+        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>

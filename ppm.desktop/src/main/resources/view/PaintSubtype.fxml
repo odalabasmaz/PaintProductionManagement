@@ -52,8 +52,8 @@
                     </GridPane>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="321.0" prefWidth="687.0">
-                    <VBox layoutX="14.0" layoutY="7.0">
-                        <TableView fx:id="tvPaintSubtype" prefHeight="200.0" prefWidth="511.0">
+                    <VBox layoutX="14.0" layoutY="7.0" prefHeight="240.0" prefWidth="512.0">
+                        <TableView fx:id="tvPaintSubtype">
                             <columns>
                                 <TableColumn fx:id="tcPaintType" prefWidth="255.0" text="BOYA TÜRÜ" />
                                 <TableColumn fx:id="tcPaintSubtype" prefWidth="254.0" text="BOYA ALT TÜRÜ" />

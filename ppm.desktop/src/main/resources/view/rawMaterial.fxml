@@ -54,7 +54,7 @@
                </AnchorPane>
                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="321.0" prefWidth="687.0">
                    <VBox layoutX="11.0" layoutY="7.0" prefHeight="328.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                       <TableView fx:id="tvRawMaterial" prefHeight="200.0" prefWidth="542.0">
+                       <TableView fx:id="tvRawMaterial">
                            <columns>
                                <TableColumn fx:id="tcName" text="ADI" />
                                <TableColumn fx:id="tcCode" prefWidth="91.0" text="KODU" />
