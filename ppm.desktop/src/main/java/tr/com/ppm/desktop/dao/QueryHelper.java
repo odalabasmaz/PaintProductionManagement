@@ -29,23 +29,23 @@ public class QueryHelper {
 	}
 
 	public QueryHelper equalsIgnoreCase(String key, String value) {
-		if (StringUtils.isNotBlank(value)) {
+		if (StringUtils.isNotBlank(key)) {
 			queryString += " and lower(" + key + ") = :" + key;
 			params.put(key, value.toLowerCase());
 		}
 		return this;
 	}
 
-	public QueryHelper likeIgnoreCase(String key, String value) {
-		if (StringUtils.isNotBlank(value)) {
+	public QueryHelper like(String key, String value) {
+		if (StringUtils.isNotBlank(key)) {
 			queryString += " and " + key + " like :" + key;
 			params.put(key, "%" + value + "%");
 		}
 		return this;
 	}
 
-	public QueryHelper like(String key, String value) {
-		if (StringUtils.isNotBlank(value)) {
+	public QueryHelper likeIgnoreCase(String key, String value) {
+		if (StringUtils.isNotBlank(key)) {
 			queryString += " and lower(" + key + ") like :" + key;
 			params.put(key, "%" + value.toLowerCase() + "%");
 		}

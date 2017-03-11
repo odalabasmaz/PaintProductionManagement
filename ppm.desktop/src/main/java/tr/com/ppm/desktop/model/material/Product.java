@@ -30,9 +30,9 @@ public class Product extends Material {
 	@Column(name = "INTERMEDIATE_PRODUCT")
 	private boolean intermediateProduct;
 
-	@OneToMany(targetEntity = Ingredient.class)
-	@JoinColumn(name = "PRODUCT_ID")
-	private Set<Ingredient> ingredientSet = new HashSet<>();
+//	@OneToMany(targetEntity = Ingredient.class)
+//	@JoinColumn(name = "PRODUCT_ID")
+//	private Set<Ingredient> ingredientSet = new HashSet<>();
 
 	/*for hibernate*/
 	Product() {
@@ -78,11 +78,11 @@ public class Product extends Material {
 		this.intermediateProduct = intermediateProduct;
 	}
 
-	public Set<Ingredient> getIngredientSet() {
-		return ingredientSet;
-	}
-
-	public void setIngredientSet(Set<Ingredient> ingredientSet) {
-		this.ingredientSet = ingredientSet;
-	}
+//	public Set<Ingredient> getIngredientSet() {
+//		return ingredientSet;
+//	}
+//
+//	public void setIngredientSet(Set<Ingredient> ingredientSet) {
+//		this.ingredientSet = ingredientSet;
+//	}
 }

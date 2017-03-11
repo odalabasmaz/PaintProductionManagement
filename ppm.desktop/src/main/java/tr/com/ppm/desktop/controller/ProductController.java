@@ -1,5 +1,6 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,55 +32,40 @@ public class ProductController implements Initializable {
 
 	@Autowired
 	private ProductService productService;
-
 	@Autowired
 	private PaintTypeService paintTypeService;
-
 	@Autowired
 	private PaintSubTypeService paintSubTypeService;
 
 	@FXML
 	private TextField tfName;
-
 	@FXML
 	private TextField tfCode;
-
 	@FXML
 	private TextField tfColorName;
-
 	@FXML
 	private TextField tfColorCode;
-
 	@FXML
 	private ComboBox<PaintType> cbPaintType;
-
 	@FXML
 	private ComboBox<PaintSubType> cbPaintSubType;
 
 	@FXML
 	private TableView<Product> tvProduct;
-
-	@FXML
-	private TableColumn<Product, String> tcDensity;
-
-	@FXML
-	private TableColumn<Product, String> tcPaintType;
-
-	@FXML
-	private TableColumn<Product, String> tcColorCode;
-
-	@FXML
-	private TableColumn<Product, String> tcPaintSubtype;
-
 	@FXML
 	private TableColumn<Product, String> tcName;
-
-	@FXML
-	private TableColumn<Product, String> tcColor;
-
 	@FXML
 	private TableColumn<Product, String> tcCode;
-
+	@FXML
+	private TableColumn<Product, String> tcColor;
+	@FXML
+	private TableColumn<Product, String> tcColorCode;
+	@FXML
+	private TableColumn<Product, String> tcPaintType;
+	@FXML
+	private TableColumn<Product, String> tcPaintSubtype;
+	@FXML
+	private TableColumn<Product, String> tcDensity;
 	@FXML
 	private TableColumn<Product, String> tcDescription;
 
@@ -102,6 +88,10 @@ public class ProductController implements Initializable {
 
 	@FXML
 	void clean(ActionEvent event) {
+		tfCode.clear();
+		tfName.clear();
+		tfColorCode.clear();
+		tfColorName.clear();
 	}
 
 	@FXML
@@ -121,6 +111,14 @@ public class ProductController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+		tcCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCode()));
+		tcColor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getColorCode()));
+		tcColorCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getColorCode()));
+		tcPaintType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaintSubType().getPaintType().toString()));
+		tcPaintSubtype.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaintSubType().toString()));
+		tcDensity.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getDensity())));
+		tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
 		cbPaintSubType.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
 	}
