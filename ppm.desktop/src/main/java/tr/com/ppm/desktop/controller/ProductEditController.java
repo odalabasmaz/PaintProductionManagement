@@ -9,10 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.DefaultStringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,12 +21,12 @@ import tr.com.ppm.desktop.model.material.*;
 import tr.com.ppm.desktop.model.production.Ingredient;
 import tr.com.ppm.desktop.service.PaintSubTypeService;
 import tr.com.ppm.desktop.service.PaintTypeService;
+import tr.com.ppm.desktop.service.ProductService;
 import tr.com.ppm.desktop.service.RawMaterialService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * @author ykarabalkan
@@ -43,6 +42,27 @@ public class ProductEditController implements Initializable {
 
 	@Autowired
 	private PaintSubTypeService paintSubTypeService;
+
+	@Autowired
+	private ProductService productService;
+
+	@FXML
+	private TextField tfName;
+
+	@FXML
+	private TextField tfCode;
+
+	@FXML
+	private TextField tfColorName;
+
+	@FXML
+	private TextField tfColorCode;
+
+	@FXML
+	private TextField tfDensity;
+
+	@FXML
+	private TextArea taDescription;
 
 	@FXML
 	private ComboBox<PaintType> cbPaintType;
@@ -71,6 +91,20 @@ public class ProductEditController implements Initializable {
 
 	@FXML
 	void add(ActionEvent event) {
+		String name = tfName.getText();
+		String code = tfCode.getText();
+		String colorName = tfColorName.getText();
+		String colorCode = tfColorCode.getText();
+		String description = taDescription.getText();
+		double density = Double.parseDouble(tfDensity.getText());
+		boolean preIntermediateProduct = false;
+		Set<Ingredient> ingredientSet = new HashSet<>();
+		ingredientSet.addAll(tvRawMaterial.getItems());
+		ingredientSet.addAll(tvIntermediateProduct.getItems());
+		PaintSubType paintSubType = cbPaintSubtype.getSelectionModel().getSelectedItem();
+		Product product = new Product(name, code, description, 0, colorName, colorCode, density, preIntermediateProduct, ingredientSet,paintSubType);
+		productService.save(product);
+
 		((Node) (event.getSource())).getScene().getWindow().hide();
 	}
 
@@ -91,14 +125,12 @@ public class ProductEditController implements Initializable {
 	}
 
 	@FXML
-	void saveRow(ActionEvent event) {
-		ObservableList<Ingredient> items = tvRawMaterial.getItems();
-		/*items.add(new Ingredient());*/
-		TableView.TableViewSelectionModel<Ingredient> selectionModel = tvRawMaterial.getSelectionModel();
-		Ingredient selectedItem = selectionModel.getSelectedItem();
-		int selectedIndex = selectionModel.getSelectedIndex();
-		selectedItem.setMaterial(tcRawMaterial.getCellData(selectedIndex));
-		selectedItem.setQuantity(new Quantity(Double.parseDouble(tcRwAmount.getCellData(selectedIndex))));
+	void deleteRow(ActionEvent event) {
+		int selectedIndex = tvRawMaterial.getSelectionModel().getSelectedIndex();
+
+		if (selectedIndex > -1) {
+			tvRawMaterial.getItems().remove(selectedIndex);
+		}
 
 	}
 
@@ -107,12 +139,9 @@ public class ProductEditController implements Initializable {
 		cbPaintType.setItems(FXCollections.observableArrayList(paintTypeService.list()));
 		cbPaintSubtype.setItems(FXCollections.observableArrayList(paintSubTypeService.list()));
 		tcRwAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getQuantity().getAmount())));
+		tcRwAmount.setCellFactory(TextFieldTableCell.forTableColumn());
 		tcRawMaterial.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getMaterial()));
-//		tcIProductAmount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().toString()));
 		tvRawMaterial.setEditable(true);
-//		tvIntermediateProduct.setEditable(true);
-//		tcRawMaterial.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()));
-//		tcRawMaterial.setCellValueFactory(cellData -> new SimpleComb(cellData.getValue().toString()));
 
 		tcRawMaterial.setCellFactory(ComboBoxTableCell.forTableColumn(FXCollections.observableArrayList(rawMaterialService.list())));
 		tcRawMaterial.setOnEditCommit((TableColumn.CellEditEvent<Ingredient, Material> e) ->
@@ -123,24 +152,25 @@ public class ProductEditController implements Initializable {
 					// index of editing row in the tableview
 					int index = e.getTablePosition().getRow();
 
-					Ingredient ingredient = (Ingredient) e.getTableView().getItems().get(index);
+					Ingredient ing = e.getTableView().getItems().get(index);
 
-					ingredient.setMaterial(newValue);
+					ing.setMaterial(newValue);
 				}
 		);
-/*		tcRawMaterial.setEditable(true);
-		ArrayList<Ingredient> rawMaterials = new ArrayList<>();
-		Ingredient e = new Ingredient();
-		*//*RawMaterial rawMaterial = new RawMaterial("12", "deneme", "345", State.SOLID, "12");
-		e.setMaterial(rawMaterial);*//*
-		*//*Quantity quantity = new Quantity();
-		quantity.setAmount(123.4);
-		e.setQuantity(quantity);*//*
-//		quantity
-		rawMaterials.add(e);
-		tvRawMaterial.setItems(FXCollections.observableArrayList(rawMaterials));*/
 
+		tcRwAmount.setOnEditCommit((TableColumn.CellEditEvent<Ingredient, String> e) ->
+				{
+					// new value coming from combobox
+					String newValue = e.getNewValue();
 
+					// index of editing row in the tableview
+					int index = e.getTablePosition().getRow();
+
+					Ingredient ing = e.getTableView().getItems().get(index);
+
+					ing.getQuantity().setAmount(Double.parseDouble(newValue));
+				}
+		);
 	}
 
 }

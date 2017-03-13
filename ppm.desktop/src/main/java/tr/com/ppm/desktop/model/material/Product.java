@@ -30,14 +30,24 @@ public class Product extends Material {
 	@Column(name = "INTERMEDIATE_PRODUCT")
 	private boolean intermediateProduct;
 
-//	@OneToMany(targetEntity = Ingredient.class)
-//	@JoinColumn(name = "PRODUCT_ID")
-//	private Set<Ingredient> ingredientSet = new HashSet<>();
+	@OneToMany(targetEntity = Ingredient.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PRODUCT_ID")
+	private Set<Ingredient> ingredientSet = new HashSet<>();
 
 	/*for hibernate*/
 	Product() {
 	}
 
+	public Product(String code, String name, String description, double stock, String colorCode, String colorName, double density, boolean intermediateProduct, Set<Ingredient> ingredients, PaintSubType paintSubType) {
+		super(code, name, description, stock);
+		this.colorCode = colorCode;
+		this.colorName = colorName;
+		this.density = density;
+		this.intermediateProduct = intermediateProduct;
+		this.ingredientSet = ingredients;
+		this.paintSubType= paintSubType;
+
+	}
 
 
 	public PaintSubType getPaintSubType() {
@@ -80,11 +90,11 @@ public class Product extends Material {
 		this.intermediateProduct = intermediateProduct;
 	}
 
-//	public Set<Ingredient> getIngredientSet() {
-//		return ingredientSet;
-//	}
-//
-//	public void setIngredientSet(Set<Ingredient> ingredientSet) {
-//		this.ingredientSet = ingredientSet;
-//	}
+	public Set<Ingredient> getIngredientSet() {
+		return ingredientSet;
+	}
+
+	public void setIngredientSet(Set<Ingredient> ingredientSet) {
+		this.ingredientSet = ingredientSet;
+	}
 }

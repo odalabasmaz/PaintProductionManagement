@@ -22,6 +22,8 @@ public class RawMaterialService extends BaseService<RawMaterial> {
 	}
 
 	public List<RawMaterial> queryWithParameter(String code, String name, State state) {
+		//TODO:yoztas QueryHelper ile yap
+
 		Map<String, Object> params = new HashMap<>();
 		params.put("name", "%" + name.trim() + "%");
 		StringBuilder builder = new StringBuilder(query);

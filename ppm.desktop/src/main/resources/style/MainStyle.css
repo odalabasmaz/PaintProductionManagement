@@ -60,10 +60,14 @@ MenuBar{
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
     -fx-background-color: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 15px;
     -fx-padding: 0px;
     -fx-font-weight: 700;
     -fx-font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.combo-box:focused {
+    -fx-border-color: #EA5444;
 }
 
 /****************

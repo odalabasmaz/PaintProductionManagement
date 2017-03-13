@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<Group xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1"
-       fx:controller="tr.com.ppm.desktop.controller.ProductEditController">
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<Group xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.ProductEditController">
     <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="776.0" prefWidth="791.0">
         <VBox layoutX="14.0" layoutY="24.0">
             <GridPane prefHeight="277.0" prefWidth="586.0">
@@ -18,83 +31,78 @@
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="134.0"/>
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <Label text="Adı : " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Label text="Kodu :" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-                <TextField GridPane.columnIndex="4" GridPane.rowIndex="0"/>
-                <Label text="Renk Adı :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Label text="Renk Kodu :" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                <TextField GridPane.columnIndex="4" GridPane.rowIndex="1"/>
-                <Label text="Boya Türü :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <ComboBox fx:id="cbPaintType" promptText="Boya Türü Seçiniz.." GridPane.columnIndex="1"
-                          GridPane.rowIndex="2"/>
-                <Label text="Boya Alt Türü :" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                <ComboBox fx:id="cbPaintSubtype" promptText="Boya Alt Türü Seçiniz.." GridPane.columnIndex="4"
-                          GridPane.rowIndex="2"/>
-                <Label text="Yoğunluk :" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Adı : " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="tfName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Kodu :" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <TextField fx:id="tfCode" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <Label text="Renk Adı :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="tfColorName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Renk Kodu :" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <TextField fx:id="tfColorCode" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                <Label text="Boya Türü :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <ComboBox fx:id="cbPaintType" promptText="Boya Türü Seçiniz.." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Boya Alt Türü :" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <ComboBox fx:id="cbPaintSubtype" promptText="Boya Alt Türü Seçiniz.." GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                <Label text="Yoğunluk :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="tfDensity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <Label text="Açıklama :" GridPane.rowIndex="4"/>
-                <TextArea prefHeight="51.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.columnSpan="4"
-                          GridPane.rowIndex="4" GridPane.rowSpan="2"/>
-                <RadioButton id="rdoAraUrun" mnemonicParsing="false" text="ARA ÜRÜN" GridPane.columnIndex="1"
-                             GridPane.rowIndex="6"/>
-                <RadioButton id="rdoAnaUrun" mnemonicParsing="false" text="ANA ÜRÜN" GridPane.columnIndex="3"
-                             GridPane.rowIndex="6"/>
-                <Label text="Ürün Tipi :" GridPane.rowIndex="6"/>
+                <Label text="Açıklama :" GridPane.rowIndex="4" />
+                <TextArea fx:id="taDescription" prefHeight="51.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="4" GridPane.rowSpan="2" />
+                <RadioButton id="rdoAraUrun" mnemonicParsing="false" text="ARA ÜRÜN" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <RadioButton id="rdoAnaUrun" mnemonicParsing="false" text="ANA ÜRÜN" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                <Label text="Ürün Tipi :" GridPane.rowIndex="6" />
             </GridPane>
             <HBox>
                 <TableView fx:id="tvRawMaterial" prefHeight="200.0" prefWidth="507.0">
                     <columns>
-                        <TableColumn fx:id="tcRawMaterial" editable="false" prefWidth="253.0" text="HAM MADDE"/>
-                        <TableColumn fx:id="tcRwAmount"   editable="false" prefWidth="253.0" text="MİKTAR (KG)"/>
+                        <TableColumn fx:id="tcRawMaterial" editable="false" prefWidth="253.0" text="HAM MADDE" />
+                        <TableColumn fx:id="tcRwAmount" editable="false" prefWidth="253.0" text="MİKTAR (KG)" />
                     </columns>
                     <effect>
-                        <InnerShadow color="#110b3c" height="29.89" radius="15.93" width="35.83"/>
+                        <InnerShadow color="#110b3c" height="29.89" radius="15.93" width="35.83" />
                     </effect>
                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
                 <VBox>
-                    <Button fx:id="btnRawAdd" mnemonicParsing="false" onAction="#addRow" text="Ekle"/>
-                    <Button fx:id="btnRawSave" mnemonicParsing="false" onAction="#saveRow" text="Ekle"/>
+                    <Button fx:id="btnRawAdd" mnemonicParsing="false" onAction="#addRow" text="Ekle" />
+                    <Button fx:id="btnRawDelete" mnemonicParsing="false" onAction="#deleteRow" text="Sil" />
                 </VBox>
             </HBox>
             <TableView fx:id="tvIntermediateProduct" prefHeight="229.0" prefWidth="507.0">
                 <columns>
-                    <TableColumn fx:id="tcIntermediateProduct"  prefWidth="251.0" text="ARA ÜRÜN"/>
-                    <TableColumn fx:id="tcIProductAmount" minWidth="0.0" prefWidth="247.0" text="MİKTAR"/>
+                    <TableColumn fx:id="tcIntermediateProduct" prefWidth="251.0" text="ARA ÜRÜN" />
+                    <TableColumn fx:id="tcIProductAmount" minWidth="0.0" prefWidth="247.0" text="MİKTAR" />
                 </columns>
                 <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                 </columnResizePolicy>
                 <effect>
-                    <InnerShadow/>
+                    <InnerShadow />
                 </effect>
             </TableView>
             <VBox>
                 <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle"/>
-                        <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" text="İptal"/>
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle" />
+                        <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" text="İptal" />
                     </buttons>
                 </ButtonBar>
             </VBox>
 
         </VBox>
         <stylesheets>
-            <URL value="@../style/MainStyle.css"/>
-            <URL value="@../style/popUp.css"/>
+            <URL value="@../style/MainStyle.css" />
+            <URL value="@../style/popUp.css" />
         </stylesheets>
     </AnchorPane>
 </Group>

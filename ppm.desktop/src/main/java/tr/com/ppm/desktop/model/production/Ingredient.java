@@ -10,21 +10,20 @@ import javax.persistence.*;
  * @author Orhun Dalabasmaz
  */
 @Entity
-@Table(name="INGREDIENT")
+@Table(name = "INGREDIENT")
 public class Ingredient extends AuditableEntity {
 
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "MATERIAL_ID")
 	private Material material;
 
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "QUANTITY_ID")
 	private Quantity quantity;
 
 	/*for hibernate*/
 	public Ingredient() {
 	}
-
 
 
 	public Material getMaterial() {
