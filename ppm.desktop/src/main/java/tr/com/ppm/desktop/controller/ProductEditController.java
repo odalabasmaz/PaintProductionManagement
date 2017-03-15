@@ -88,6 +88,8 @@ public class ProductEditController implements Initializable {
 	@FXML
 	private TableColumn<Ingredient, Quantity> tcIProductAmount;
 
+	@FXML
+	private ToggleGroup productType;
 
 	@FXML
 	void add(ActionEvent event) {
