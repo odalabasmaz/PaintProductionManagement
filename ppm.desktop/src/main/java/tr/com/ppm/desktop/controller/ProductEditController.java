@@ -1,6 +1,5 @@
 package tr.com.ppm.desktop.controller;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -12,21 +11,24 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.converter.DefaultStringConverter;
+import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.common.Quantity;
-import tr.com.ppm.desktop.model.common.State;
-import tr.com.ppm.desktop.model.material.*;
+import tr.com.ppm.desktop.model.material.Material;
+import tr.com.ppm.desktop.model.material.PaintSubType;
+import tr.com.ppm.desktop.model.material.PaintType;
+import tr.com.ppm.desktop.model.material.Product;
 import tr.com.ppm.desktop.model.production.Ingredient;
 import tr.com.ppm.desktop.service.PaintSubTypeService;
 import tr.com.ppm.desktop.service.PaintTypeService;
 import tr.com.ppm.desktop.service.ProductService;
 import tr.com.ppm.desktop.service.RawMaterialService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.net.URL;
-import java.util.*;
+import java.util.HashSet;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  * @author ykarabalkan
@@ -89,7 +91,16 @@ public class ProductEditController implements Initializable {
 	private TableColumn<Ingredient, Quantity> tcIProductAmount;
 
 	@FXML
-	private ToggleGroup productType;
+	private RadioButton rbAraUrun;
+
+	@FXML
+	private RadioButton rbAnaUrun;
+
+	@FXML
+	private HBox rawMaterialBox;
+
+	@FXML
+	private HBox intermediateProductBox;
 
 	@FXML
 	void add(ActionEvent event) {
@@ -104,7 +115,7 @@ public class ProductEditController implements Initializable {
 		ingredientSet.addAll(tvRawMaterial.getItems());
 		ingredientSet.addAll(tvIntermediateProduct.getItems());
 		PaintSubType paintSubType = cbPaintSubtype.getSelectionModel().getSelectedItem();
-		Product product = new Product(name, code, description, 0, colorName, colorCode, density, preIntermediateProduct, ingredientSet,paintSubType);
+		Product product = new Product(name, code, description, 0, colorName, colorCode, density, preIntermediateProduct, ingredientSet, paintSubType);
 		productService.save(product);
 
 		((Node) (event.getSource())).getScene().getWindow().hide();
@@ -116,24 +127,40 @@ public class ProductEditController implements Initializable {
 	}
 
 	@FXML
-	void addRow(ActionEvent event) {
+	void addRawMaterial(ActionEvent event) {
 		ObservableList<Ingredient> items = tvRawMaterial.getItems();
 		Ingredient ingredient = new Ingredient();
 		ingredient.setQuantity(new Quantity(0.0));
 		items.add(ingredient);
 		tcRawMaterial.setEditable(true);
 		tcRwAmount.setEditable(true);
-
 	}
 
 	@FXML
-	void deleteRow(ActionEvent event) {
+	void deleteRawMaterial(ActionEvent event) {
 		int selectedIndex = tvRawMaterial.getSelectionModel().getSelectedIndex();
 
 		if (selectedIndex > -1) {
 			tvRawMaterial.getItems().remove(selectedIndex);
 		}
+	}
 
+	@FXML
+	void addIntermediateProduct(ActionEvent event) {
+	}
+
+	@FXML
+	void deleteIntermediateProduct(ActionEvent event) {
+	}
+
+	@FXML
+	void anaUrunSelected(ActionEvent event) {
+		rawMaterialBox.setVisible(true);
+	}
+
+	@FXML
+	void araUrunSelected(ActionEvent event) {
+		rawMaterialBox.setVisible(false);
 	}
 
 	@Override
