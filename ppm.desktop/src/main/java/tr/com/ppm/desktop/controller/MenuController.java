@@ -42,6 +42,11 @@ public class MenuController implements Initializable {
 		ViewManager.openPage(PaintSubtypeView.class);
 	}
 
+	@FXML
+	void openOrder(ActionEvent event) {
+		ViewManager.openPage(OrderView.class);
+	}
+
 	public void exit(ActionEvent actionEvent) {
 		Platform.exit();
 	}

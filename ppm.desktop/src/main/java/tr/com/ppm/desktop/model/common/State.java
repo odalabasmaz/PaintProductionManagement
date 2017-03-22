@@ -4,15 +4,16 @@ package tr.com.ppm.desktop.model.common;
  * @author Orhun Dalabasmaz
  */
 public enum State {
-	SOLID, LIQUID;
+	SOLID("KATI"), LIQUID("SIVI");
+
+	private String value;
+
+	State(String value) {
+		this.value = value;
+	}
 
 	@Override
 	public String toString() {
-		if (this == SOLID) {
-			return "KATI";
-		} else if (this == LIQUID) {
-			return "SIVI";
-		}
-		return super.toString();
+		return this.value;
 	}
 }

@@ -17,8 +17,8 @@ public class OrderItem extends AuditableEntity {
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product product;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CONTAINER_ID")
+	@Column(name = "CONTAINER")
+	@Enumerated(EnumType.STRING)
 	private Container container;
 
 	@Column(name = "QUANTITY")
