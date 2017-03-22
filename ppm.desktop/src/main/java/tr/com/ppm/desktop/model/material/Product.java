@@ -46,9 +46,7 @@ public class Product extends Material {
 		this.intermediateProduct = intermediateProduct;
 		this.ingredientSet = ingredients;
 		this.paintSubType= paintSubType;
-
 	}
-
 
 	public PaintSubType getPaintSubType() {
 		return paintSubType;

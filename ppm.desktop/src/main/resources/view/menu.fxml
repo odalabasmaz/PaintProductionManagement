@@ -21,7 +21,7 @@
         <MenuItem mnemonicParsing="false" text="About"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Sipariş">
-        <MenuItem mnemonicParsing="false" text="About"/>
+        <MenuItem fx:id="menuItemOrder" mnemonicParsing="false" text="Sipariş" onAction="#openOrder"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Rapor">
         <MenuItem mnemonicParsing="false" text="About"/>

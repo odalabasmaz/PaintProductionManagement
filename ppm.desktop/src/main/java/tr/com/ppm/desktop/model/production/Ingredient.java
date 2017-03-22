@@ -25,7 +25,6 @@ public class Ingredient extends AuditableEntity {
 	public Ingredient() {
 	}
 
-
 	public Material getMaterial() {
 		return material;
 	}
