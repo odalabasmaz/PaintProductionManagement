@@ -87,5 +87,6 @@ public class OrderController implements Initializable {
 		tcOrderStatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus().toString()));
 		tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId().toString()));
 		cbCustomer.setItems(FXCollections.observableArrayList(customerService.list()));
+		cbOrderStatus.setItems(FXCollections.observableArrayList(Status.values()));
 	}
 }
