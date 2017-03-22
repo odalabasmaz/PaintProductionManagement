@@ -1,5 +1,6 @@
 package tr.com.ppm.desktop.controller;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -16,6 +17,8 @@ import tr.com.ppm.desktop.model.order.Order;
 import tr.com.ppm.desktop.model.order.Status;
 import tr.com.ppm.desktop.service.CustomerService;
 import tr.com.ppm.desktop.service.OrderService;
+import tr.com.ppm.desktop.view.OrderEditView;
+import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
 import java.util.List;
@@ -45,9 +48,9 @@ public class OrderController implements Initializable {
 	@FXML
 	private TableColumn<Order, String> tcOrderCode;
 	@FXML
-	private TableColumn<Order, String> tcCustomer;
+	private TableColumn<Order, Customer> tcCustomer;
 	@FXML
-	private TableColumn<Order, String> tcOrderStatus;
+	private TableColumn<Order, Status> tcOrderStatus;
 	@FXML
 	private TableColumn<Order, String> tcDate;
 
@@ -70,6 +73,7 @@ public class OrderController implements Initializable {
 
 	@FXML
 	void add(ActionEvent event) {
+		ViewManager.openPopup(OrderEditView.class, this::query);
 	}
 
 	@FXML
@@ -83,8 +87,8 @@ public class OrderController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tcOrderCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrderId()));
-		tcCustomer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCustomer().getName()));
-		tcOrderStatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus().toString()));
+		tcCustomer.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCustomer()));
+		tcOrderStatus.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStatus()));
 		tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId().toString()));
 		cbCustomer.setItems(FXCollections.observableArrayList(customerService.list()));
 		cbOrderStatus.setItems(FXCollections.observableArrayList(Status.values()));
