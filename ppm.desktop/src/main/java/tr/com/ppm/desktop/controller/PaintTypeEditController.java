@@ -38,9 +38,9 @@ public class PaintTypeEditController implements Initializable, EditViewControlle
 
 	@FXML
 	void add(ActionEvent event) {
-		if(this.viewMode==ViewMode.NEW){
+		if (this.viewMode == ViewMode.NEW) {
 			service.save(new PaintType(tfPaintType.getText()));
-		}else if(this.viewMode==ViewMode.EDIT){
+		} else if (this.viewMode == ViewMode.EDIT) {
 			this.paintType.setName(tfPaintType.getText());
 			service.update(this.paintType);
 		}
@@ -60,7 +60,7 @@ public class PaintTypeEditController implements Initializable, EditViewControlle
 	@Override
 	public void updateEditView(PaintType paintType) {
 		if (paintType != null) {
-			this.paintType= paintType;
+			this.paintType = paintType;
 			tfPaintType.setText(paintType.getName());
 			viewMode = ViewMode.EDIT;
 		}

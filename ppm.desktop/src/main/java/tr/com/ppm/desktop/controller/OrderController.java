@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.customer.Customer;
 import tr.com.ppm.desktop.model.order.Order;
 import tr.com.ppm.desktop.model.order.Status;
+import tr.com.ppm.desktop.service.CustomerService;
 import tr.com.ppm.desktop.service.OrderService;
 
 import java.net.URL;
@@ -28,6 +29,8 @@ public class OrderController implements Initializable {
 
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private CustomerService customerService;
 
 	@FXML
 	private TextField tfOrderCode;
@@ -83,5 +86,6 @@ public class OrderController implements Initializable {
 		tcCustomer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCustomer().getName()));
 		tcOrderStatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus().toString()));
 		tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId().toString()));
+		cbCustomer.setItems(FXCollections.observableArrayList(customerService.list()));
 	}
 }

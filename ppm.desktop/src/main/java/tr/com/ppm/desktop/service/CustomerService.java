@@ -7,9 +7,9 @@ import tr.com.ppm.desktop.model.customer.Customer;
  * @author Orhun Dalabasmaz
  */
 @Service
-public class CustomerService extends BaseService {
+public class CustomerService extends BaseService<Customer> {
 	@Override
-	protected Class getEntityClass() {
+	protected Class<Customer> getEntityClass() {
 		return Customer.class;
 	}
 }

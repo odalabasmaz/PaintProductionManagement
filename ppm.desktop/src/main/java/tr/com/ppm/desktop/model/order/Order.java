@@ -11,7 +11,7 @@ import java.util.List;
  * @author Orhun Dalabasmaz
  */
 @Entity
-@Table(name = "ORDER")
+@Table(name = "PAINT_ORDER")
 public class Order extends AuditableEntity {
 
 	@Column(name = "ORDER_ID")
