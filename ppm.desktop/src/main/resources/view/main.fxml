@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<AnchorPane fx:id="AnchorPane" stylesheets="@../style/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.102"
-            xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane fx:id="BorderPane" prefHeight="600" prefWidth="1000" AnchorPane.bottomAnchor="0.0"
-                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <top>
-            <fx:include source="menu.fxml"/>
-        </top>
-    </BorderPane>
-</AnchorPane>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<Group xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tr.com.ppm.desktop.controller.MainController">
+   <children>
+      <AnchorPane fx:id="AnchorPane" stylesheets="@../style/MainStyle.css">
+          <BorderPane fx:id="BorderPane" prefHeight="600" prefWidth="1000" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <top>
+                  <fx:include source="menu.fxml" />
+              </top>
+      
+          </BorderPane>
+      </AnchorPane>
+       <Button fx:id="btnClose" layoutX="968.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnCloseOnClick" prefHeight="37.0" prefWidth="38.0" stylesheets="@../style/btnOnText.css" />
+   </children>
+</Group>

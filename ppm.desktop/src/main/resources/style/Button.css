@@ -1,0 +1,10 @@
+/**********
+ * Button *                                                                 *
+ **********/
+.button {
+     -fx-background-radius: 100;
+}
+.button:hover {
+    -fx-background-color: #EA5444;
+    -fx-text-fill: white;
+}
