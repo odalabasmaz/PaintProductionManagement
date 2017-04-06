@@ -30,7 +30,7 @@ public class Product extends Material {
 	@Column(name = "INTERMEDIATE_PRODUCT")
 	private boolean intermediateProduct;
 
-	@OneToMany(targetEntity = Ingredient.class, cascade = CascadeType.ALL)
+	@OneToMany(targetEntity = Ingredient.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "PRODUCT_ID")
 	private Set<Ingredient> ingredientSet = new HashSet<>();
 

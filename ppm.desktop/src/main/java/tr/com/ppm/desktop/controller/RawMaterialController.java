@@ -1,6 +1,5 @@
 package tr.com.ppm.desktop.controller;
 
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -8,9 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.common.State;
@@ -119,7 +115,7 @@ public class RawMaterialController implements Initializable {
 		cbState.setItems(FXCollections.observableArrayList(State.values()));
 		tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		tcCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCode()));
-		tcState.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getState()));
+		tcState.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getState()));
 		tcStock.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getStock()));
 		tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 	}
