@@ -10,7 +10,7 @@
         <MenuItem fx:id="menuItemPaintType" mnemonicParsing="false" onAction="#openPaintType" text="Boya Türü"/>
         <MenuItem fx:id="menuItemPaintSubtype" mnemonicParsing="false" onAction="#openPaintSubType"
                   text="Boya Alt Türü"/>
-        <MenuItem mnemonicParsing="false" text="Müşteri"/>
+        <MenuItem fx:id="menuItemCustomer" mnemonicParsing="false" onAction="#openCustomer" text="Müşteri"/>
         <SeparatorMenuItem/>
         <MenuItem fx:id="menuItemExit" mnemonicParsing="false" onAction="#exit" text="Exit"/>
     </Menu>

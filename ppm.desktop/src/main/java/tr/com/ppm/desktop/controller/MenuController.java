@@ -38,6 +38,11 @@ public class MenuController implements Initializable {
 	}
 
 	@FXML
+	void openCustomer(ActionEvent event) {
+		ViewManager.openPage(CustomerView.class);
+	}
+
+	@FXML
 	void openPaintSubType(ActionEvent event) {
 		ViewManager.openPage(PaintSubtypeView.class);
 	}

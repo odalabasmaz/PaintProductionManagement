@@ -4,11 +4,13 @@ import tr.com.ppm.desktop.model.common.AuditableEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author Orhun Dalabasmaz
  */
-@Entity(name = "CUSTOMER")
+@Entity
+@Table(name = "CUSTOMER")
 public class Customer extends AuditableEntity {
 
 	@Column(name = "NAME")
