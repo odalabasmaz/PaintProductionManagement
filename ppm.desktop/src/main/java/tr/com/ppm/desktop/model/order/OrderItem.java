@@ -24,6 +24,9 @@ public class OrderItem extends AuditableEntity {
 	@Column(name = "QUANTITY")
 	private Integer quantity;
 
+	@Column(name = "HAS_RECEIPT")
+	private boolean hasReceipt;
+
 	/*for hibernate*/
 	OrderItem() {
 	}
@@ -50,5 +53,13 @@ public class OrderItem extends AuditableEntity {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public boolean isHasReceipt() {
+		return hasReceipt;
+	}
+
+	public void setHasReceipt(boolean hasReceipt) {
+		this.hasReceipt = hasReceipt;
 	}
 }
