@@ -84,6 +84,10 @@ public class OrderController implements Initializable {
 	public void edit(ActionEvent event) {
 	}
 
+	@FXML
+	public void recipe(ActionEvent event) {
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tcOrderCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOrderId()));

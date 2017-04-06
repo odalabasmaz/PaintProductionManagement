@@ -67,6 +67,7 @@
                 </AnchorPane>
                 <ButtonBar nodeOrientation="RIGHT_TO_LEFT">
                     <buttons>
+                        <Button fx:id="btnRecipe" mnemonicParsing="false" onAction="#recipe" text="Boya Reçetesi Oluştur"/>
                         <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#edit" text="Düzenle"/>
                         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#delete" text="Sil"/>
                         <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#add" text="Ekle"/>
