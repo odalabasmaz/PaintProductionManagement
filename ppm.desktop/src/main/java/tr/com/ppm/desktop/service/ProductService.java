@@ -6,6 +6,7 @@ import tr.com.ppm.desktop.model.material.PaintSubType;
 import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.model.material.Product;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
  */
 @Service
 public class ProductService extends BaseService<Product> {
+	String intermediateProductQuery ="from Product where intermediateProduct = :intermediateProduct";
 
 	public List<Product> list(String name, String code, String colorName, String colorCode,
 	                          PaintType paintType, PaintSubType paintSubType) {
@@ -32,5 +34,11 @@ public class ProductService extends BaseService<Product> {
 	@Override
 	protected Class<Product> getEntityClass() {
 		return Product.class;
+	}
+
+	public Collection<Product> listIntermediateProducts() {
+		Map<String, Object> params = new HashMap<>();
+		params.put("intermediateProduct", Boolean.TRUE);
+		return  executeQuery(intermediateProductQuery,params);
 	}
 }

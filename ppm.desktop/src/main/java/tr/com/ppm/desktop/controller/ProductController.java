@@ -14,10 +14,12 @@ import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.material.PaintSubType;
 import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.model.material.Product;
+import tr.com.ppm.desktop.model.material.RawMaterial;
 import tr.com.ppm.desktop.service.PaintSubTypeService;
 import tr.com.ppm.desktop.service.PaintTypeService;
 import tr.com.ppm.desktop.service.ProductService;
 import tr.com.ppm.desktop.view.ProductEditView;
+import tr.com.ppm.desktop.view.RawMaterialEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
@@ -106,7 +108,10 @@ public class ProductController implements Initializable {
 
 	@FXML
 	public void edit(ActionEvent event) {
-
+		Product selectedItem = tvProduct.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			ViewManager.openPopup(ProductEditView.class, this::query, selectedItem);
+		}
 	}
 
 	@Override

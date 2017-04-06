@@ -46,34 +46,17 @@
                 <Label text="Açıklama :" GridPane.rowIndex="4"/>
                 <TextArea fx:id="taDescription" prefHeight="51.0" prefWidth="152.0" GridPane.columnIndex="1"
                           GridPane.columnSpan="4" GridPane.rowIndex="4" GridPane.rowSpan="2"/>
-                <RadioButton id="rbAraUrun" mnemonicParsing="false" onAction="#araUrunSelected" text="ARA ÜRÜN"
+                <RadioButton fx:id="rbAraUrun" mnemonicParsing="false" onAction="#araUrunSelected" text="ARA ÜRÜN"
                              GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <toggleGroup>
                         <ToggleGroup fx:id="productType"/>
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton id="rbAnaUrun" mnemonicParsing="false" onAction="#anaUrunSelected" text="ANA ÜRÜN"
-                             toggleGroup="$productType" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+                <RadioButton fx:id="rbAnaUrun" mnemonicParsing="false" onAction="#anaUrunSelected" text="ANA ÜRÜN"
+                             toggleGroup="$productType" GridPane.columnIndex="3" GridPane.rowIndex="6" selected="true"/>
                 <Label text="Ürün Tipi :" GridPane.rowIndex="6"/>
             </GridPane>
-            <HBox fx:id="rawMaterialBox">
-                <TableView fx:id="tvRawMaterial" prefHeight="200.0" prefWidth="507.0">
-                    <columns>
-                        <TableColumn fx:id="tcRawMaterial" editable="false" prefWidth="253.0" text="HAM MADDE"/>
-                        <TableColumn fx:id="tcRwAmount" editable="false" prefWidth="253.0" text="MİKTAR (KG)"/>
-                    </columns>
-                    <effect>
-                        <InnerShadow color="#110b3c" height="29.89" radius="15.93" width="35.83"/>
-                    </effect>
-                    <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-                    </columnResizePolicy>
-                </TableView>
-                <VBox>
-                    <Button fx:id="btnRawMaterialAdd" mnemonicParsing="false" onAction="#addRawMaterial" text="Ekle"/>
-                    <Button fx:id="btnRawMDelete" mnemonicParsing="false" onAction="#deleteRawMaterial" text="Sil"/>
-                </VBox>
-            </HBox>
+
             <HBox fx:id="intermediateProductBox">
                 <TableView fx:id="tvIntermediateProduct" prefHeight="229.0" prefWidth="507.0">
                     <columns>
@@ -94,6 +77,26 @@
                             onAction="#deleteIntermediateProduct" text="Sil"/>
                 </VBox>
             </HBox>
+
+            <HBox fx:id="rawMaterialBox">
+                <TableView fx:id="tvRawMaterial" prefHeight="200.0" prefWidth="507.0">
+                    <columns>
+                        <TableColumn fx:id="tcRawMaterial" editable="false" prefWidth="253.0" text="HAM MADDE"/>
+                        <TableColumn fx:id="tcRawMaterialAmount" editable="false" prefWidth="253.0" text="MİKTAR (KG)"/>
+                    </columns>
+                    <effect>
+                        <InnerShadow color="#110b3c" height="29.89" radius="15.93" width="35.83"/>
+                    </effect>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+                <VBox>
+                    <Button fx:id="btnRawMaterialAdd" mnemonicParsing="false" onAction="#addRawMaterial" text="Ekle"/>
+                    <Button fx:id="btnRawMDelete" mnemonicParsing="false" onAction="#deleteRawMaterial" text="Sil"/>
+                </VBox>
+            </HBox>
+
             <VBox>
                 <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
