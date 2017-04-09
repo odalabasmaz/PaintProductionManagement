@@ -12,11 +12,8 @@ import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tr.com.ppm.desktop.model.customer.Customer;
-import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.service.CustomerService;
-import tr.com.ppm.desktop.service.PaintTypeService;
 import tr.com.ppm.desktop.view.CustomerEditView;
-import tr.com.ppm.desktop.view.PaintTypeEditView;
 import tr.com.ppm.desktop.view.ViewManager;
 
 import java.net.URL;
@@ -63,7 +60,7 @@ public class CustomerController implements Initializable {
 
 	private void query() {
 		String customer = tfCustomer.getText();
-		List<Customer> customers = service.listByName(customer);
+		List<Customer> customers = service.findAllByName(customer);
 		tblViewCustomer.setItems(FXCollections.observableArrayList(customers));
 	}
 
@@ -91,7 +88,7 @@ public class CustomerController implements Initializable {
 	@FXML
 	void query(ActionEvent event) {
 		String customer = tfCustomer.getText();
-		List<Customer> customers = service.listByName(customer);
+		List<Customer> customers = service.findAllByName(customer);
 		tblViewCustomer.setItems(FXCollections.observableArrayList(customers));
 	}
 

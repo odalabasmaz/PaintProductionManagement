@@ -12,17 +12,31 @@ import java.util.Map;
  */
 @Service
 public class CustomerService extends BaseService<Customer> {
-	private static final String QUERY_STRING = "from Customer where lower(name) like :name";
-
-	public List<Customer> listByName(String customer) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + customer.trim().toLowerCase() + "%");
-		return executeQuery(QUERY_STRING, params);
-	}
-
+	private static final String QUERY_BY_NAME = "from Customer where lower(name) like :name";
+	private static final String QUERY_BY_ID = "from Customer where id = :name";
 
 	@Override
 	protected Class<Customer> getEntityClass() {
 		return Customer.class;
 	}
+
+	public Customer findById(long id) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		return executeQuery(QUERY_BY_ID, params).get(0);
+	}
+
+	public Customer findByName(String name) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", name);
+		List<Customer> customers = executeQuery(QUERY_BY_NAME, params);
+		return customers.size() != 1 ? null : customers.get(0);
+	}
+
+	public List<Customer> findAllByName(String name) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", "%" + name.trim().toLowerCase() + "%");
+		return executeQuery(QUERY_BY_NAME, params);
+	}
+
 }

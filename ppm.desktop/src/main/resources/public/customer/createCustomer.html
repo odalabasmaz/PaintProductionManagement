@@ -1,0 +1,20 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>PPM</title>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/controller.js"></script>
+</head>
+<body>
+
+<h1>Create Customer</h1>
+
+<form name="createCustomerForm" ng-submit="submit()" ng-controller="CreateCustomerCtrl">
+    <div>
+        <input type="text" ng-model="Name" required/>
+        <input type="submit" value="Save"/>
+    </div>
+</form>
+</body>
+</html>
