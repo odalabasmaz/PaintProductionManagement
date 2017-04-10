@@ -27,7 +27,6 @@
 		<maven.compiler.level>1.8</maven.compiler.level>
 		<jersey.version>1.17.1</jersey.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<main.class>tr.com.ppm.desktop.App</main.class>
 	</properties>
 
 	<dependencies>
@@ -181,7 +180,7 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>8.7.0</version>
 				<configuration>
-					<mainClass>${main.class}</mainClass>
+					<mainClass>tr.com.ppm.desktop.DesktopApp</mainClass>
 				</configuration>
 			</plugin>
 
@@ -213,7 +212,7 @@
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
-							<mainClass>${main.class}</mainClass>
+							<mainClass>tr.com.ppm.desktop.DesktopApp</mainClass>
 						</manifest>
 						<manifestEntries>
 							<App-Version>${project.version}</App-Version>
