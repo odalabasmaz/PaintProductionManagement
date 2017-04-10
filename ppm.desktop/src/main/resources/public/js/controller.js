@@ -19,6 +19,50 @@ app.controller('CreateCustomerCtrl', function ($scope, $http) {
     };
 });
 
+
+// MasterPage için denemek için eklendi
+/*var app2 = angular.module('masters', ['ui.router']);
+
+app2.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+
+    // For any unmatched url, redirect to root
+    $urlRouterProvider.otherwise("/");
+
+    $stateProvider
+        .state('musteri', {
+            url: '/',
+            templateUrl: 'pages/musteri.html'
+        })
+        .state('leftMaster', {
+            abstract: true,
+            templateUrl: 'LeftMaster.html'
+        })
+        .state('topLeftMaster', {
+            abstract: true,
+            templateUrl: 'TopLeftMaster.html'
+        })
+
+        .state('login', {
+            url: '/',
+            templateUrl: 'login.html'
+        })
+        .state('menuMaster.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'dashboard.html',
+        })
+        .state('leftMaster.products', {
+            url: '/products',
+            templateUrl: 'products.html',
+        })
+        .state('topLeftMaster.customer', {
+            url: '/customer',
+            templateUrl: 'customers.html',
+        });
+}]);*/
+
+
+
+
 /*
  app.controller('UserListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$location',
  function ($scope, UsersFactory, UserFactory, $location) {

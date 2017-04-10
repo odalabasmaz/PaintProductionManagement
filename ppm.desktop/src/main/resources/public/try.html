@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js'></script>
+
+    <script src="js/controller.js"></script>
+</head>
+
+<body ng-app="masters">
+<div class='container'>
+    <h4><a href='http://www.Advancesharp.com' target='_blank'>Advancesharp.com</a> This menu is only for testing</h4>
+    <ul class='nav navbar-nav'>
+        <li><a ui-sref="login">login</a></li>
+        <li><a ui-sref="musteri">Musteri</a></li>
+        <li><a ui-sref="leftMaster.products">Products</a></li>
+        <li><a ui-sref="topLeftMaster.customer">Customers</a></li>
+    </ul>
+
+</div>
+
+
+<div ui-view=""></div>
+
+
+</body>
+
+</html>
