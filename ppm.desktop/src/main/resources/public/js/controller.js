@@ -2,9 +2,55 @@
 var app = angular.module('app', []);
 
 app.controller('CustomerCtrl', function ($scope, $http) {
+
+    /*var d = $.Deferred();
     $http.get('/rest/customers').then(function (response) {
         $scope.customers = response.data;
+        d.resolve(response.data);
     });
+
+    return d.promise();
+*/
+
+    $("#jsGrid").jsGrid({
+        height: "300px",
+        width: "400px",
+        inserting: false,
+        editing: true,
+        sorting: true,
+        paging: true,
+        autoload: true,
+        controller: {
+            loadData: function() {
+                var d = $.Deferred();
+                $http.get('/rest/customers').then(function (response) {
+                    $scope.customers = response.data;
+                    d.resolve(response.data);
+                });
+
+                return d.promise();
+            }
+        },
+        fields: [
+            { name: "id", type: "text", width: 100 },
+            { name: "name", title:"Müşteri", type: "text", width: 200 },
+            {
+                type: "control",
+                modeSwitchButton: false,
+                editButton: false,
+
+                headerTemplate: function () {
+                    return $("<button>").attr("type", "button").text("Add")
+                        .on("click", function () {
+                             alert("pop çıkacak ekleme işlemi falan");
+                        });
+                }
+            }
+
+        ]
+    });
+
+
 });
 
 app.controller('CreateCustomerCtrl', function ($scope, $http) {
@@ -31,7 +77,7 @@ app2.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functi
     $stateProvider
         .state('musteri', {
             url: '/',
-            templateUrl: 'pages/musteri.html'
+            templateUrl: 'html/musteri.html'
         })
         .state('leftMaster', {
             abstract: true,

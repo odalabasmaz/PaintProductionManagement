@@ -1,41 +1,46 @@
 ﻿//Menülere tıklandığında açılacak sayfalar
-$("#anasayfa").click(function () {
-    $("#masterContent").load("pages/anasayfa_content.html");
+/*$("#anasayfa").click(function () {
+    $("#masterContent").load("html/anasayfa_content.html");
  
-});
+});*/
+
 $("#boyaTuru").click(function () {
-    $("#masterContent").load("pages/turler/boya_turu.html");
+    //$("#masterContent").load("html/turler/boya_turu.html");
+    window.open("html/turler/boya_turu.html", '_self');
+
 });
 
 $("#boyaAltTuru").click(function () {
-    $("#masterContent").load("pages/turler/boya_alt_turu.html");
+    $("#masterContent").load("html/turler/boya_alt_turu.html");
 });
 
 $("#kovaTuru").click(function () {
-    $("#masterContent").load("pages/turler/kova_turu.html");
+    $("#masterContent").load("html/turler/kova_turu.html");
 });
 
 $("#hammadde").click(function () {
-    $("#masterContent").load("pages/hammadde.html");
+    $("#masterContent").load("html/hammadde.html");
 });
 
 $("#urun").click(function () {
-    $("#masterContent").load("pages/urun.html");
+    $("#masterContent").load("html/urun.html");
 });
 
 $("#musteri").click(function () {
-    $("#masterContent").load("pages/musteri.html");
+    $("#masterContent").load("html/musteri.html");
+    window.open("html/musteri.html", '_self');
+
 });
 
 $("#uretim").click(function () {
-    $("#masterContent").load("pages/uretim.html");
+    $("#masterContent").load("html/uretim.html");
 });
 
 $("#siparis").click(function () {
-    $("#masterContent").load("pages/siparis.html");
+    $("#masterContent").load("html/siparis.html");
 });
 
 $("#stok").click(function () {
-    $("#masterContent").load("pages/stok.html");
+    $("#masterContent").load("html/stok.html");
 });
 
