@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html data-ng-app="app">
+<head>
+	<meta charset="UTF-8"/>
+	<title>PPM</title>
+	<script src="../js/angular.min.js"></script>
+	<script src="../js/controller.js"></script>
+</head>
+<body>
+<div ng-controller="CustomerCtrl">
+	<h1>Welcome to Customer Page!</h1>
+	<p>Customer: <input title="Customer Name" type="text" ng-model="name"/><a href="createCustomer.html">Create Customer</a></p>
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Customer</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="customer in customers | filter:name | orderBy:'-id'">
+			<td>{{ customer.id }}</td>
+			<td>{{ customer.name }}</td>
+			<td>
+				<img src="../images/delete.ico" data-ng-click="deleteCustomer(customer.id)" width="12px" height="12px">
+				<img src="../images/edit.png" data-ng-click="editCustomer(customer.id)" width="12px" height="12px">
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

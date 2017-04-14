@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class CustomerService extends BaseService<Customer> {
 	private static final String QUERY_BY_NAME = "from Customer where lower(name) like :name";
-	private static final String QUERY_BY_ID = "from Customer where id = :name";
+	private static final String QUERY_BY_ID = "from Customer where id = :id";
 
 	@Override
 	protected Class<Customer> getEntityClass() {
