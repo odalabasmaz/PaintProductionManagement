@@ -1,9 +1,9 @@
 <!doctype html>
-<html ng-app>
+<html data-ng-app="app">
 <head>
     <meta charset="UTF-8">
     <title>PPM</title>
-    <script src="../js/angular.min.js"></script>
+    <script src="../plugins/angularjs/angular.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -13,19 +13,19 @@
         <div class="control-group">
             <label class="control-label" for="inputFirstName">First name:</label>
             <div class="controls">
-                <input type="text" id="inputFirstName" ng-model="user.firstName"/>
+                <input type="text" id="inputFirstName" data-ng-model="user.firstName"/>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="inputLastName">Last name:</label>
             <div class="controls">
-                <input type="text" id="inputLastName" ng-model="user.lastName"/>
+                <input type="text" id="inputLastName" data-ng-model="user.lastName"/>
             </div>
         </div>
         <div class="control-group">
             <div class="controls">
-                <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
+                <a data-ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a data-ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
             </div>
         </div>
     </form>

@@ -3,20 +3,20 @@
 <head>
 	<meta charset="UTF-8"/>
 	<title>PPM</title>
-	<script src="../js/angular.min.js"></script>
-	<script src="../js/controller.js"></script>
+	<script src="../plugins/angularjs/angular.min.js"></script>
+	<script src="customerController.js"></script>
 </head>
 <body>
-<div ng-controller="CustomerCtrl">
+<div data-ng-controller="CustomerCtrl">
 	<h1>Welcome to Customer Page!</h1>
-	<p>Customer: <input title="Customer Name" type="text" ng-model="name"/><a href="createCustomer.html">Create Customer</a></p>
+	<p>Customer: <input title="Customer Name" type="text" data-ng-model="name"/><a href="createCustomer.html">Create Customer</a></p>
 	<table>
 		<tr>
 			<th>Id</th>
 			<th>Customer</th>
 			<th>Action</th>
 		</tr>
-		<tr ng-repeat="customer in customers | filter:name | orderBy:'-id'">
+		<tr data-ng-repeat="customer in customers | filter:name | orderBy:'-id'">
 			<td>{{ customer.id }}</td>
 			<td>{{ customer.name }}</td>
 			<td>

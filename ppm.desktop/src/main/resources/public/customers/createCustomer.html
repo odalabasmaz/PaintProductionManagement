@@ -3,15 +3,15 @@
 <head>
 	<meta charset="UTF-8"/>
 	<title>PPM</title>
-	<script src="../js/angular.min.js"></script>
-	<script src="../js/controller.js"></script>
+	<script src="../plugins/angularjs/angular.min.js"></script>
+	<script src="customerController.js"></script>
 </head>
 <body>
 <h1>Create Customer</h1>
-<div ng-controller="CustomerCtrl">
+<div data-ng-controller="CustomerCtrl">
 	<form data-ng-submit="addCustomer()">
 		<label>Name:
-			<input type="text" ng-model="Name" size="30" placeholder="Customer Name" required/>
+			<input type="text" data-ng-model="Name" size="30" placeholder="Customer Name" required/>
 		</label>
 		<input type="submit" value="Save"/>
 	</form>

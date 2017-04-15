@@ -1,5 +1,46 @@
-var app = angular.module('app', []);
+var app = angular.module("app", ["ngRoute"]);
 
+//Menüler - routing
+app.config(['$locationProvider', function ($locationProvider) {
+    $locationProvider.hashPrefix('');
+}]);
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when("/anasayfaContent", {
+            templateUrl: "html/anasayfa_content.html"
+        })
+        .when("/boyaTuru", {
+            templateUrl: "html/turler/boya_turu.html"
+        })
+        .when("/boyaAltTuru", {
+            templateUrl: "html/turler/boya_alt_turu.html"
+        })
+        .when("/kovaTuru", {
+            templateUrl: "html/turler/kova_turu.html"
+        })
+        .when("/hammadde", {
+            templateUrl: "html/hammadde.html"
+        })
+        .when("/urun", {
+            templateUrl: "html/urun.html"
+        })
+        .when("/musteri", {
+            templateUrl: "html/musteri.html",
+            controller : "CustomerCtrl"
+        })
+        .when("/uretim", {
+            templateUrl: "html/uretim.html"
+        })
+        .when("/siparis", {
+            templateUrl: "html/siparis.html"
+        })
+        .when("/stok", {
+            templateUrl: "html/stok.html"
+        });
+});
+
+
+//Musteri.html
 app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 	$http.get('/rest/customers').then(function (response) {
 		$scope.customers = response.data;
@@ -11,7 +52,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, 
 		res.then(
 			function (response) {
 				alert('response: ' + response.data.result);
-				$window.location.href = '/customers/index.html';
+                $window.location.reload();
 			}, function (response) {
 				alert("exception occurred.");
 			});
@@ -26,59 +67,30 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, 
 		res.then(
 			function (response) {
 				alert('response: ' + response.data.result);
-				$window.location.href = '/customers/index.html';
-			}, function (response) {
+                $window.location.reload();
+            }, function (response) {
 				alert("exception occurred.");
 			});
 	};
 
 }]);
 
+
+
+
+
+
+
+
+
+
+
+
 /*
  - REST post request with body only, server side
  - ng-resource
  - rest angularjs best practices
  */
-
-// MasterPage denemek için eklendi
-/*var app2 = angular.module('masters', ['ui.router']);
-
- app2.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
-
- // For any unmatched url, redirect to root
- $urlRouterProvider.otherwise("/");
-
- $stateProvider
- .state('musteri', {
- url: '/',
- templateUrl: 'html/musteri.html'
- })
- .state('leftMaster', {
- abstract: true,
- templateUrl: 'LeftMaster.html'
- })
- .state('topLeftMaster', {
- abstract: true,
- templateUrl: 'TopLeftMaster.html'
- })
-
- .state('login', {
- url: '/',
- templateUrl: 'login.html'
- })
- .state('menuMaster.dashboard', {
- url: '/dashboard',
- templateUrl: 'dashboard.html',
- })
- .state('leftMaster.products', {
- url: '/products',
- templateUrl: 'products.html',
- })
- .state('topLeftMaster.customer', {
- url: '/customer',
- templateUrl: 'customers.html',
- });
- }]);*/
 
 /*
  app.controller('UserListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$location',
