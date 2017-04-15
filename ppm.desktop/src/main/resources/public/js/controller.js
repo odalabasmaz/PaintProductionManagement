@@ -51,7 +51,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, 
 		var res = $http.post('/rest/customers', customer);
 		res.then(
 			function (response) {
-				alert('response: ' + response.data.result);
+				//alert('response: ' + response.data.result);
                 $window.location.reload();
 			}, function (response) {
 				alert("exception occurred.");
@@ -59,6 +59,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, 
 	};
 
 	$scope.updateCustomer = function () {
+        var customer = {name: $scope.Name};
 
 	};
 
@@ -66,7 +67,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, 
 		var res = $http.delete('/rest/customers?id=' + id);
 		res.then(
 			function (response) {
-				alert('response: ' + response.data.result);
+				//alert('response: ' + response.data.result);
                 $window.location.reload();
             }, function (response) {
 				alert("exception occurred.");
