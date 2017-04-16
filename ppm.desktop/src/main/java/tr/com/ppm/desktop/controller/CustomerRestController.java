@@ -60,7 +60,7 @@ public class CustomerRestController {
 
 	@RequestMapping(
 			method = RequestMethod.PUT,
-			path = "/rest/customers/{id}")
+			path = "/rest/customers")
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	String updateCustomer(@RequestBody Customer customer) {

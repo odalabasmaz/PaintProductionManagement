@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ngRoute"]);
+var app = angular.module("app", ["ngRoute", "ngTouch", "ui.grid", "ui.grid.pagination"]);
 
 //Menüler - routing
 app.config(['$locationProvider', function ($locationProvider) {
@@ -26,7 +26,7 @@ app.config(function ($routeProvider) {
         })
         .when("/musteri", {
             templateUrl: "html/musteri.html",
-            controller : "CustomerCtrl"
+            controller: "CustomerCtrl"
         })
         .when("/uretim", {
             templateUrl: "html/uretim.html"
@@ -39,52 +39,98 @@ app.config(function ($routeProvider) {
         });
 });
 
-
 //Musteri.html
-app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
-	$http.get('/rest/customers').then(function (response) {
-		$scope.customers = response.data;
-	});
+app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', function ($scope, $http, $window, $filter) {
 
-	$scope.addCustomer = function () {
-		var customer = {name: $scope.Name};
-		var res = $http.post('/rest/customers', customer);
-		res.then(
-			function (response) {
-				//alert('response: ' + response.data.result);
-                $window.location.reload();
-			}, function (response) {
-				alert("exception occurred.");
-			});
-	};
+    //Grid Tanımlanıyor
+    $scope.gridOptions = {
+        paginationPageSizes: [5, 10, 20],
+        paginationPageSize: 10,
+        columnDefs: [
+            {name: 'id'},
+            {name: 'name'},
+            {
+                name: 'Aksiyon',
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#editModal'" +
+                "data-ng-click='grid.appScope.editCustomer(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
+                "data-ng-click='grid.appScope.deleteCustomer(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                enableCellEdit: false,
+                width: 80
+            }
+        ]
+    };
 
-	$scope.updateCustomer = function () {
+    //Müşteriler Listesi
+    $scope.getCustomers = function () {
+        $http.get('/rest/customers').then(function (response) {
+            $scope.gridOptions.data = response.data;
+        });
+    };
+
+    $scope.getCustomers();
+
+    //Adına göre Müşteri Filtreleme
+    $scope.searchCustomer = function (name) {
+        if(name != undefined)
+        {
+            $http.get('/rest/customers?name=' + name).then(function (response) {
+                $scope.gridOptions.data = response.data;
+            });
+        }
+    };
+
+    $scope.cleanCustomerName = function () {
+         $scope.Name = "";
+    };
+
+
+    //Müşteri Ekleme
+    $scope.addCustomer = function () {
         var customer = {name: $scope.Name};
-
-	};
-
-	$scope.deleteCustomer = function (id) {
-		var res = $http.delete('/rest/customers?id=' + id);
-		res.then(
-			function (response) {
-				//alert('response: ' + response.data.result);
-                $window.location.reload();
+        var res = $http.post('/rest/customers', customer);
+        res.then(
+            function (response) {
+                $scope.getCustomers();
             }, function (response) {
-				alert("exception occurred.");
-			});
-	};
+                alert("exception occurred.");
+            });
+    };
+
+    var customerId;
+
+    $scope.editCustomer = function (row) {
+        customerId = row.entity.id;
+        $scope.EditName = row.entity.name;
+    };
+
+    //Müşteri Güncelleme
+    $scope.updateCustomer = function () {
+        var customer = {id: customerId, name: $scope.EditName};
+        var res = $http.put('/rest/customers', customer);
+        res.then(
+            function (response) {
+                $scope.getCustomers();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+
+    };
+
+    //Müşteri Silme
+    $scope.deleteCustomer = function (row) {
+        var id = row.entity.id;
+        var res = $http.delete('/rest/customers?id=' + id);
+        res.then(
+            function (response) {
+                $scope.getCustomers();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+
 
 }]);
-
-
-
-
-
-
-
-
-
-
 
 
 /*
