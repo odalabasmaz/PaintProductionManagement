@@ -71,7 +71,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
 
     //Adına göre Müşteri Filtreleme
     $scope.searchCustomer = function (name) {
-        if (name != undefined) {
+        if (name !== undefined) {
             $http.get('/rest/customers?name=' + name).then(function (response) {
                 $scope.gridOptions.data = response.data;
             });
