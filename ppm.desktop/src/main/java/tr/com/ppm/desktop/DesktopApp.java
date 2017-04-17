@@ -14,8 +14,8 @@ import tr.com.ppm.desktop.view.ViewManager;
 /**
  * @author Orhun Dalabasmaz
  */
-@Lazy
-@SpringBootApplication
+/*@Lazy
+@SpringBootApplication*/
 public class DesktopApp extends Application {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DesktopApp.class);
 	private static ApplicationContext applicationContext;
