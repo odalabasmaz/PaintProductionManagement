@@ -71,8 +71,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
 
     //Adına göre Müşteri Filtreleme
     $scope.searchCustomer = function (name) {
-        if(name != undefined)
-        {
+        if (name != undefined) {
             $http.get('/rest/customers?name=' + name).then(function (response) {
                 $scope.gridOptions.data = response.data;
             });
@@ -80,9 +79,13 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
     };
 
     $scope.cleanCustomerName = function () {
-         $scope.Name = "";
+        $scope.Name = "";
     };
 
+    $scope.cleanSearchCustomerName = function () {
+        $scope.customerName = "";
+        $scope.getCustomers();
+    };
 
     //Müşteri Ekleme
     $scope.addCustomer = function () {
@@ -128,9 +131,15 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
             });
     };
 
+    $scope.exportExcel = function () {
 
+        alasql('SELECT id,name INTO XLSX("Musteri.xlsx",{headers:true}) FROM ?',[$scope.gridOptions.data]);
+     }
 
 }]);
+
+
+
 
 
 /*
