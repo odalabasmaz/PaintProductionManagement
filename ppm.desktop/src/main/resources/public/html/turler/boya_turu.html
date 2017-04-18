@@ -1,12 +1,5 @@
 ﻿<!-- page content -->
-<div>
-   <!-- <div class="page-title">
-        <div class="title_left">
-            <h3>Boya Türü İşlemleri
-                <small>...</small>
-            </h3>
-        </div>
-    </div>-->
+<div id="masterContent">
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -23,72 +16,37 @@
                 </div>
                 <div class="x_content">
                     <div class="row">
-                        <div class="form-group">
-                            <label class="col-sm-1">Boya Türü</label>
-
+                        <div class="form-group-sm">
+                            <label class="col-sm-1 input-sm">Boya Türü</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control">
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm"
+                                           data-ng-model="searchPaintTypeName">
+                                    <span class="input-group-btn">
+                                              <button type="button" data-ng-click="cleanSearchPaintTypeName()"
+                                                      class="btn btn-info btn-sm"><i class="fa fa-times"></i></button>
+                                        <button style="margin-left: -5px;" type="button" class="btn btn-danger btn-sm"
+                                                data-ng-click="searchPaintType(searchPaintTypeName)"><i
+                                                class="fa fa-search"></i>
+                                </button>
+                                           </span>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-1">
                             </div>
                         </div>
                     </div>
                     <br/>
+                    <!--Ekle-->
                     <div class="row">
-                        <div class="form-group" style="text-align: right;">
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>
-                                    Sorgula
-                                </button>
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Temizle
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <table id="datatable" class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Boya Türü</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr>
-                            <td>A Boya Türü</td>
-                        </tr>
-                        <tr>
-                            <td>B Boya Türü</td>
-                        </tr>
-                        <tr>
-                            <td>C Boya Türü</td>
-                        </tr>
-                        <tr>
-                            <td>D Boya Türü</td>
-                        </tr>
-                        <tr>
-                            <td>E Boya Türü</td>
-                        </tr>
-                        <tr>
-                            <td>F Boya Türü</td>
-                        </tr>
-                        <tr>
-                            <td>G Boya Türü</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <br/>
-                    <div class="row">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target=".bs-example-modal-sm"><i class="fa fa-save"></i> Yeni Kayıt
-                            </button>
-                            <button type="button" class="btn btn-success"><i class="fa fa-edit"></i> Düzenle
-                            </button>
-                            <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Sil
-                            </button>
-
-                            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                                 aria-hidden="true" style="display: none;">
+                        <div class="form-group-sm">
+                            <div class="modal fade bs-example-modal-sm" id="addPaintTypeModal" tabindex="-1"
+                                 role="dialog"
+                                 aria-hidden="true"
+                                 style="display: none;margin-top: 170px;">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -100,20 +58,25 @@
                                                 Kayıt</h4>
                                         </div>
                                         <div class="modal-body">
+
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <label class="col-sm-4">Boya Türü</label>
+                                                    <label class="col-sm-4 input-ssm">Boya Türü : </label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control">
+                                                        <input class="form-control input-sm" type="text"
+                                                               data-ng-model="addPaintTypeName" size="30" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">
-                                                <i class="fa fa-save"></i> Kaydet
+                                            <button data-ng-click="addPaintType()" type="button"
+                                                    class="btn btn-primary btn-sm"
+                                                    data-dismiss="modal"><i
+                                                    class="fa fa-save"></i> Kaydet
                                             </button>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                    data-dismiss="modal"><i
                                                     class="fa fa-ban"></i> İptal
                                             </button>
 
@@ -124,10 +87,75 @@
                             </div>
                         </div>
                     </div>
+
+                    <!--Düzenle-->
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <div class="modal fade bs-example-modal-sm" id="editPaintTypeModal" tabindex="-1"
+                                 role="dialog"
+                                 aria-hidden="true"
+                                 style="display: none; margin-top: 170px;"
+                            ">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title">Boya Türü | Düzenle</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 input-ssm">Boya Türü : </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control input-sm" type="text"
+                                                           id="csname"
+                                                           data-ng-model="editPaintTypeName" size="30" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button data-ng-click="updatePaintType()" type="button"
+                                                class="btn btn-primary btn-sm"
+                                                data-dismiss="modal"><i
+                                                class="fa fa-save"></i> Güncelle
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                data-dismiss="modal"><i
+                                                class="fa fa-ban"></i> İptal
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                data-target="#addPaintTypeModal" data-ng-click="cleanPaintTypeName()"><i
+                                class="fa fa-save"></i>
+                            Yeni Boya Türü Ekle
+                        </button>
+                        <button type="button" id="excelExport" data-ng-click="exportExcelPaintType()"
+                                class="btn btn-danger btn-sm" style="margin-left: 348px"><i
+                                class="fa fa-file-excel-o"></i> Excel'e
+                            Aktar
+                        </button>
+                        <div ui-grid="gridOptionsPaintType" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                             class="grid"></div>
+                    </div>
+                </div>
+                <br/>
             </div>
         </div>
-
     </div>
+
 </div>
 <!-- /page content -->
