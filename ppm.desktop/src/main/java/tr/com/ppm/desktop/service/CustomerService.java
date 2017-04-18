@@ -1,42 +1,52 @@
 package tr.com.ppm.desktop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tr.com.ppm.desktop.model.customer.Customer;
+import tr.com.ppm.desktop.repositories.CustomerRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * @author Orhun Dalabasmaz
+ * @author ykarabalkan.
  */
+
 @Service
-public class CustomerService extends BaseService<Customer> {
-	private static final String QUERY_BY_NAME = "from Customer where lower(name) like :name";
-	private static final String QUERY_BY_ID = "from Customer where id = :id";
+public class CustomerService {
 
-	@Override
-	protected Class<Customer> getEntityClass() {
-		return Customer.class;
+	@Autowired
+	private CustomerRepository customerRepository;
+
+	public Customer findById(Long id) {
+		return customerRepository.findOne(id);
 	}
 
-	public Customer findById(long id) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("id", id);
-		return executeQuery(QUERY_BY_ID, params).get(0);
+	public List<Customer> findByName(String name) {
+		return customerRepository.findByName(name);
 	}
 
-	public Customer findByName(String name) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("name", name);
-		List<Customer> customers = executeQuery(QUERY_BY_NAME, params);
-		return customers.size() != 1 ? null : customers.get(0);
+	public void saveCustomer(Customer customer) {
+		customerRepository.save(customer);
 	}
 
-	public List<Customer> findAllByName(String name) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + name.trim().toLowerCase() + "%");
-		return executeQuery(QUERY_BY_NAME, params);
+	public void updateCustomer(Customer customer) {
+		saveCustomer(customer);
+	}
+
+	public void deleteCustomer(Customer customer) {
+		customerRepository.delete(customer);
+	}
+
+	public void deleteCustomerById(Long id) {
+		customerRepository.delete(id);
+	}
+
+	public void deleteAllCustomers() {
+		customerRepository.deleteAll();
+	}
+
+	public List<Customer> findAllCustomers() {
+		return customerRepository.findAll();
 	}
 
 }

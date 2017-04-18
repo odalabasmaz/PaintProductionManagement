@@ -75,7 +75,7 @@ public class OrderEditController implements Initializable, EditViewController<Or
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		cbCustomer.setItems(FXCollections.observableArrayList(customerService.list()));
+		cbCustomer.setItems(FXCollections.observableArrayList(customerService.findAllCustomers()));
 		cbOrderStatus.setItems(FXCollections.observableArrayList(Status.values()));
 	}
 

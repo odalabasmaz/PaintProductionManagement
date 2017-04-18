@@ -28,7 +28,7 @@ public class CustomerRestController {
 			path = "/rest/customers")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Customer> getCustomers(@RequestParam(value = "name", defaultValue = "") String name) {
-		return StringUtils.isBlank(name) ? service.list() : service.findAllByName(name);
+		return StringUtils.isBlank(name) ? service.findAllCustomers() : service.findByName(name);
 	}
 
 	@RequestMapping(
@@ -54,7 +54,7 @@ public class CustomerRestController {
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	String addCustomer(@RequestBody Customer customer) {
-		service.save(customer);
+		service.saveCustomer(customer);
 		return "{\"result\": \"Customer saved!\"}";
 	}
 
@@ -64,7 +64,7 @@ public class CustomerRestController {
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	String updateCustomer(@RequestBody Customer customer) {
-		service.update(customer);
+		service.updateCustomer(customer);
 		return "{\"result\": \"Customer updated!\"}";
 	}
 
@@ -74,8 +74,7 @@ public class CustomerRestController {
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	String deleteCustomer(@RequestParam(value = "id") long id) {
-		Customer customer = service.findById(id);
-		service.remove(customer);
+		service.deleteCustomerById(id);
 		return "{\"result\": \"Customer deleted!\"}";
 	}
 

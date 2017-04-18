@@ -60,7 +60,7 @@ public class CustomerController implements Initializable {
 
 	private void query() {
 		String customer = tfCustomer.getText();
-		List<Customer> customers = service.findAllByName(customer);
+		List<Customer> customers = service.findByName(customer);
 		tblViewCustomer.setItems(FXCollections.observableArrayList(customers));
 	}
 
@@ -72,8 +72,8 @@ public class CustomerController implements Initializable {
 
 	@FXML
 	void delete(ActionEvent event) {
-		Customer paintType = tblViewCustomer.getSelectionModel().getSelectedItem();
-		service.remove(paintType);
+		Customer customer = tblViewCustomer.getSelectionModel().getSelectedItem();
+		service.deleteCustomer(customer);
 		listAll();
 	}
 
@@ -88,7 +88,7 @@ public class CustomerController implements Initializable {
 	@FXML
 	void query(ActionEvent event) {
 		String customer = tfCustomer.getText();
-		List<Customer> customers = service.findAllByName(customer);
+		List<Customer> customers = service.findByName(customer);
 		tblViewCustomer.setItems(FXCollections.observableArrayList(customers));
 	}
 
@@ -99,6 +99,6 @@ public class CustomerController implements Initializable {
 	}
 
 	private void listAll() {
-		tblViewCustomer.setItems(FXCollections.observableArrayList(service.list()));
+		tblViewCustomer.setItems(FXCollections.observableArrayList(service.findAllCustomers()));
 	}
 }
