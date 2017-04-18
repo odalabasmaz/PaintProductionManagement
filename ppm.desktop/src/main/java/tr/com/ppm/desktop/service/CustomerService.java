@@ -22,7 +22,7 @@ public class CustomerService {
 	}
 
 	public List<Customer> findByName(String name) {
-		return customerRepository.findByName(name);
+		return customerRepository.findByNameContainingIgnoreCase(name);
 	}
 
 	public void saveCustomer(Customer customer) {
