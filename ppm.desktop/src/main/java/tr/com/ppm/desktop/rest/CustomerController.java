@@ -1,4 +1,4 @@
-package tr.com.ppm.desktop.controller;
+package tr.com.ppm.desktop.rest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,12 @@ import java.util.List;
  * @author Orhun Dalabasmaz
  */
 @RestController
-public class CustomerRestController {
+public class CustomerController {
 
 	private final CustomerService service;
 
 	@Autowired
-	public CustomerRestController(CustomerService service) {
+	public CustomerController(CustomerService service) {
 		this.service = service;
 	}
 
