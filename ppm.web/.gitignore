@@ -1,0 +1,7 @@
+# Intellij Idea Files
+*.iml
+.idea/
+
+# Generated files
+target/
+src/test/resources/output/

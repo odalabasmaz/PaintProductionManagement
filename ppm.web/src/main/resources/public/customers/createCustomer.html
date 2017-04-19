@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html data-ng-app="app">
+<head>
+	<meta charset="UTF-8"/>
+	<title>PPM</title>
+	<script src="../plugins/angularjs/angular.min.js"></script>
+	<script src="customerController.js"></script>
+</head>
+<body>
+<h1>Create Customer</h1>
+<div data-ng-controller="CustomerCtrl">
+	<form data-ng-submit="addCustomer()">
+		<label>Name:
+			<input type="text" data-ng-model="Name" size="30" placeholder="Customer Name" required/>
+		</label>
+		<input type="submit" value="Save"/>
+	</form>
+</div>
+</body>
+</html>

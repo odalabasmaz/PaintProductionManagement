@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Albera Boya | Boya Üretim Yönetimi </title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <!-- Bootstrap -->
+    <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="plugins/animate.css/animate.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="css/custom.css" rel="stylesheet"/>
+    <!-- Ppm Style -->
+    <link href="css/ppmStyle.css" rel="stylesheet"/>
+
+    <!-- AngularJS Scripts -->
+    <script src="plugins/angularjs/angular.min.js"></script>
+    <script src="plugins/angularjs/angular-route.js"></script>
+    <script src="plugins/angularjs/angular-touch.js"></script>
+    <script src="plugins/angularjs/angular-animate.js"></script>
+
+
+    <!-- Ui-grid Style -->
+    <link rel="stylesheet" href="plugins/ui-grid/ui-grid.css">
+    <script src="plugins/alasql/alasql.min.js"></script>
+    <script src="plugins/alasql/xlsx.core.min.js"></script>
+
+
+</head>
+<body class="nav-md" data-ng-app="app">
+<div class="container body">
+    <div class="main_container">
+        <!--Sidebar menu-->
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div id="top-icon" class="navbar nav_title" style="border: 0; background: rgb(237, 237, 237);">
+                    <!--background değişti-->
+                    <!--<a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>-->
+                    <a href="anasayfa.html" class="site_title titlestyle">
+                        <img id="imgt" class="imgtLarge" src="../images/logo.png"
+                             style="height: 50px;margin-left: 6px;"/>
+                        Albera Boya
+                    </a>
+
+                </div>
+                <div class="clearfix"></div>
+                <br/>
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <h3>MENÜ</h3>
+                        <ul class="nav side-menu" style="font-size:20px;">
+                            <li>
+                                <a href="#anasayfaContent" style="color:aquamarine;"><i class="fa fa-home"></i> Anasayfa</a>
+                            </li>
+                            <li>
+                                <a style="color:burlywood;"><i class="fa fa-sitemap"></i> Türler <span
+                                        class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="#boyaTuru">Boya Türü</a></li>
+                                    <li><a href="#boyaAltTuru">Boya Alt Türü</a></li>
+                                 </ul>
+                            </li>
+                            <li>
+                                <a href="#hammadde" style="color:cadetblue;"><i class="fa fa-download"></i> Hammadde</a>
+                            </li>
+                            <li>
+                                <a href="#urun" style="color:darksalmon;"><i class="fa fa-paint-brush"></i> Ürün</a>
+                            </li>
+                            <li>
+                                <a href="#musteri" style="color:hotpink;"><i class="fa fa-users"></i> Müşteri</a>
+                            </li>
+                            <li>
+                                <a href="#uretim" style="color:khaki;"><i class="fa fa-industry"></i> Üretim</a>
+                            </li>
+                            <li>
+                                <a href="#siparis" style="color:mediumspringgreen;"><i class="fa fa-shopping-cart"></i>
+                                    Sipariş</a>
+                            </li>
+                            <li>
+                                <a href="#stok" style="color:mediumpurple;"><i class="fa fa-server"></i> Stok</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Lock">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                    </a>
+                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+        <!-- /Sidebar menu-->
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav>
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fa fa-user"></i> Tuğçe Dalabasmaz
+                                <span class="fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- page content -->
+
+         <div class="right_col" role="main">
+             <div ng-view>
+             </div>
+         </div>
+        <!-- /page content -->
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                <a> Albera Boya ~ 2017</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+<!-- jQuery -->
+<script src="plugins/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/lib/fastclick.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="js/custom.js"></script>
+<!-- Ppm Script -->
+<script src="js/ppmScript.js"></script>
+<script src="js/controller.js"></script>
+
+<!-- Ui-grid Script -->
+<script src="plugins/ui-grid/ui-grid.js"></script>
+<script src="plugins/ui-grid/pdfmake.js"></script>
+<script src="plugins/ui-grid/vfs_fonts.js"></script>
+
+
+</body>
+</html>
