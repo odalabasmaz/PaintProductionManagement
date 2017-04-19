@@ -17,7 +17,8 @@ app.config(function ($routeProvider) {
             controller: "PaintTypeCtrl"
         })
         .when("/boyaAltTuru", {
-            templateUrl: "html/turler/boya_alt_turu.html"
+            templateUrl: "html/turler/boya_alt_turu.html",
+            controller: "PaintSubTypeCtrl"
         })
         .when("/hammadde", {
             templateUrl: "html/hammadde.html"
@@ -134,7 +135,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
 
     $scope.exportExcel = function () {
 
-        alasql('SELECT id,name INTO XLSX("Musteri.xlsx",{headers:true}) FROM ?',[$scope.gridOptions.data]);
+        alasql('SELECT id,name INTO XLSX("Musteri.xlsx",{headers:true}) FROM ?', [$scope.gridOptions.data]);
     }
 
 }]);
@@ -234,12 +235,124 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
 
     $scope.exportExcelPaintType = function () {
 
-        alasql('SELECT id,name INTO XLSX("BoyaTürü.xlsx",{headers:true}) FROM ?',[$scope.gridOptionsPaintType.data]);
+        alasql('SELECT id,name INTO XLSX("BoyaTürü.xlsx",{headers:true}) FROM ?', [$scope.gridOptionsPaintType.data]);
     }
 
 }]);
 
 
+//boya_alt_turu.html
+app.controller('PaintSubTypeCtrl', ['$scope', '$http', '$window', '$filter', function ($scope, $http, $window, $filter) {
+
+    //Grid Tanımlanıyor
+    $scope.gridOptionsPaintSubType = {
+        paginationPageSizes: [5, 10, 20],
+        paginationPageSize: 10,
+        columnDefs: [
+            {name: 'id'},
+            {name: 'name', displayName: 'Boya Alt Türü'},
+            {name: 'paintType.name', displayName:'Boya Türü'},
+            {
+                name: 'Aksiyon',
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#editPaintSubTypeModal'" +
+                "data-ng-click='grid.appScope.editSubPaintType(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
+                "data-ng-click='grid.appScope.deleteSubPaintType(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                enableCellEdit: false,
+                width: 80
+            }
+        ]
+    };
+
+
+    //Boya Türü Listesi
+    $scope.getPaintTypes = function () {
+        $http.get('/rest/paintTypes').then(function (response) {
+            //select ekleme yapacaksın
+            $scope.paintTypes = response.data;
+        });
+    };
+
+    $scope.getPaintTypes();
+
+    //Boya Alt Türü Listesi
+    $scope.getPaintSubTypes = function () {
+        $http.get('/rest/paintSubTypes').then(function (response) {
+            $scope.gridOptionsPaintSubType.data = response.data;
+        });
+    };
+
+    $scope.getPaintSubTypes();
+
+    //Adına göre Müşteri Filtreleme
+    $scope.searchPaintSubType = function (name) {
+        if (name !== undefined) {
+            $http.get('/rest/paintSubTypes?name=' + name).then(function (response) {
+                $scope.gridOptionsPaintSubType.data = response.data;
+            });
+        }
+    };
+
+    $scope.cleanPaintSubTypeName = function () {
+        $scope.addPaintSubTypeName = "";
+        $scope.getPaintTypes();
+    };
+
+    $scope.cleanSearchPaintSubTypeName = function () {
+        $scope.searchPaintSubTypeName = "";
+        $scope.getPaintSubTypes();
+    };
+
+
+    //Boya Türü Ekleme
+    $scope.addPaintSubType = function () {
+        var paintSubType = {name: $scope.addPaintSubTypeName, paintTypeId: $scope.paintTypeSelectAdd};
+        var res = $http.post('/rest/paintSubTypes?name=' + $scope.addPaintSubTypeName + '&paintTypeId=' + $scope.paintTypeSelectAdd);
+        res.then(
+            function (response) {
+                $scope.getPaintSubTypes();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    var paintSubTypeId;
+
+    $scope.editPaintSubType = function (row) {
+        paintSubTypeId = row.entity.id;
+        $scope.editPaintSubTypeName = row.entity.name;
+    };
+
+    //Boya Türü Güncelleme
+    $scope.updatePaintSubType = function () {
+        var paintSubType = {id: paintTypeId, name: $scope.editPaintTypeName};
+        var res = $http.put('/rest/paintSubTypes', paintSubType);
+        res.then(
+            function (response) {
+                $scope.getPaintSubTypes();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+
+    };
+
+    //Boya Türü Silme
+    $scope.deletePaintSubType = function (row) {
+        var id = row.entity.id;
+        var res = $http.delete('/rest/paintSubTypes?id=' + id);
+        res.then(
+            function (response) {
+                $scope.getPaintSubTypes();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    $scope.exportExcelPaintSubType = function () {
+
+        alasql('SELECT id,name INTO XLSX("BoyaTürü.xlsx",{headers:true}) FROM ?', [$scope.gridOptionsPaintSubType.data]);
+    }
+
+}]);
 
 
 /*
