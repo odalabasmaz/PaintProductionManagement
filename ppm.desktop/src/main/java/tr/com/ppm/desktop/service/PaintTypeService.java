@@ -1,28 +1,47 @@
 package tr.com.ppm.desktop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tr.com.ppm.desktop.model.material.PaintType;
+import tr.com.ppm.desktop.repositories.PaintTypeRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Orhun Dalabasmaz
  */
 @Service
-public class PaintTypeService extends BaseService<PaintType> {
-	private static final String QUERY_STRING = "from PaintType where lower(name) like :name";
+public class PaintTypeService {
 
-	public List<PaintType> listByPaintType(String paintType) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + paintType.trim().toLowerCase() + "%");
-		return executeQuery(QUERY_STRING, params);
+	@Autowired
+	private PaintTypeRepository paintTypeRepository;
+
+	public List<PaintType> findByName(String name) {
+		return paintTypeRepository.findByNameContainingIgnoreCase(name);
 	}
 
-	@Override
-	protected Class<PaintType> getEntityClass() {
-		return PaintType.class;
+	public void savePaintType(PaintType paintType) {
+		paintTypeRepository.save(paintType);
+	}
+
+	public void updatePaintType(PaintType paintType) {
+		savePaintType(paintType);
+	}
+
+	public void deletePaintType(PaintType paintType) {
+		paintTypeRepository.delete(paintType);
+	}
+
+	public void deletePaintTypeById(Long id) {
+		paintTypeRepository.delete(id);
+	}
+
+	public void deleteAllPaintTypes() {
+		paintTypeRepository.deleteAll();
+	}
+
+	public List<PaintType> findAllPaintTypes() {
+		return paintTypeRepository.findAll();
 	}
 
 }
