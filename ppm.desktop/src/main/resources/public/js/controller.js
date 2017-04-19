@@ -19,9 +19,6 @@ app.config(function ($routeProvider) {
         .when("/boyaAltTuru", {
             templateUrl: "html/turler/boya_alt_turu.html"
         })
-        .when("/kovaTuru", {
-            templateUrl: "html/turler/kova_turu.html"
-        })
         .when("/hammadde", {
             templateUrl: "html/hammadde.html"
         })
