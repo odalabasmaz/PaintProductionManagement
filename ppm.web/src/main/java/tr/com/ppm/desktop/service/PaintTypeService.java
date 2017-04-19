@@ -16,6 +16,10 @@ public class PaintTypeService {
 	@Autowired
 	private PaintTypeRepository paintTypeRepository;
 
+	public PaintType findById(Long id) {
+		return paintTypeRepository.findOne(id);
+	}
+
 	public List<PaintType> findByName(String name) {
 		return paintTypeRepository.findByNameContainingIgnoreCase(name);
 	}

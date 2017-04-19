@@ -135,7 +135,7 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
     $scope.exportExcel = function () {
 
         alasql('SELECT id,name INTO XLSX("Musteri.xlsx",{headers:true}) FROM ?',[$scope.gridOptions.data]);
-     }
+    }
 
 }]);
 
@@ -163,7 +163,7 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
 
     //Boya Türü Listesi
     $scope.getPaintTypes = function () {
-        $http.get('/rest/paint_types').then(function (response) {
+        $http.get('/rest/paintTypes').then(function (response) {
             $scope.gridOptionsPaintType.data = response.data;
         });
     };
@@ -173,7 +173,7 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
     //Adına göre Müşteri Filtreleme
     $scope.searchPaintType = function (name) {
         if (name !== undefined) {
-            $http.get('/rest/paint_types?name=' + name).then(function (response) {
+            $http.get('/rest/paintTypes?name=' + name).then(function (response) {
                 $scope.gridOptionsPaintType.data = response.data;
             });
         }
@@ -191,7 +191,7 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
     //Boya Türü Ekleme
     $scope.addPaintType = function () {
         var paintType = {name: $scope.addPaintTypeName};
-        var res = $http.post('/rest/paint_types', paintType);
+        var res = $http.post('/rest/paintTypes', paintType);
         res.then(
             function (response) {
                 $scope.getPaintTypes();
@@ -210,7 +210,7 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
     //Boya Türü Güncelleme
     $scope.updatePaintType = function () {
         var paintType = {id: paintTypeId, name: $scope.editPaintTypeName};
-        var res = $http.put('/rest/paint_types', paintType);
+        var res = $http.put('/rest/paintTypes', paintType);
         res.then(
             function (response) {
                 $scope.getPaintTypes();
@@ -223,7 +223,7 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
     //Boya Türü Silme
     $scope.deletePaintType = function (row) {
         var id = row.entity.id;
-        var res = $http.delete('/rest/paint_types?id=' + id);
+        var res = $http.delete('/rest/paintTypes?id=' + id);
         res.then(
             function (response) {
                 $scope.getPaintTypes();
