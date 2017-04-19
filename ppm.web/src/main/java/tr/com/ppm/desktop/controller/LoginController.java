@@ -1,4 +1,4 @@
-package tr.com.ppm.desktop.rest;
+package tr.com.ppm.desktop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

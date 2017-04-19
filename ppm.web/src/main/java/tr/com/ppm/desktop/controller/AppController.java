@@ -1,4 +1,4 @@
-package tr.com.ppm.desktop.rest;
+package tr.com.ppm.desktop.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
