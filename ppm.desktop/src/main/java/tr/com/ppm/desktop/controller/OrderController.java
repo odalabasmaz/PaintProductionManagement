@@ -60,7 +60,7 @@ public class OrderController implements Initializable {
 	}
 
 	private void query() {
-		List<Order> orders = orderService.list();
+		List<Order> orders = orderService.findAllOrders();
 		tvOrder.setItems(FXCollections.observableArrayList(orders));
 	}
 
