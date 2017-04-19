@@ -66,12 +66,4 @@ public class PaintTypeController {
 		return "{\"result\": \"PaintType deleted!\"}";
 	}
 
-	@RequestMapping(
-			method = RequestMethod.OPTIONS,
-			path = "/rest/paintTypes")
-	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody List<RequestMethod> options() {
-		return Arrays.asList(RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS);
-	}
-
 }
