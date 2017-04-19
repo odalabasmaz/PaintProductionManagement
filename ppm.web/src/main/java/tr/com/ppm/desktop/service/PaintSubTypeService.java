@@ -1,36 +1,50 @@
 package tr.com.ppm.desktop.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tr.com.ppm.desktop.model.material.PaintSubType;
-import tr.com.ppm.desktop.model.material.PaintType;
+import tr.com.ppm.desktop.repositories.PaintSubTypeRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * @author Orhun Dalabasmaz
+ * @author uadak
  */
 @Service
-public class PaintSubTypeService extends BaseService<PaintSubType> {
+public class PaintSubTypeService {
 
-	private static final String QUERY_STRING = "from PaintSubType where lower(name) like :name and paintType = :paintType";
-	private static final String QUERY_STR = "from PaintSubType where lower(name) like :name";
+	@Autowired
+	private PaintSubTypeRepository paintSubTypeRepository;
 
-	@Override
-	protected Class getEntityClass() {
-		return PaintSubType.class;
+	public List<PaintSubType> findByName(String name) {
+		return paintSubTypeRepository.findByNameContainingIgnoreCase(name);
 	}
 
-	public List<PaintSubType> list(String paintSubType, PaintType paintType) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + paintSubType.trim().toLowerCase() + "%");
-		params.put("paintType", paintType);
-		return executeQuery(QUERY_STRING, params);
+	public PaintSubType findById(Long id) {
+		return paintSubTypeRepository.findOne(id);
 	}
-	public List<PaintSubType> list(String paintSubType) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + paintSubType.trim().toLowerCase() + "%");
-		return executeQuery(QUERY_STR, params);
+
+	public void savePaintSubType(PaintSubType paintSubType) {
+		paintSubTypeRepository.save(paintSubType);
+	}
+
+	public void updatePaintSubType(PaintSubType paintSubType) {
+		savePaintSubType(paintSubType);
+	}
+
+	public void deletePaintSubType(PaintSubType paintSubType) {
+		paintSubTypeRepository.delete(paintSubType);
+	}
+
+	public void deletePaintSubTypeById(Long id) {
+		paintSubTypeRepository.delete(id);
+	}
+
+	public void deleteAllPaintSubTypes() {
+		paintSubTypeRepository.deleteAll();
+	}
+
+	public List<PaintSubType> findAllPaintSubTypes() {
+		return paintSubTypeRepository.findAll();
 	}
 }
