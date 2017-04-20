@@ -12,45 +12,17 @@ import java.util.List;
  */
 
 @Service
-public class CustomerService {
+public class CustomerService extends BaseNewService<Customer, Long> {
 
-	private final CustomerRepository repository;
+	private CustomerRepository repository;
 
 	@Autowired
 	public CustomerService(CustomerRepository repository) {
-		this.repository = repository;
-	}
-
-	public Customer findById(Long id) {
-		return repository.findOne(id);
+		super(repository);
 	}
 
 	public List<Customer> findByName(String name) {
 		return repository.findByNameContainingIgnoreCase(name);
-	}
-
-	public void saveCustomer(Customer customer) {
-		repository.save(customer);
-	}
-
-	public void updateCustomer(Customer customer) {
-		saveCustomer(customer);
-	}
-
-	public void deleteCustomer(Customer customer) {
-		repository.delete(customer);
-	}
-
-	public void deleteCustomerById(Long id) {
-		repository.delete(id);
-	}
-
-	public void deleteAllCustomers() {
-		repository.deleteAll();
-	}
-
-	public List<Customer> findAll() {
-		return repository.findAll();
 	}
 
 }

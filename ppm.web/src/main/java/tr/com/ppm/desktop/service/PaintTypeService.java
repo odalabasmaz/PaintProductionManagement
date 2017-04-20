@@ -11,41 +11,17 @@ import java.util.List;
  * @author Orhun Dalabasmaz
  */
 @Service
-public class PaintTypeService {
+public class PaintTypeService extends BaseNewService<PaintType, Long> {
+
+	private PaintTypeRepository repository;
 
 	@Autowired
-	private PaintTypeRepository paintTypeRepository;
-
-	public PaintType findById(Long id) {
-		return paintTypeRepository.findOne(id);
+	public PaintTypeService(PaintTypeRepository repository) {
+		super(repository);
 	}
 
 	public List<PaintType> findByName(String name) {
-		return paintTypeRepository.findByNameContainingIgnoreCase(name);
-	}
-
-	public void savePaintType(PaintType paintType) {
-		paintTypeRepository.save(paintType);
-	}
-
-	public void updatePaintType(PaintType paintType) {
-		savePaintType(paintType);
-	}
-
-	public void deletePaintType(PaintType paintType) {
-		paintTypeRepository.delete(paintType);
-	}
-
-	public void deletePaintTypeById(Long id) {
-		paintTypeRepository.delete(id);
-	}
-
-	public void deleteAllPaintTypes() {
-		paintTypeRepository.deleteAll();
-	}
-
-	public List<PaintType> findAllPaintTypes() {
-		return paintTypeRepository.findAll();
+		return repository.findByNameContainingIgnoreCase(name);
 	}
 
 }

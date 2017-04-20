@@ -52,9 +52,10 @@ public class CustomerController {
 			method = RequestMethod.POST,
 			path = "/rest/customers")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody
+	public
+	@ResponseBody
 	String addCustomer(@RequestBody Customer customer) {
-		service.saveCustomer(customer);
+		service.save(customer);
 		return "{\"result\": \"Customer saved!\"}";
 	}
 
@@ -62,9 +63,10 @@ public class CustomerController {
 			method = RequestMethod.PUT,
 			path = "/rest/customers")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody
+	public
+	@ResponseBody
 	String updateCustomer(@RequestBody Customer customer) {
-		service.updateCustomer(customer);
+		service.update(customer);
 		return "{\"result\": \"Customer updated!\"}";
 	}
 
@@ -72,9 +74,10 @@ public class CustomerController {
 			method = RequestMethod.DELETE,
 			path = "/rest/customers")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody
+	public
+	@ResponseBody
 	String deleteCustomer(@RequestParam(value = "id") long id) {
-		service.deleteCustomerById(id);
+		service.deleteById(id);
 		return "{\"result\": \"Customer deleted!\"}";
 	}
 
@@ -82,7 +85,8 @@ public class CustomerController {
 			method = RequestMethod.OPTIONS,
 			path = "/rest/customers")
 	@ResponseStatus(value = HttpStatus.OK)
-	public @ResponseBody
+	public
+	@ResponseBody
 	List<RequestMethod> options() {
 		return Arrays.asList(RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS);
 	}
