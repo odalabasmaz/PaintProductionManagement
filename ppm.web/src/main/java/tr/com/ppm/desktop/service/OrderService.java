@@ -3,7 +3,7 @@ package tr.com.ppm.desktop.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tr.com.ppm.desktop.model.order.Order;
-import tr.com.ppm.desktop.repositories.OrderRepository;
+import tr.com.ppm.desktop.repository.OrderRepository;
 
 import java.util.List;
 

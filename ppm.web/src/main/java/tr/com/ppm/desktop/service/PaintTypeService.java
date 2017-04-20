@@ -3,7 +3,7 @@ package tr.com.ppm.desktop.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tr.com.ppm.desktop.model.material.PaintType;
-import tr.com.ppm.desktop.repositories.PaintTypeRepository;
+import tr.com.ppm.desktop.repository.PaintTypeRepository;
 
 import java.util.List;
 

@@ -28,7 +28,7 @@ public class CustomerController {
 			path = "/rest/customers")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Customer> getCustomers(@RequestParam(value = "name", defaultValue = "") String name) {
-		return StringUtils.isBlank(name) ? service.findAllCustomers() : service.findByName(name);
+		return StringUtils.isBlank(name) ? service.findAll() : service.findByName(name);
 	}
 
 	@RequestMapping(
