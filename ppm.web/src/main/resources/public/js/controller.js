@@ -12,13 +12,9 @@ app.config(function ($routeProvider) {
         .when("/anasayfaContent", {
             templateUrl: "html/anasayfa_content.html"
         })
-        .when("/boyaTuru", {
-            templateUrl: "html/turler/boya_turu.html",
-            controller: "PaintTypeCtrl"
-        })
-        .when("/boyaAltTuru", {
-            templateUrl: "html/turler/boya_alt_turu.html",
-            controller: "PaintSubTypeCtrl"
+        .when("/boyatur", {
+            templateUrl: "html/boya_tur.html",
+            controller: "PaintTypesCtrl"
         })
         .when("/hammadde", {
             templateUrl: "html/hammadde.html"
@@ -50,17 +46,18 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
         paginationPageSize: 10,
         columnDefs: [
             {name: 'id'},
-            {name: 'name'},
+            {name: 'name', displayName: 'Müşteri'},
             {
                 name: 'Aksiyon',
-                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#editModal'" +
-                "data-ng-click='grid.appScope.editCustomer(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
-                "data-ng-click='grid.appScope.deleteCustomer(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'>" +
+                "<button type='button' data-toggle='modal'  data-target='#editModal' data-ng-click='grid.appScope.editCustomer(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button>" +
+                "<button type='button' data-ng-click='grid.appScope.deleteCustomer(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
                 enableCellEdit: false,
                 width: 80
             }
         ]
     };
+
 
     //Müşteriler Listesi
     $scope.getCustomers = function () {
@@ -141,20 +138,20 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
 }]);
 
 
-//boya_turu.html
-app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', function ($scope, $http, $window, $filter) {
+//boya_tur.html
+app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', function ($scope, $http, $window, $filter) {
 
-    //Grid Tanımlanıyor
+    // Boya Türü Grid Tanımlanıyor
     $scope.gridOptionsPaintType = {
         paginationPageSizes: [5, 10, 20],
         paginationPageSize: 10,
         columnDefs: [
-            {name: 'id'},
-            {name: 'name'},
+            {name: 'id',width: 40},
+            {name: 'name', displayName: 'Boya Türü'},
             {
                 name: 'Aksiyon',
-                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#editPaintTypeModal'" +
-                "data-ng-click='grid.appScope.editPaintType(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#PaintTypeModal'" +
+                "data-ng-click='grid.appScope.openPaintTypeModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
                 "data-ng-click='grid.appScope.deletePaintType(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
                 enableCellEdit: false,
                 width: 80
@@ -166,12 +163,13 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
     $scope.getPaintTypes = function () {
         $http.get('/rest/paintTypes').then(function (response) {
             $scope.gridOptionsPaintType.data = response.data;
+            $scope.paintTypes = response.data;
         });
     };
 
     $scope.getPaintTypes();
 
-    //Adına göre Müşteri Filtreleme
+    //Adına göre Boya Türü Filtreleme
     $scope.searchPaintType = function (name) {
         if (name !== undefined) {
             $http.get('/rest/paintTypes?name=' + name).then(function (response) {
@@ -179,19 +177,47 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
             });
         }
     };
-
-    $scope.cleanPaintTypeName = function () {
-        $scope.addPaintTypeName = "";
-    };
-
     $scope.cleanSearchPaintTypeName = function () {
         $scope.searchPaintTypeName = "";
         $scope.getPaintTypes();
     };
 
+    // Boya Türü Ekleme/Düzenleme Modal açılması
+    var paintTypeId;
+    $scope.openPaintTypeModal = function (row) {
+
+        if (row == null) { // Yeni Kayıt
+
+            $scope.modalPaintTypeName = "";
+            document.getElementById("paintTypeModalHeader").innerHTML = "Boya Türü | Yeni Kayıt";
+            document.getElementById("savePaintTypeButton").innerHTML = "Kaydet";
+        } else {// Düzenle
+
+            document.getElementById("paintTypeModalHeader").innerHTML = "Boya Türü | Düzenle";
+            document.getElementById("savePaintTypeButton").innerHTML = "Güncelle";
+            paintTypeId = row.entity.id;
+            $scope.modalPaintTypeName = row.entity.name;
+        }
+    };
+
+    $scope.savePaintType = function () {
+
+        var buttonType = document.getElementById("savePaintTypeButton").innerHTML;
+
+        if (buttonType == 'Kaydet') {
+            $scope.addPaintType();
+        }
+
+        if (buttonType == 'Güncelle') {
+            $scope.updatePaintType();
+        }
+
+
+    }
+
     //Boya Türü Ekleme
     $scope.addPaintType = function () {
-        var paintType = {name: $scope.addPaintTypeName};
+        var paintType = {name: $scope.modalPaintTypeName};
         var res = $http.post('/rest/paintTypes', paintType);
         res.then(
             function (response) {
@@ -201,16 +227,9 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
             });
     };
 
-    var paintTypeId;
-
-    $scope.editPaintType = function (row) {
-        paintTypeId = row.entity.id;
-        $scope.editPaintTypeName = row.entity.name;
-    };
-
     //Boya Türü Güncelleme
     $scope.updatePaintType = function () {
-        var paintType = {id: paintTypeId, name: $scope.editPaintTypeName};
+        var paintType = {id: paintTypeId, name: $scope.modalPaintTypeName};
         var res = $http.put('/rest/paintTypes', paintType);
         res.then(
             function (response) {
@@ -233,46 +252,32 @@ app.controller('PaintTypeCtrl', ['$scope', '$http', '$window', '$filter', functi
             });
     };
 
+    //Boya Türü Excel Export
     $scope.exportExcelPaintType = function () {
 
         alasql('SELECT id,name INTO XLSX("BoyaTürü.xlsx",{headers:true}) FROM ?', [$scope.gridOptionsPaintType.data]);
     }
 
-}]);
 
 
-//boya_alt_turu.html
-app.controller('PaintSubTypeCtrl', ['$scope', '$http', '$window', '$filter', function ($scope, $http, $window, $filter) {
-
-    //Grid Tanımlanıyor
+    //Boya Alt Türü Grid Tanımlanıyor
     $scope.gridOptionsPaintSubType = {
         paginationPageSizes: [5, 10, 20],
         paginationPageSize: 10,
         columnDefs: [
-            {name: 'id'},
+            {name: 'id',width: 40},
             {name: 'name', displayName: 'Boya Alt Türü'},
-            {name: 'paintType.name', displayName:'Boya Türü'},
+            {name: 'paintType.name', displayName: 'Boya Türü'},
             {
                 name: 'Aksiyon',
-                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#editPaintSubTypeModal'" +
-                "data-ng-click='grid.appScope.editSubPaintType(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#PaintSubTypeModal'" +
+                "data-ng-click='grid.appScope.openPaintSubTypeModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
                 "data-ng-click='grid.appScope.deleteSubPaintType(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
                 enableCellEdit: false,
                 width: 80
             }
         ]
     };
-
-
-    //Boya Türü Listesi
-    $scope.getPaintTypes = function () {
-        $http.get('/rest/paintTypes').then(function (response) {
-            //select ekleme yapacaksın
-            $scope.paintTypes = response.data;
-        });
-    };
-
-    $scope.getPaintTypes();
 
     //Boya Alt Türü Listesi
     $scope.getPaintSubTypes = function () {
@@ -283,7 +288,7 @@ app.controller('PaintSubTypeCtrl', ['$scope', '$http', '$window', '$filter', fun
 
     $scope.getPaintSubTypes();
 
-    //Adına göre Müşteri Filtreleme
+    //Boya Alt Türü Filtreleme
     $scope.searchPaintSubType = function (name) {
         if (name !== undefined) {
             $http.get('/rest/paintSubTypes?name=' + name).then(function (response) {
@@ -292,15 +297,45 @@ app.controller('PaintSubTypeCtrl', ['$scope', '$http', '$window', '$filter', fun
         }
     };
 
-    $scope.cleanPaintSubTypeName = function () {
-        $scope.addPaintSubTypeName = "";
-        $scope.getPaintTypes();
-    };
-
     $scope.cleanSearchPaintSubTypeName = function () {
         $scope.searchPaintSubTypeName = "";
         $scope.getPaintSubTypes();
     };
+
+
+    var paintSubTypeId;
+    $scope.openPaintSubTypeModal = function (row) {
+
+        if (row == null) { // Yeni Kayıt
+
+            $scope.addPaintSubTypeName = "";
+            $scope.getPaintTypes();
+            document.getElementById("paintSubTypeModalHeader").innerHTML = "Boya Alt Türü | Yeni Kayıt";
+            document.getElementById("savePaintSubTypeButton").innerHTML = "Kaydet";
+        } else {// Düzenle
+
+            document.getElementById("paintSubTypeModalHeader").innerHTML = "Boya Alt Türü | Düzenle";
+            document.getElementById("savePaintSubTypeButton").innerHTML = "Güncelle";
+
+            paintSubTypeId = row.entity.id;
+            $scope.editPaintSubTypeName = row.entity.name;
+            $scope.modalPaintTypeSelect = row.entity.paintType.id;
+        }
+
+    };
+
+    $scope.savePaintSubType = function () {
+
+        var buttonType = document.getElementById("savePaintSubTypeButton").innerHTML;
+
+        if (buttonType == 'Kaydet') {
+            $scope.addPaintSubType();
+        }
+
+        if (buttonType == 'Güncelle') {
+            $scope.updatePaintSubType();
+        }
+    }
 
 
     //Boya Türü Ekleme
@@ -313,13 +348,6 @@ app.controller('PaintSubTypeCtrl', ['$scope', '$http', '$window', '$filter', fun
             }, function (response) {
                 alert("exception occurred.");
             });
-    };
-
-    var paintSubTypeId;
-
-    $scope.editPaintSubType = function (row) {
-        paintSubTypeId = row.entity.id;
-        $scope.editPaintSubTypeName = row.entity.name;
     };
 
     //Boya Türü Güncelleme

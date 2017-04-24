@@ -1,0 +1,271 @@
+<!-- page content -->
+<div id="masterContent">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Boya Türü İşlemleri</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <label class="col-sm-3 input-sm">Boya Türü</label>
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm"
+                                           data-ng-model="searchPaintTypeName" data-ng-change="searchPaintType(searchPaintTypeName)">
+                                    <span class="input-group-btn">
+                                              <button type="button" data-ng-click="cleanSearchPaintTypeName()"
+                                                      class="btn btn-info btn-sm"><i class="fa fa-times"></i></button>
+                                       <!-- <button style="margin-left: -5px;" type="button" class="btn btn-danger btn-sm"
+                                                data-ng-click="searchPaintType(searchPaintTypeName)"><i
+                                                class="fa fa-search"></i>
+                                </button>-->
+                                           </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <!--Ekle&Düzenle Modal-->
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <div class="modal fade bs-example-modal-sm" id="PaintTypeModal" tabindex="-1"
+                                 role="dialog"
+                                 aria-hidden="true"
+                                 style="display: none;margin-top: 170px;">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <h4 class="modal-title" id="paintTypeModalHeader"></h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 input-ssm">Boya Türü : </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control input-sm" type="text"
+                                                               data-ng-model="modalPaintTypeName" size="30" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button data-ng-click="savePaintType()" type="button"
+                                                    class="btn btn-primary btn-sm" id="savePaintTypeButton"
+                                                    data-dismiss="modal"><i
+                                                    class="fa fa-save"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                    data-dismiss="modal"><i
+                                                    class="fa fa-ban"></i> İptal
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#PaintTypeModal" data-ng-click="openPaintTypeModal(null)"><i
+                                    class="fa fa-save"></i>
+                                Yeni Boya Türü Ekle
+                            </button>
+                            <button type="button" id="excelExport" data-ng-click="exportExcelPaintType()"
+                                    class="btn btn-danger btn-sm" style="margin-left: 267px;"><i
+                                    class="fa fa-file-excel-o"></i> Excel'e
+                                Aktar
+                            </button>
+                            <div ui-grid="gridOptionsPaintType" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                                 class="grid"></div>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Boya Alt Türü İşlemleri</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <div class="row">
+                    <div class="form-group-sm">
+                        <label class="col-sm-3 input-sm">Boya Alt Türü</label>
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm"
+                                       data-ng-model="searchPaintSubTypeName">
+                                <span class="input-group-btn">
+                                              <button type="button" data-ng-click="cleanSearchPaintSubTypeName()"
+                                                      class="btn btn-info btn-sm"><i class="fa fa-times"></i></button>
+                                        <button style="margin-left: -5px;" type="button" class="btn btn-danger btn-sm"
+                                                data-ng-click="searchPaintSubType(searchPaintSubTypeName)"><i
+                                                class="fa fa-search"></i>
+                                </button>
+                                           </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <!--Ekle & Düzenle -->
+                <div class="row">
+                    <div class="form-group-sm">
+                        <div class="modal fade bs-example-modal-sm" id="PaintSubTypeModal" tabindex="-1"
+                             role="dialog"
+                             aria-hidden="true"
+                             style="display: none;margin-top: 170px;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title" id="paintSubTypeModalHeader"></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 input-sm">Boya Türü </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control input-sm"
+                                                            ng-model="modalPaintTypeSelect"
+                                                            ng-options="item.id as item.name for item in paintTypes">
+                                                        <option value="">Seçiniz..</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 input-sm">Boya Alt Türü : </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control input-sm" type="text"
+                                                           data-ng-model="modalPaintSubTypeName" size="30" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button data-ng-click="savePaintSubType()" type="button"
+                                                class="btn btn-primary btn-sm" id="savePaintSubTypeButton"
+                                                data-dismiss="modal"><i
+                                                class="fa fa-save"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                data-dismiss="modal"><i
+                                                class="fa fa-ban"></i> İptal
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Düzenle-->
+               <!-- <div class="row">
+                    <div class="form-group-sm">
+                        <div class="modal fade bs-example-modal-sm" id="editPaintSubTypeModal" tabindex="-1"
+                             role="dialog"
+                             aria-hidden="true"
+                             style="display: none; margin-top: 170px;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h4 class="modal-title">Boya Alt Türü | Düzenle</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 input-sm">Boya Türü </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control input-sm"
+                                                            ng-model="paintTypeSelectEdit"
+                                                            ng-options="item.id as item.name for item in paintTypes">
+                                                        <option value="">Seçiniz..</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 input-sm">Boya Alt Türü : </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control input-sm" type="text"
+                                                           id="csname"
+                                                           data-ng-model="editPaintSubTypeName" size="30" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button data-ng-click="updatePaintSubType()" type="button"
+                                                class="btn btn-primary btn-sm"
+                                                data-dismiss="modal"><i
+                                                class="fa fa-save"></i> Güncelle
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                                data-dismiss="modal"><i
+                                                class="fa fa-ban"></i> İptal
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+                <div class="row">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                data-target="#PaintSubTypeModal" data-ng-click="openPaintSubTypeModal(null)"><i
+                                class="fa fa-save"></i>
+                            Yeni Boya Alt Türü Ekle
+                        </button>
+                        <button type="button" id="excelExportSubType" data-ng-click="exportExcelPaintSubType()"
+                                class="btn btn-danger btn-sm" style="margin-left: 250px"><i
+                                class="fa fa-file-excel-o"></i> Excel'e
+                            Aktar
+                        </button>
+                        <div ui-grid="gridOptionsPaintSubType" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                             class="grid"></div>
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+<!-- /page content -->
