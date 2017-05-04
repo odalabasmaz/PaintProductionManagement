@@ -327,7 +327,7 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
 
         if (row == null) { // Yeni Kayıt
 
-            $scope.addPaintSubTypeName = "";
+            $scope.modalPaintSubTypeName = "";
             $scope.getPaintTypes();
             document.getElementById("paintSubTypeModalHeader").innerHTML = "Boya Alt Türü | Yeni Kayıt";
             document.getElementById("savePaintSubTypeButton").innerHTML = "<i class='fa fa-save'></i>     Kaydet";
@@ -337,7 +337,7 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
             document.getElementById("savePaintSubTypeButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
 
             paintSubTypeId = row.entity.id;
-            $scope.editPaintSubTypeName = row.entity.name;
+            $scope.modalPaintSubTypeName = row.entity.name;
             $scope.modalPaintTypeSelect = row.entity.paintType.id;
         }
 
@@ -358,8 +358,7 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
 
     //Boya Alt Türü Ekleme
     $scope.addPaintSubType = function () {
-        var paintSubType = {name: $scope.addPaintSubTypeName, paintTypeId: $scope.paintTypeSelectAdd};
-        var res = $http.post('/rest/paintSubTypes?name=' + $scope.addPaintSubTypeName + '&paintTypeId=' + $scope.paintTypeSelectAdd);
+        var res = $http.post('/rest/paintSubTypes?name=' + $scope.modalPaintSubTypeName + '&paintTypeId=' + $scope.modalPaintTypeSelect);
         res.then(
             function (response) {
                 $scope.getPaintSubTypes();
@@ -689,10 +688,13 @@ app.controller('ProductCRUDCtrl', ['$scope', '$http', '$window',  function ($sco
         if(option == 'mainProduct')
         {
             //intermProductSection
-            document.getElementById('intermProductSection').style.display = "none";
+            document.getElementById('RawMaterialSection').style.display = "block";
+            document.getElementById('MainProductSection').style.display = "block";
+
         }
         else if(option == 'intermProduct'){
-            document.getElementById('intermProductSection').style.display = "block";
+            document.getElementById('RawMaterialSection').style.display = "block";
+            document.getElementById('MainProductSection').style.display = "none";
 
         }
 
