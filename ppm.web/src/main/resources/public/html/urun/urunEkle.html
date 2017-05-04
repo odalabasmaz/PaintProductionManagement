@@ -90,9 +90,11 @@
                                     <label class="col-sm-3 input-sm">Ürün Tipi : </label>
                                     <div class="col-sm-9">
                                         <p>
-                                            <input data-ng-click="displayIntermProductSection('mainProduct');" type="radio" class="flat" name="uruntipi" id="mainProduct"
+                                            <input data-ng-click="displayIntermProductSection('mainProduct');"
+                                                   type="radio" class="flat" name="uruntipi" id="mainProduct"
                                                    value="ana" checked="" required/>&nbsp;&nbsp;Ana Ürün&nbsp;&nbsp;
-                                            <input data-ng-click="displayIntermProductSection('intermProduct');"  type="radio" class="flat" name="uruntipi" id="intermProduct"
+                                            <input data-ng-click="displayIntermProductSection('intermProduct');"
+                                                   type="radio" class="flat" name="uruntipi" id="intermProduct"
                                                    value="ara"/>&nbsp;&nbsp;Ara Ürün
                                         </p>
                                     </div>
@@ -116,22 +118,35 @@
                     <br/>
                     <br/>
                     <br/>
-                    <div class="row" id="intermProductSection" style="display: none;">
-                        <div class="col-sm-6">
-                            <div class="tile-stats padding10">
-                                <span class="section">Ara Ürün</span>
-                                <div ui-grid="gridOptionsIntermProduct" ui-grid-pagination ui-grid-selection ui-grid-exporter
-                                     class="gridProduct"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-6" id="RawMaterialSection">
                             <div class="tile-stats padding10">
                                 <span class="section">Hammadde</span>
-                                <div ui-grid="gridOptionsRawMaterial" ui-grid-pagination ui-grid-selection ui-grid-exporter
-                                     class="gridProduct"></div>
+                                <div class="col-sm-9">
+                                    <div ui-grid="gridOptionsRawMaterial" ui-grid-pagination ui-grid-selection
+                                         ui-grid-exporter
+                                         class="gridProduct"></div>
+                                </div>
+                                <div class="col-sm-1"><i class="fa fa-plus-circle addIcon"></i></div>
+
+
                             </div>
                         </div>
+                        <div class="col-sm-6" id="MainProductSection">
+                            <div class="tile-stats padding10">
+                                <span class="section">Ara Ürün</span>
+                                <div class="col-sm-9">
+                                    <div ui-grid="gridOptionsIntermProduct" ui-grid-pagination ui-grid-selection
+                                         ui-grid-exporter
+                                         class="gridProduct"></div>
+                                </div>
+                                <div class="col-sm-1"><i class="fa fa-plus-circle addIcon"></i></div>
+
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </div>
