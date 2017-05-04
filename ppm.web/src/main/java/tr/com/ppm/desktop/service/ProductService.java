@@ -16,30 +16,23 @@ import java.util.Map;
  */
 @Service
 public class ProductService extends BaseService<Product> {
-	String intermediateProductQuery = "from Product where intermediateProduct = :intermediateProduct";
+	private static final String QUERY_BY_NAME = "from Product where lower(name) like :name";
+	private static final String QUERY_BY_ID = "from Product where id = :id";
 
 	@Override
 	protected Class<Product> getEntityClass() {
 		return Product.class;
 	}
 
-	public List<Product> list(String name, String code, String colorName, String colorCode,
-							  PaintType paintType, PaintSubType paintSubType) {
+	public Product findById(long id) {
 		Map<String, Object> params = new HashMap<>();
-		String queryString = QueryHelper.getInstance("Product", params)
-				.equals("name", name)
-				.equals("code", code)
-				.likeIgnoreCase("colorName", colorName)
-				.equals("colorCode", colorCode)
-				.build();
-
-		return executeQuery(queryString, params);
+		params.put("id", id);
+		return executeQuery(QUERY_BY_ID, params).get(0);
 	}
 
-
-	public Collection<Product> listIntermediateProducts() {
+	public List<Product> findAllByName(String name) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("intermediateProduct", Boolean.TRUE);
-		return executeQuery(intermediateProductQuery, params);
+		params.put("name", "%" + name.trim().toLowerCase() + "%");
+		return executeQuery(QUERY_BY_NAME, params);
 	}
 }

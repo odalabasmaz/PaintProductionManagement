@@ -19,12 +19,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(
-			method = RequestMethod.POST,
+			method = RequestMethod.GET,
 			path = "/rest/login")
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody
 	String login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password) {
-		service.login(username, password);
+		service.findByName(username, password);
 		return "{\"result\": \"Login!\"}";
 	}
 }
