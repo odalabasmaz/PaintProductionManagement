@@ -2,7 +2,6 @@ package tr.com.ppm.desktop.service;
 
 import org.springframework.stereotype.Service;
 import tr.com.ppm.desktop.model.material.PaintSubType;
-import tr.com.ppm.desktop.model.material.PaintType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,23 +13,23 @@ import java.util.Map;
 @Service
 public class PaintSubTypeService extends BaseService<PaintSubType> {
 
-	private static final String QUERY_STRING = "from PaintSubType where lower(name) like :name and paintType = :paintType";
-	private static final String QUERY_STR = "from PaintSubType where lower(name) like :name";
+	private static final String QUERY_BY_NAME = "from PaintSubType where lower(name) like :name";
+	private static final String QUERY_BY_ID = "from PaintSubType where id = :id";
 
 	@Override
 	protected Class getEntityClass() {
 		return PaintSubType.class;
 	}
 
-	public List<PaintSubType> list(String paintSubType, PaintType paintType) {
+	public PaintSubType findById(long id) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + paintSubType.trim().toLowerCase() + "%");
-		params.put("paintType", paintType);
-		return executeQuery(QUERY_STRING, params);
+		params.put("id", id);
+		return executeQuery(QUERY_BY_ID, params).get(0);
 	}
-	public List<PaintSubType> list(String paintSubType) {
+
+	public List<PaintSubType> findAllByName(String name) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + paintSubType.trim().toLowerCase() + "%");
-		return executeQuery(QUERY_STR, params);
+		params.put("name", "%" + name.trim().toLowerCase() + "%");
+		return executeQuery(QUERY_BY_NAME, params);
 	}
 }

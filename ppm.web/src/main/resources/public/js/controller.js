@@ -292,7 +292,7 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
                 name: 'Aksiyon',
                 cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'><button type='button' data-toggle='modal'  data-target='#PaintSubTypeModal'" +
                 "data-ng-click='grid.appScope.openPaintSubTypeModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button><button type='button' " +
-                "data-ng-click='grid.appScope.deleteSubPaintType(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                "data-ng-click='grid.appScope.deletePaintSubType(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
                 enableCellEdit: false,
                 width: 80
             }
@@ -323,6 +323,7 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
     };
 
     var paintSubTypeId;
+	var updatedEntity;
     $scope.openPaintSubTypeModal = function (row) {
 
         if (row == null) { // Yeni Kayıt
@@ -337,8 +338,11 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
             document.getElementById("savePaintSubTypeButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
 
             paintSubTypeId = row.entity.id;
+            updatedEntity = row.entity;
             $scope.modalPaintSubTypeName = row.entity.name;
-            $scope.modalPaintTypeSelect = row.entity.paintType.id;
+            $scope.modalPaintTypeSelect = row.entity.paintType;
+            $scope.modalPaintTypeSelectId = row.entity.paintType.id;
+
         }
 
     };
@@ -354,11 +358,11 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
         if (buttonType == '<i class="fa fa-save"></i>     Güncelle') {
             $scope.updatePaintSubType();
         }
-    }
+    };
 
     //Boya Alt Türü Ekleme
     $scope.addPaintSubType = function () {
-        var res = $http.post('/rest/paintSubTypes?name=' + $scope.modalPaintSubTypeName + '&paintTypeId=' + $scope.modalPaintTypeSelect);
+        var res = $http.post('/rest/paintSubTypes?name=' + $scope.modalPaintSubTypeName + '&paintTypeId=' + $scope.modalPaintTypeSelectId);
         res.then(
             function (response) {
                 $scope.getPaintSubTypes();
@@ -369,8 +373,9 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope
 
     //Boya Alt Türü Güncelleme
     $scope.updatePaintSubType = function () {
-        var paintSubType = {id: paintTypeId, name: $scope.editPaintTypeName};
-        var res = $http.put('/rest/paintSubTypes', paintSubType);
+        updatedEntity.name = $scope.modalPaintSubTypeName;
+        updatedEntity.paintType = $scope.modalPaintTypeSelect;
+        var res = $http.put('/rest/paintSubTypes', updatedEntity);
         res.then(
             function (response) {
                 $scope.getPaintSubTypes();

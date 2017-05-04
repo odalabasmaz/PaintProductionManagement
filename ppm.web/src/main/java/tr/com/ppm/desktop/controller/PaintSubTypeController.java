@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tr.com.ppm.desktop.model.material.PaintSubType;
+import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.service.PaintSubTypeService;
 import tr.com.ppm.desktop.service.PaintTypeService;
 
@@ -30,7 +31,7 @@ public class PaintSubTypeController {
 			path = "/rest/paintSubTypes")
 	@ResponseStatus(HttpStatus.OK)
 	public List<PaintSubType> getPaintSubTypes(@RequestParam(value = "name", defaultValue = "") String name) {
-		return StringUtils.isBlank(name) ? service.list() : service.list();
+		return StringUtils.isBlank(name) ? service.list() : service.findAllByName(name);
 	}
 
 	@RequestMapping(
@@ -38,8 +39,7 @@ public class PaintSubTypeController {
 			value = "/rest/paintSubTypes/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public PaintSubType getPaintSubType(@PathVariable(value = "id") long id) {
-		return null;
-//        return service.findById(id);
+		return service.findById(id);
 	}
 
 	@RequestMapping(
@@ -49,10 +49,9 @@ public class PaintSubTypeController {
 	public
 	@ResponseBody
 	String addPaintSubType(@RequestParam(value = "name") String name, @RequestParam(value = "paintTypeId") Long paintTypeId) {
-
-        /*PaintType paintType = paintTypeService.findById(paintTypeId);
-        PaintSubType paintSubType = new PaintSubType(name, paintType);
-        service.savePaintSubType(paintSubType);*/
+		PaintType paintType = paintTypeService.findById(paintTypeId);
+		PaintSubType paintSubType = new PaintSubType(name, paintType);
+		service.save(paintSubType);
 		return "{\"result\": \"PaintSubType saved!\"}";
 	}
 
@@ -63,7 +62,7 @@ public class PaintSubTypeController {
 	public
 	@ResponseBody
 	String updatePaintSubType(@RequestBody PaintSubType paintSubType) {
-	    /*service.updatePaintSubType(paintSubType);*/
+		service.update(paintSubType);
 		return "{\"result\": \"PaintSubType updated!\"}";
 	}
 
@@ -74,7 +73,8 @@ public class PaintSubTypeController {
 	public
 	@ResponseBody
 	String deletePaintSubType(@RequestParam(value = "id") long id) {
-	    /*service.deletePaintSubTypeById(id);*/
+		PaintSubType paintType = service.findById(id);
+		service.remove(paintType);
 		return "{\"result\": \"PaintSubType deleted!\"}";
 	}
 
