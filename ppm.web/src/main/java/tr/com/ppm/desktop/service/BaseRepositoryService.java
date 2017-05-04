@@ -10,11 +10,11 @@ import java.util.List;
  * @author ykarabalkan
  */
 @Service
-public abstract class BaseNewService<T, I extends Serializable> {
+public abstract class BaseRepositoryService<T, I extends Serializable> {
 
 	private final JpaRepository<T, I> jpaRepository;
 
-	BaseNewService(JpaRepository jpaRepository) {
+	BaseRepositoryService(JpaRepository jpaRepository) {
 		this.jpaRepository = jpaRepository;
 	}
 

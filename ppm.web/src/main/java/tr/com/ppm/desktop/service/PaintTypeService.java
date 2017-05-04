@@ -12,17 +12,24 @@ import java.util.Map;
  */
 @Service
 public class PaintTypeService extends BaseService<PaintType> {
-	private static final String QUERY_STRING = "from PaintType where lower(name) like :name";
-
-	public List<PaintType> listByPaintType(String paintType) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("name", "%" + paintType.trim().toLowerCase() + "%");
-		return executeQuery(QUERY_STRING, params);
-	}
+	private static final String QUERY_BY_NAME = "from PaintType where lower(name) like :name";
+	private static final String QUERY_BY_ID = "from PaintType where id = :id";
 
 	@Override
 	protected Class<PaintType> getEntityClass() {
 		return PaintType.class;
+	}
+
+	public PaintType findById(long id) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		return executeQuery(QUERY_BY_ID, params).get(0);
+	}
+
+	public List<PaintType> findAllByName(String name) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", "%" + name.trim().toLowerCase() + "%");
+		return executeQuery(QUERY_BY_NAME, params);
 	}
 
 }
