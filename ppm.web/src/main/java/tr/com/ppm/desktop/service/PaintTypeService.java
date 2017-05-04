@@ -1,27 +1,28 @@
 package tr.com.ppm.desktop.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tr.com.ppm.desktop.model.material.PaintType;
-import tr.com.ppm.desktop.repository.PaintTypeRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Orhun Dalabasmaz
  */
 @Service
-public class PaintTypeService extends BaseNewService<PaintType, Long> {
+public class PaintTypeService extends BaseService<PaintType> {
+	private static final String QUERY_STRING = "from PaintType where lower(name) like :name";
 
-	private PaintTypeRepository repository;
-
-	@Autowired
-	public PaintTypeService(PaintTypeRepository repository) {
-		super(repository);
+	public List<PaintType> listByPaintType(String paintType) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", "%" + paintType.trim().toLowerCase() + "%");
+		return executeQuery(QUERY_STRING, params);
 	}
 
-	public List<PaintType> findByName(String name) {
-		return repository.findByNameContainingIgnoreCase(name);
+	@Override
+	protected Class<PaintType> getEntityClass() {
+		return PaintType.class;
 	}
 
 }

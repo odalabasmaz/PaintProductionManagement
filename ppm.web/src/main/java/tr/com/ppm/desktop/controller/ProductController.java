@@ -1,6 +1,5 @@
 package tr.com.ppm.desktop.controller;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +27,7 @@ public class ProductController {
 			path = "/rest/products")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Product> getProducts(@RequestParam(value = "name") String name) {
-		service.findAll();
-
-		return null;
+		return service.list();
 	}
 
 	@RequestMapping(

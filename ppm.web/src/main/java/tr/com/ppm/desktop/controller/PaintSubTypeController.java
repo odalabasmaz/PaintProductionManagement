@@ -33,7 +33,7 @@ public class PaintSubTypeController {
             path = "/rest/paintSubTypes")
     @ResponseStatus(HttpStatus.OK)
     public List<PaintSubType> getPaintSubTypes(@RequestParam(value = "name", defaultValue = "") String name) {
-        return StringUtils.isBlank(name) ? service.findAllPaintSubTypes() : service.findByName(name);
+        return StringUtils.isBlank(name) ? service.list() : service.list();
     }
 
     @RequestMapping(
@@ -41,7 +41,8 @@ public class PaintSubTypeController {
             value = "/rest/paintSubTypes/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PaintSubType getPaintSubType(@PathVariable(value = "id") long id) {
-        return service.findById(id);
+        return null;
+//        return service.findById(id);
     }
 
     @RequestMapping(
@@ -52,9 +53,9 @@ public class PaintSubTypeController {
     @ResponseBody
     String addPaintSubType(@RequestParam(value = "name") String name, @RequestParam(value = "paintTypeId") Long paintTypeId) {
 
-        PaintType paintType = paintTypeService.findById(paintTypeId);
+        /*PaintType paintType = paintTypeService.findById(paintTypeId);
         PaintSubType paintSubType = new PaintSubType(name, paintType);
-        service.savePaintSubType(paintSubType);
+        service.savePaintSubType(paintSubType);*/
         return "{\"result\": \"PaintSubType saved!\"}";
     }
 
@@ -65,7 +66,7 @@ public class PaintSubTypeController {
     public
     @ResponseBody
     String updatePaintSubType(@RequestBody PaintSubType paintSubType) {
-        service.updatePaintSubType(paintSubType);
+        /*service.updatePaintSubType(paintSubType);*/
         return "{\"result\": \"PaintSubType updated!\"}";
     }
 
@@ -76,7 +77,7 @@ public class PaintSubTypeController {
     public
     @ResponseBody
     String deletePaintSubType(@RequestParam(value = "id") long id) {
-        service.deletePaintSubTypeById(id);
+        /*service.deletePaintSubTypeById(id);*/
         return "{\"result\": \"PaintSubType deleted!\"}";
     }
 

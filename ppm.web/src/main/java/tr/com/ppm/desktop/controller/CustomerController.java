@@ -28,7 +28,7 @@ public class CustomerController {
 			path = "/rest/customers")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Customer> getCustomers(@RequestParam(value = "name", defaultValue = "") String name) {
-		return StringUtils.isBlank(name) ? service.findAll() : service.findByName(name);
+		return StringUtils.isBlank(name) ? service.list() : service.findAllByName(name);
 	}
 
 	@RequestMapping(
@@ -77,7 +77,8 @@ public class CustomerController {
 	public
 	@ResponseBody
 	String deleteCustomer(@RequestParam(value = "id") long id) {
-		service.deleteById(id);
+		Customer customer = service.findById(id);
+		service.remove(customer);
 		return "{\"result\": \"Customer deleted!\"}";
 	}
 

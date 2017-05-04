@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tr.com.ppm.desktop.model.material.PaintType;
 import tr.com.ppm.desktop.service.PaintTypeService;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class PaintTypeController {
 			path = "/rest/paintTypes")
 	@ResponseStatus(HttpStatus.OK)
 	public List<PaintType> getPaintTypes(@RequestParam(value = "name", defaultValue = "") String name) {
-		return StringUtils.isBlank(name) ? service.findAll() : service.findByName(name);
+		return StringUtils.isBlank(name) ? service.list() : service.list();
 	}
 
 	@RequestMapping(
@@ -35,16 +36,15 @@ public class PaintTypeController {
 			value = "/rest/paintTypes/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public PaintType getPaintType(@PathVariable(value = "id") long id) {
-		return service.findById(id);
+//		return service.findById(id);
+		return null;
 	}
 
 	@RequestMapping(
 			method = RequestMethod.POST,
 			path = "/rest/paintTypes")
 	@ResponseStatus(HttpStatus.OK)
-	public
-	@ResponseBody
-	String addPaintType(@RequestBody PaintType paintType) {
+	public @ResponseBody String addPaintType(@RequestBody PaintType paintType) {
 		service.save(paintType);
 		return "{\"result\": \"PaintType saved!\"}";
 	}
@@ -53,9 +53,7 @@ public class PaintTypeController {
 			method = RequestMethod.PUT,
 			path = "/rest/paintTypes")
 	@ResponseStatus(HttpStatus.OK)
-	public
-	@ResponseBody
-	String updatePaintType(@RequestBody PaintType paintType) {
+	public @ResponseBody String updatePaintType(@RequestBody PaintType paintType) {
 		service.update(paintType);
 		return "{\"result\": \"PaintType updated!\"}";
 	}
@@ -64,10 +62,8 @@ public class PaintTypeController {
 			method = RequestMethod.DELETE,
 			path = "/rest/paintTypes")
 	@ResponseStatus(HttpStatus.OK)
-	public
-	@ResponseBody
-	String deletePaintType(@RequestParam(value = "id") long id) {
-		service.deleteById(id);
+	public @ResponseBody String deletePaintType(@RequestParam(value = "id") long id) {
+//		service.deletePaintTypeById(id);
 		return "{\"result\": \"PaintType deleted!\"}";
 	}
 
