@@ -17,10 +17,16 @@ app.config(function ($routeProvider) {
             controller: "PaintTypesCtrl"
         })
         .when("/hammadde", {
-            templateUrl: "html/hammadde.html"
+            templateUrl: "html/hammadde.html",
+            controller: "RawMaterialCtrl"
         })
         .when("/urun", {
-            templateUrl: "html/urun.html"
+            templateUrl: "html/urun/urun.html",
+            controller: "ProductCtrl"
+        })
+        .when("/urunEkle", {
+            templateUrl: "html/urun/urunEkle.html",
+            controller: "ProductCRUDCtrl"
         })
         .when("/musteri", {
             templateUrl: "html/musteri.html",
@@ -30,7 +36,8 @@ app.config(function ($routeProvider) {
             templateUrl: "html/uretim.html"
         })
         .when("/siparis", {
-            templateUrl: "html/siparis.html"
+            templateUrl: "html/siparis.html",
+            controller: "OrderCtrl"
         })
         .when("/stok", {
             templateUrl: "html/stok.html"
@@ -38,7 +45,7 @@ app.config(function ($routeProvider) {
 });
 
 //musteri.html
-app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', function ($scope, $http, $window, $filter) {
+app.controller('CustomerCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
     //Grid Tanımlanıyor
     $scope.gridOptions = {
@@ -50,22 +57,19 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
             {
                 name: 'Aksiyon',
                 cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'>" +
-                "<button type='button' data-toggle='modal'  data-target='#editModal' data-ng-click='grid.appScope.editCustomer(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button>" +
+                "<button type='button' data-toggle='modal'  data-target='#CustomerModal' data-ng-click='grid.appScope.openCustomerModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button>" +
                 "<button type='button' data-ng-click='grid.appScope.deleteCustomer(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
                 enableCellEdit: false,
                 width: 80
             }
         ]
     };
-
-
     //Müşteriler Listesi
     $scope.getCustomers = function () {
         $http.get('/rest/customers').then(function (response) {
             $scope.gridOptions.data = response.data;
         });
     };
-
     $scope.getCustomers();
 
     //Adına göre Müşteri Filtreleme
@@ -77,18 +81,43 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
         }
     };
 
-    $scope.cleanCustomerName = function () {
-        $scope.Name = "";
-    };
-
     $scope.cleanSearchCustomerName = function () {
         $scope.customerName = "";
         $scope.getCustomers();
     };
 
+
+    // Müşteri Ekleme/Düzenleme Modal açılması
+    var customerId;
+    $scope.openCustomerModal = function (row) {
+
+        if (row == null) { // Yeni Kayıt
+            $scope.modalCustomerName = "";
+            document.getElementById("customerModalHeader").innerHTML = "Müşteri | Yeni Kayıt";
+            document.getElementById("saveCustomerButton").innerHTML = "<i class='fa fa-save'></i>     Kaydet";
+        } else {// Düzenle
+            document.getElementById("customerModalHeader").innerHTML = "Müşteri | Düzenle";
+            document.getElementById("saveCustomerButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
+            customerId = row.entity.id;
+            $scope.modalCustomerName = row.entity.name;
+        }
+    };
+
+    $scope.saveCustomer = function () {
+        var buttonType = document.getElementById("saveCustomerButton").innerHTML;
+        if (buttonType == '<i class="fa fa-save"></i>     Kaydet') {
+            $scope.addCustomer();
+        }
+        if (buttonType == '<i class="fa fa-save"></i>     Güncelle') {
+
+            $scope.updateCustomer();
+
+        }
+     }
+
     //Müşteri Ekleme
     $scope.addCustomer = function () {
-        var customer = {name: $scope.Name};
+        var customer = {name: $scope.modalCustomerName};
         var res = $http.post('/rest/customers', customer);
         res.then(
             function (response) {
@@ -98,16 +127,9 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
             });
     };
 
-    var customerId;
-
-    $scope.editCustomer = function (row) {
-        customerId = row.entity.id;
-        $scope.EditName = row.entity.name;
-    };
-
     //Müşteri Güncelleme
     $scope.updateCustomer = function () {
-        var customer = {id: customerId, name: $scope.EditName};
+        var customer = {id: customerId, name: $scope.modalCustomerName};
         var res = $http.put('/rest/customers', customer);
         res.then(
             function (response) {
@@ -117,7 +139,6 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
             });
 
     };
-
     //Müşteri Silme
     $scope.deleteCustomer = function (row) {
         var id = row.entity.id;
@@ -130,16 +151,15 @@ app.controller('CustomerCtrl', ['$scope', '$http', '$window', '$filter', functio
             });
     };
 
-    $scope.exportExcel = function () {
+    $scope.exportCustomerExcel = function () {
 
         alasql('SELECT id,name INTO XLSX("Musteri.xlsx",{headers:true}) FROM ?', [$scope.gridOptions.data]);
     }
 
 }]);
 
-
 //boya_tur.html
-app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', function ($scope, $http, $window, $filter) {
+app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
     // Boya Türü Grid Tanımlanıyor
     $scope.gridOptionsPaintType = {
@@ -190,11 +210,11 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
 
             $scope.modalPaintTypeName = "";
             document.getElementById("paintTypeModalHeader").innerHTML = "Boya Türü | Yeni Kayıt";
-            document.getElementById("savePaintTypeButton").innerHTML = "Kaydet";
+            document.getElementById("savePaintTypeButton").innerHTML = "<i class='fa fa-save'></i>     Kaydet";
         } else {// Düzenle
 
             document.getElementById("paintTypeModalHeader").innerHTML = "Boya Türü | Düzenle";
-            document.getElementById("savePaintTypeButton").innerHTML = "Güncelle";
+            document.getElementById("savePaintTypeButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
             paintTypeId = row.entity.id;
             $scope.modalPaintTypeName = row.entity.name;
         }
@@ -204,11 +224,11 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
 
         var buttonType = document.getElementById("savePaintTypeButton").innerHTML;
 
-        if (buttonType == 'Kaydet') {
+        if (buttonType == '<i class="fa fa-save"></i>     Kaydet') {
             $scope.addPaintType();
         }
 
-        if (buttonType == 'Güncelle') {
+        if (buttonType == '<i class="fa fa-save"></i>     Güncelle') {
             $scope.updatePaintType();
         }
 
@@ -302,7 +322,6 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
         $scope.getPaintSubTypes();
     };
 
-
     var paintSubTypeId;
     $scope.openPaintSubTypeModal = function (row) {
 
@@ -311,11 +330,11 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
             $scope.addPaintSubTypeName = "";
             $scope.getPaintTypes();
             document.getElementById("paintSubTypeModalHeader").innerHTML = "Boya Alt Türü | Yeni Kayıt";
-            document.getElementById("savePaintSubTypeButton").innerHTML = "Kaydet";
+            document.getElementById("savePaintSubTypeButton").innerHTML = "<i class='fa fa-save'></i>     Kaydet";
         } else {// Düzenle
 
             document.getElementById("paintSubTypeModalHeader").innerHTML = "Boya Alt Türü | Düzenle";
-            document.getElementById("savePaintSubTypeButton").innerHTML = "Güncelle";
+            document.getElementById("savePaintSubTypeButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
 
             paintSubTypeId = row.entity.id;
             $scope.editPaintSubTypeName = row.entity.name;
@@ -328,17 +347,16 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
 
         var buttonType = document.getElementById("savePaintSubTypeButton").innerHTML;
 
-        if (buttonType == 'Kaydet') {
+        if (buttonType == '<i class="fa fa-save"></i>     Kaydet') {
             $scope.addPaintSubType();
         }
 
-        if (buttonType == 'Güncelle') {
+        if (buttonType == '<i class="fa fa-save"></i>     Güncelle') {
             $scope.updatePaintSubType();
         }
     }
 
-
-    //Boya Türü Ekleme
+    //Boya Alt Türü Ekleme
     $scope.addPaintSubType = function () {
         var paintSubType = {name: $scope.addPaintSubTypeName, paintTypeId: $scope.paintTypeSelectAdd};
         var res = $http.post('/rest/paintSubTypes?name=' + $scope.addPaintSubTypeName + '&paintTypeId=' + $scope.paintTypeSelectAdd);
@@ -350,7 +368,7 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
             });
     };
 
-    //Boya Türü Güncelleme
+    //Boya Alt Türü Güncelleme
     $scope.updatePaintSubType = function () {
         var paintSubType = {id: paintTypeId, name: $scope.editPaintTypeName};
         var res = $http.put('/rest/paintSubTypes', paintSubType);
@@ -363,7 +381,7 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
 
     };
 
-    //Boya Türü Silme
+    //Boya Alt Türü Silme
     $scope.deletePaintSubType = function (row) {
         var id = row.entity.id;
         var res = $http.delete('/rest/paintSubTypes?id=' + id);
@@ -375,12 +393,470 @@ app.controller('PaintTypesCtrl', ['$scope', '$http', '$window', '$filter', funct
             });
     };
 
+    //Boya Alt Türü Excel Export
     $scope.exportExcelPaintSubType = function () {
 
-        alasql('SELECT id,name INTO XLSX("BoyaTürü.xlsx",{headers:true}) FROM ?', [$scope.gridOptionsPaintSubType.data]);
+        alasql('SELECT id,name INTO XLSX("BoyaAltTürü.xlsx",{headers:true}) FROM ?', [$scope.gridOptionsPaintSubType.data]);
     }
 
 }]);
+
+//hammadde.html
+app.controller('RawMaterialCtrl', ['$scope', '$http', '$window',  function ($scope, $http, $window) {
+
+    //Grid Tanımlanıyor
+    $scope.gridOptions = {
+        paginationPageSizes: [5, 10, 20],
+        paginationPageSize: 10,
+        columnDefs: [
+            {name: 'id'},
+            {name: 'code', displayName:'Hammadde Kodu'},
+            {name: 'name', displayName: 'Hammadde Adı'},
+            {name: 'type', displayName: 'Hammadde Türü'}, //bunu arkada göremedim?
+            {name: 'desc', displayName: 'Açıklama'},
+            {
+                name: 'Aksiyon',
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'>" +
+                "<button type='button' data-toggle='modal'  data-target='#RawMaterialModal' data-ng-click='grid.appScope.openRawMaterialModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button>" +
+                "<button type='button' data-ng-click='grid.appScope.deleteRawMaterial(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                enableCellEdit: false,
+                width: 80
+            }
+        ]
+    };
+    //Hammadde Listesi
+    $scope.getRawMaterials = function () {
+        $http.get('/rest/rawmaterials').then(function (response) {
+            $scope.gridOptions.data = response.data;
+        });
+    };
+    $scope.getRawMaterials();
+
+    //Adına göre Hammadde Filtreleme
+    $scope.searchRawMaterial = function (name) {
+        if (name !== undefined) {
+            $http.get('/rest/rawmaterials?name=' + name).then(function (response) {
+                $scope.gridOptions.data = response.data;
+            });
+        }
+    };
+
+    //Hammadde Search Temizleme -- bakılacak
+    $scope.cleanSearchRawMaterialName = function () {
+        $scope.customerName = "";
+        $scope.getRawMaterials();
+    };
+
+    // Hammadde Ekleme/Düzenleme Modal açılması
+    var rawMaterialId;
+    $scope.openRawMaterialModal = function (row) {
+
+        if (row == null) { // Yeni Kayıt
+            $scope.modalRawMaterialName = "";
+            document.getElementById("RawMaterialModalHeader").innerHTML = "Hammadde | Yeni Kayıt";
+            document.getElementById("saveRawMaterialButton").innerHTML = "<i class='fa fa-save'></i>     Kaydet";
+        } else {// Düzenle
+            document.getElementById("RawMaterialModalHeader").innerHTML = "Hammadde | Düzenle";
+            document.getElementById("saveRawMaterialButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
+            rawMaterialId = row.entity.id;
+            $scope.modalRawMaterialName = row.entity.name;
+        }
+    };
+
+    $scope.saveRawMaterial = function () {
+        var buttonType = document.getElementById("saveRawMaterialButton").innerHTML;
+        if (buttonType == '<i class="fa fa-save"></i>     Kaydet') {
+            $scope.addRawMaterial();
+        }
+        if (buttonType == '<i class="fa fa-save"></i>     Güncelle') {
+
+            $scope.updateRawMaterial();
+
+        }
+    }
+
+    //Hammadde Ekleme
+    $scope.addRawMaterial = function () {
+        var rawMaterial = {name: $scope.modalRawMaterialName};
+        var res = $http.post('/rest/rawmaterials', rawMaterial);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    //Hammadde Güncelleme
+    $scope.updateRawMaterial = function () {
+        var rawMaterial = {id: rawMaterialId, name: $scope.modalRawMaterialName};
+        var res = $http.put('/rest/rawmaterials', rawMaterial);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+
+    };
+
+    //Hammadde Silme
+    $scope.deleteRawMaterial = function (row) {
+        var id = row.entity.id;
+        var res = $http.delete('/rest/rawmaterials?id=' + id);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    //Hammadde Excel Export
+    $scope.exportRawMaterialExcel = function () {
+
+        alasql('SELECT id,name INTO XLSX("Hammadde.xlsx",{headers:true}) FROM ?', [$scope.gridOptions.data]);
+    }
+
+}]);
+
+//urun.html
+app.controller('ProductCtrl', ['$scope', '$http', '$window',  function ($scope, $http, $window) {
+
+    //Ürün Grid Tanımlanıyor
+    $scope.gridOptions = {
+        paginationPageSizes: [5, 10, 20],
+        paginationPageSize: 10,
+        columnDefs: [
+            {name: 'id'},
+            {name: 'name', displayName: 'Ürün Adı'},
+            {name: 'code', displayName:'Ürün Kodu'},
+            {name: 'colorName', displayName:'Renk Adı'},
+            {name: 'colorCode', displayName:'Renk Kodu'},
+            {name: 'density', displayName: 'Yoğunluğu'},
+            {name: 'paintType', displayName: 'Boya Türü'},
+            {name: 'paintSubType', displayName: 'Boya Alt Türü'},
+            {name: 'desc', displayName: 'Açıklama'},
+            {
+                name: 'Aksiyon',
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'>" +
+                "<button type='button' data-toggle='modal'  data-target='#ProductModal' data-ng-click='grid.appScope.openProductModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button>" +
+                "<button type='button' data-ng-click='grid.appScope.deleteProduct(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                enableCellEdit: false,
+                width: 80
+            }
+        ]
+    };
+
+    //Ürün Listesi
+    $scope.getProducts = function () {
+        $http.get('/rest/products').then(function (response) {
+            $scope.gridOptions.data = response.data;
+        });
+    };
+    $scope.getProducts();
+
+    //Adına göre Ürün Filtreleme -- bakılacak
+    $scope.searchProduct = function (name) {
+        if (name !== undefined) {
+            $http.get('/rest/products?name=' + name).then(function (response) {
+                $scope.gridOptions.data = response.data;
+            });
+        }
+    };
+
+    //Ürün Search Temizleme -- bakılacak
+    $scope.cleanSearchProduct = function () {
+        $scope.customerName = "";
+        $scope.getProducts();
+    };
+
+    // Ürün Ekleme/Düzenleme Modal açılması
+    var productId;
+    $scope.openProductModal = function (row) {
+
+        if (row == null) { // Yeni Kayıt
+            $scope.modalProductName = "";
+            document.getElementById("ProductModalHeader").innerHTML = "Ürün | Yeni Kayıt";
+            document.getElementById("saveProductButton").innerHTML = "<i class='fa fa-save'></i>     Kaydet";
+        } else {// Düzenle
+            document.getElementById("ProductModalHeader").innerHTML = "Ürün | Düzenle";
+            document.getElementById("saveProductButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
+            productId = row.entity.id;
+            $scope.modalProductName = row.entity.name;
+        }
+    };
+
+    $scope.saveRawMaterial = function () {
+        var buttonType = document.getElementById("saveProductButton").innerHTML;
+        if (buttonType == '<i class="fa fa-save"></i>     Kaydet') {
+            $scope.addProduct();
+        }
+        if (buttonType == '<i class="fa fa-save"></i>     Güncelle') {
+
+            $scope.updateProduct();
+
+        }
+    }
+
+    //Hammadde Ekleme
+    $scope.addProduct = function () {
+        var product = {name: $scope.modalProductName};
+        var res = $http.post('/rest/products', product);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    //Hammadde Güncelleme
+    $scope.updateProduct = function () {
+        var customer = {id: customerId, name: $scope.modalRawMaterialName};
+        var res = $http.put('/rest/products', customer);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+
+    };
+
+    //Hammadde Silme
+    $scope.deleteRawMaterial = function (row) {
+        var id = row.entity.id;
+        var res = $http.delete('/rest/rawmaterials?id=' + id);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    //Hammadde Excel Export
+    $scope.exportRawMaterialExcel = function () {
+
+        alasql('SELECT id,name INTO XLSX("Hammadde.xlsx",{headers:true}) FROM ?', [$scope.gridOptions.data]);
+    }
+
+}]);
+
+//urunEkle.html
+app.controller('ProductCRUDCtrl', ['$scope', '$http', '$window',  function ($scope, $http, $window) {
+
+    //Ara Ürün Grid Tanımlanıyor
+    $scope.gridOptionsIntermProduct = {
+        paginationPageSizes: [5, 10, 20],
+        paginationPageSize: 10,
+        columnDefs: [
+            {name: 'name', displayName: 'Ara Ürün'},
+            {name: 'miktar', displayName: 'Miktar'},
+             {
+                name: 'Aksiyon',
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'>" +
+                "<button type='button' data-toggle='modal'  data-target='#ProductModal' data-ng-click='grid.appScope.openProductModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button>" +
+                "<button type='button' data-ng-click='grid.appScope.deleteProduct(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                enableCellEdit: false,
+                width: 80
+            }
+        ]
+    };
+
+    //Hammadde Grid Tanımlanıyor
+    $scope.gridOptionsRawMaterial = {
+        paginationPageSizes: [5, 10, 20],
+        paginationPageSize: 10,
+        columnDefs: [
+            {name: 'name', displayName: 'Hammadde'},
+            {name: 'miktar', displayName: 'Miktar'},
+            {
+                name: 'Aksiyon',
+                cellTemplate: "<div class='ui-grid-cell-contents' style='text-align: center;'>" +
+                "<button type='button' data-toggle='modal'  data-target='#ProductModal' data-ng-click='grid.appScope.openProductModal(row)' class='btn btn-success btn-xs'><i class='fa fa-edit'></i></button>" +
+                "<button type='button' data-ng-click='grid.appScope.deleteProduct(row)' class='btn btn-danger btn-xs'><i class='fa fa-trash'></i></button></div>",
+                enableCellEdit: false,
+                width: 80
+            }
+        ]
+    };
+
+
+    //Ürün Listesi
+    $scope.displayIntermProductSection = function (option) {
+        if(option == 'mainProduct')
+        {
+            //intermProductSection
+            document.getElementById('intermProductSection').style.display = "none";
+        }
+        else if(option == 'intermProduct'){
+            document.getElementById('intermProductSection').style.display = "block";
+
+        }
+
+
+    };
+
+
+
+
+
+
+
+
+    //Ürün Listesi
+    $scope.getProducts = function () {
+        $http.get('/rest/products').then(function (response) {
+            $scope.gridOptions.data = response.data;
+        });
+    };
+    $scope.getProducts();
+
+    //Adına göre Ürün Filtreleme -- bakılacak
+    $scope.searchProduct = function (name) {
+        if (name !== undefined) {
+            $http.get('/rest/products?name=' + name).then(function (response) {
+                $scope.gridOptions.data = response.data;
+            });
+        }
+    };
+
+    //Ürün Search Temizleme -- bakılacak
+    $scope.cleanSearchProduct = function () {
+        $scope.customerName = "";
+        $scope.getProducts();
+    };
+
+    // Ürün Ekleme/Düzenleme Modal açılması
+    var productId;
+    $scope.openProductModal = function (row) {
+
+        if (row == null) { // Yeni Kayıt
+            $scope.modalProductName = "";
+            document.getElementById("ProductModalHeader").innerHTML = "Ürün | Yeni Kayıt";
+            document.getElementById("saveProductButton").innerHTML = "<i class='fa fa-save'></i>     Kaydet";
+        } else {// Düzenle
+            document.getElementById("ProductModalHeader").innerHTML = "Ürün | Düzenle";
+            document.getElementById("saveProductButton").innerHTML = "<i class='fa fa-save'></i>     Güncelle";
+            productId = row.entity.id;
+            $scope.modalProductName = row.entity.name;
+        }
+    };
+
+    $scope.saveRawMaterial = function () {
+        var buttonType = document.getElementById("saveProductButton").innerHTML;
+        if (buttonType == '<i class="fa fa-save"></i>     Kaydet') {
+            $scope.addProduct();
+        }
+        if (buttonType == '<i class="fa fa-save"></i>     Güncelle') {
+
+            $scope.updateProduct();
+
+        }
+    }
+
+    //Hammadde Ekleme
+    $scope.addProduct = function () {
+        var product = {name: $scope.modalProductName};
+        var res = $http.post('/rest/products', product);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    //Hammadde Güncelleme
+    $scope.updateProduct = function () {
+        var customer = {id: customerId, name: $scope.modalRawMaterialName};
+        var res = $http.put('/rest/products', customer);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+
+    };
+
+    //Hammadde Silme
+    $scope.deleteRawMaterial = function (row) {
+        var id = row.entity.id;
+        var res = $http.delete('/rest/rawmaterials?id=' + id);
+        res.then(
+            function (response) {
+                $scope.getRawMaterials();
+            }, function (response) {
+                alert("exception occurred.");
+            });
+    };
+
+    //Hammadde Excel Export
+    $scope.exportRawMaterialExcel = function () {
+
+        alasql('SELECT id,name INTO XLSX("Hammadde.xlsx",{headers:true}) FROM ?', [$scope.gridOptions.data]);
+    }
+
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*

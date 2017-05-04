@@ -1,0 +1,141 @@
+<!-- page content -->
+<div id="masterContent">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Ürün Ekleme / Güncelleme İşlemleri</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <label class="col-sm-1 input-sm">Adı : </label>
+                            <div class="col-sm-3">
+                                <input class="form-control input-sm" type="text"
+                                       data-ng-model="productName" size="30" required/>
+                            </div>
+                            <label class="col-sm-1 input-sm">Yoğunluğu : </label>
+                            <div class="col-sm-3">
+                                <input class="form-control input-sm" type="text"
+                                       data-ng-model="productDensity" size="30" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <label class="col-sm-3 input-sm">Kodu : </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-sm" type="text"
+                                               data-ng-model="productCode" size="30" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-3 input-sm">Renk Adı : </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-sm" type="text"
+                                               data-ng-model="colorName" size="30" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-3 input-sm">Renk Kodu : </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control input-sm" type="text"
+                                               data-ng-model="colorCode" size="30" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-3 input-sm">Boya Türü : </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control input-sm"
+                                                ng-model="selectPaintType">
+                                            <option value="">Seçiniz..</option>
+                                            <option value="1">Vernik</option>
+                                            <option value="2">Katı</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-3 input-sm">Boya Alt Türü : </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control input-sm"
+                                                ng-model="selectPaintSubType">
+                                            <option value="">Seçiniz..</option>
+                                            <option value="1">Su Bazlı</option>
+                                            <option value="2">Katı</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-4">
+
+                                <div class="row">
+                                    <label class="col-sm-3 input-sm">Açıklama : </label>
+                                    <div class="col-sm-9">
+                                         <textarea class="form-control input-sm" rows="6"
+                                                   data-ng-model="productDesc"></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <label class="col-sm-3 input-sm">Ürün Tipi : </label>
+                                    <div class="col-sm-9">
+                                        <p>
+                                            <input data-ng-click="displayIntermProductSection('mainProduct');" type="radio" class="flat" name="uruntipi" id="mainProduct"
+                                                   value="ana" checked="" required/>&nbsp;&nbsp;Ana Ürün&nbsp;&nbsp;
+                                            <input data-ng-click="displayIntermProductSection('intermProduct');"  type="radio" class="flat" name="uruntipi" id="intermProduct"
+                                                   value="ara"/>&nbsp;&nbsp;Ara Ürün
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <div class="col-sm-4">
+                            </div>
+                            <div class="col-sm-4" style="margin-left: 300px;">
+                                <!--<button data-ng-click="saveProduct()" type="button"
+                                        class="btn btn-primary btn-sm" id="saveProductButton"
+                                ><i class="fa fa-save"></i> Kaydet
+                                </button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="row" id="intermProductSection" style="display: none;">
+                        <div class="col-sm-6">
+                            <div class="tile-stats padding10">
+                                <span class="section">Ara Ürün</span>
+                                <div ui-grid="gridOptionsIntermProduct" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                                     class="gridProduct"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="tile-stats padding10">
+                                <span class="section">Hammadde</span>
+                                <div ui-grid="gridOptionsRawMaterial" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                                     class="gridProduct"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /page content -->

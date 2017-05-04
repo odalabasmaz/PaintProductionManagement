@@ -10,7 +10,26 @@
     width: 520px;
 }
 
+.gridRawMaterial {
+    width: 70%;
+}
+
+.gridProduct
+{
+    width: 90%;
+}
+
 .marginleft363
 {
     margin-left: 363px;
+}
+
+.modalRawMaterial{
+
+    width: 500px;
+}
+
+.padding10
+{
+    padding: 10px !important;
 }

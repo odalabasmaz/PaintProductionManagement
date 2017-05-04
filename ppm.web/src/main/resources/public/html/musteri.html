@@ -36,10 +36,10 @@
                         </div>
                     </div>
                     <br/>
-                    <!--Ekle-->
+                    <!--Ekle & Düzenle Modal-->
                     <div class="row">
                         <div class="form-group-sm">
-                            <div class="modal fade bs-example-modal-sm" id="addModal" tabindex="-1" role="dialog"
+                            <div class="modal fade bs-example-modal-sm" id="CustomerModal" tabindex="-1" role="dialog"
                                  aria-hidden="true"
                                  style="display: none;margin-top: 170px;">
                                 <div class="modal-dialog modal-sm">
@@ -49,25 +49,23 @@
                                                     aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
-                                            <h4 class="modal-title" id="myModalLabel2">Müşteri | Yeni
-                                                Kayıt</h4>
+                                            <h4 class="modal-title" id="customerModalHeader"></h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 input-ssm">Müşteri : </label>
+                                                    <label class="col-sm-4 input-sm">Müşteri : </label>
                                                     <div class="col-sm-8">
                                                         <input class="form-control input-sm" type="text"
-                                                               data-ng-model="Name" size="30" required/>
+                                                               data-ng-model="modalCustomerName" size="30" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button data-ng-click="addCustomer()" type="button"
-                                                    class="btn btn-primary btn-sm"
-                                                    data-dismiss="modal"><i
-                                                    class="fa fa-save"></i> Kaydet
+                                            <button data-ng-click="saveCustomer()" type="button"
+                                                    class="btn btn-primary btn-sm" id="saveCustomerButton"
+                                                    data-dismiss="modal"><i class="fa fa-save"></i>
                                             </button>
                                             <button type="button" class="btn btn-danger btn-sm"
                                                     data-dismiss="modal"><i
@@ -79,58 +77,14 @@
                             </div>
                         </div>
                     </div>
-
-                    <!--Düzenle-->
-                    <div class="row">
-                        <div class="form-group-sm">
-                            <div class="modal fade bs-example-modal-sm" id="editModal" tabindex="-1" role="dialog"
-                                 aria-hidden="true"
-                                 style="display: none; margin-top: 170px;">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <h4 class="modal-title">Müşteri | Düzenle</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <label class="col-sm-4 input-ssm">Müşteri : </label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control input-sm" type="text" id="csname"
-                                                           data-ng-model="EditName" size="30" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button data-ng-click="updateCustomer()" type="button"
-                                                class="btn btn-primary btn-sm"
-                                                data-dismiss="modal"><i
-                                                class="fa fa-save"></i> Güncelle
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                                data-dismiss="modal"><i
-                                                class="fa fa-ban"></i> İptal
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row">
                     <div class="form-group">
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                data-target="#addModal" data-ng-click="cleanCustomerName()"><i class="fa fa-save"></i>
+                                data-target="#CustomerModal" data-ng-click="openCustomerModal(null)"><i class="fa fa-save"></i>
                             Yeni Müşteri Ekle
                         </button>
-                        <button type="button" id="excelExport" data-ng-click="exportExcel()"
-                                class="btn btn-danger btn-sm marginleft363"><i class="fa fa-file-excel-o"></i> Excel'e
+                        <button type="button" id="excelExport" data-ng-click="exportCustomerExcel()"
+                                class="btn btn-danger btn-sm" style="margin-left: 283px;"><i class="fa fa-file-excel-o"></i> Excel'e
                             Aktar
                         </button>
                         <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-exporter

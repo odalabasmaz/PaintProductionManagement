@@ -1,13 +1,154 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-    Hammadde
+﻿<!-- page content -->
+<div id="masterContent">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Hammadde İşlemleri</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <label class="col-sm-1 input-sm">Adı</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control input-sm" data-ng-model="searchRawMaterialName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <label class="col-sm-1 input-sm">Kodu</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control input-sm" data-ng-model="searchRawMaterialCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <label class="col-sm-1 input-sm">Türü</label>
+                            <div class="col-sm-3">
+                                <select class="form-control input-sm"
+                                        ng-model="searchRawMaterialType">
+                                    <option value="">Seçiniz..</option>
+                                    <option value="1">Sıvı</option>
+                                    <option value="2">Katı</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" class="btn btn-danger btn-sm"
+                                        data-dismiss="modal"><i class="fa fa-search"></i> Ara
+                                </button>
+                                <button type="button" class="btn btn-info btn-sm"
+                                        data-dismiss="modal"><i class="fa fa-trash"></i> Temizle
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <!--Ekle & Düzenle Modal-->
+                    <div class="row">
+                        <div class="form-group-sm">
+                            <div class="modal fade" id="RawMaterialModal" tabindex="-1"
+                                 role="dialog"
+                                 aria-hidden="true"
+                                 style="display: none;margin-top: 122px;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <h4 class="modal-title" id="RawMaterialModalHeader"></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 input-sm">Hammadde Adı : </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control input-sm" type="text"
+                                                               data-ng-model="modalRawMaterialName" size="30" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 input-sm">Hammadde Kodu : </label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control input-sm" type="text"
+                                                               data-ng-model="modalRawMaterialCode" size="30" required/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 input-sm">Hammadde Türü : </label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control input-sm"
+                                                                ng-model="modalRawMaterialType">
+                                                            <option value="">Seçiniz..</option>
+                                                            <option value="1">Sıvı</option>
+                                                            <option value="2">Katı</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 input-sm">Açıklama : </label>
+                                                    <div class="col-sm-8">
+                                                        <textarea class="form-control input-sm" rows="3"
+                                                                  data-ng-model="modalRawMaterialDesc"></textarea>
 
-    <button id="hammaddeBtn" class="btn btn-primary" type="button">Dene Beni</button>                            <!--<a class="reset_pass" href="#">Lost your password?</a>-->
-     
-</body>
-</html>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button data-ng-click="saveRawMaterial()" type="button"
+                                                    class="btn btn-primary btn-sm" id="saveRawMaterialButton"
+                                                    data-dismiss="modal"><i class="fa fa-save"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                    data-dismiss="modal"><i
+                                                    class="fa fa-ban"></i> İptal
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Ekle & Düzenle Modal-->
+
+                    <div class="row">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#RawMaterialModal" data-ng-click="openRawMaterialModal(null)"><i
+                                    class="fa fa-save"></i>
+                                Yeni Hammadde Ekle
+                            </button>
+                            <button type="button" id="excelExport" data-ng-click="exportRawMaterialExcel()"
+                                    class="btn btn-danger btn-sm" style="margin-left: 556px;"><i class="fa fa-file-excel-o"></i>
+                                Excel'e
+                                Aktar
+                            </button>
+                            <div ui-grid="gridOptions" ui-grid-pagination ui-grid-selection ui-grid-exporter
+                                 class="gridRawMaterial"></div>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /page content -->
