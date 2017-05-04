@@ -23,11 +23,12 @@
                             <label class="col-sm-1 input-sm">Boya Türü</label>
                             <div class="col-sm-3">
                                 <select class="form-control input-sm"
-                                        ng-model="searchPaintType">
+                                        ng-model="searchPaintTypeSelect" data-ng-change="getPaintSubTypes(searchPaintTypeSelect);"
+                                        ng-options="item.id as item.name for item in paintTypes">
                                     <option value="">Seçiniz..</option>
-                                    <option value="1">Vernik</option>
-                                    <option value="2">Katı</option>
-                                </select></div>
+                                </select>
+
+                                </div>
                         </div>
                     </div>
                     <div class="row">
@@ -39,10 +40,9 @@
                             <label class="col-sm-2 input-sm">Boya Alt Türü</label>
                             <div class="col-sm-3" style="margin-left: -96px;">
                                 <select class="form-control input-sm"
-                                        ng-model="searchPaintSubType">
+                                        ng-model="searchPaintSubTypeSelect"
+                                        ng-options="item.id as item.name for item in paintSubTypes">
                                     <option value="">Seçiniz..</option>
-                                    <option value="1">Su Bazlı</option>
-                                    <option value="2">Katı</option>
                                 </select></div>
                         </div>
                     </div>
