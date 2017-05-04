@@ -52,6 +52,10 @@ public class QueryHelper {
 		return this;
 	}
 
+	public String format(String value) {
+		return value.replaceAll("'", "''");
+	}
+
 	public String build() {
 		return queryString;
 	}
